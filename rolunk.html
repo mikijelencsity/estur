@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rólunk | Estur Épker Kft. — Baja</title>
+<meta name="description" content="Az Estur Épker Kft. 2016 óta épít, felújít és ad át kulcsrakészen. Ismerd meg csapatunkat, értékeinket és történetünket.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sage:#727562;--sage-dark:#5a5d4e;--sage-deeper:#3e4134;--sage-light:#95987f;--sage-subtle:#e8eae0;--sage-glow:rgba(114,117,98,.18);
+  --cream:#f6f6f2;--white:#ffffff;--gray-50:#f0f1ec;--gray-100:#dfe1d9;--gray-200:#c0c4b8;--gray-400:#7d8274;--gray-600:#434840;--gray-800:#222620;--gray-900:#111410;
+  --font-h:'Sora',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;
+  --shadow-sm:0 1px 3px rgba(17,20,16,.08);--shadow-md:0 4px 20px rgba(17,20,16,.1);--shadow-lg:0 12px 40px rgba(17,20,16,.14);--shadow-xl:0 24px 64px rgba(17,20,16,.18);
+  --radius:12px;--radius-sm:8px;--tr:.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes countUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes rotateIn{from{opacity:0;transform:rotate(-5deg) scale(.9)}to{opacity:1;transform:rotate(0) scale(1)}}
+@keyframes slideFromLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideFromRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.9);transition:opacity .8s ease,transform .8s ease}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* ══ LANG BAR ══ */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:1100;background:var(--gray-900);height:32px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;gap:12px}
+.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:.75rem;font-family:var(--font-b);font-weight:600;cursor:pointer;padding:2px 8px;border-radius:4px;transition:var(--tr);letter-spacing:.5px}
+.lang-btn.active{color:white;background:rgba(255,255,255,.12)}
+.lang-btn:hover{color:white}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:32px;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.navbar.scrolled{box-shadow:var(--shadow-sm)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--gray-600);font-size:.9rem;font-weight:500;transition:var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--sage);transition:var(--tr)}
+.nav-links a:hover{color:var(--sage)}.nav-links a:hover::after{width:100%}
+.nav-links a.active-page{color:var(--sage)}.nav-links a.active-page::after{width:100%}
+.nav-cta{background:var(--sage)!important;color:white!important;padding:10px 24px;border-radius:50px;font-weight:600!important;font-size:.85rem!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--sage-dark)!important;transform:translateY(-1px);box-shadow:0 4px 16px var(--sage-glow)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--gray-800);transition:var(--tr);border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:104px;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{text-decoration:none;font-family:var(--font-h);font-size:1.3rem;font-weight:600;color:var(--gray-800);transition:var(--tr)}
+.mobile-menu a:hover{color:var(--sage)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{min-height:70vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:104px;background:var(--gray-900)}
+.page-hero-bg{position:absolute;inset:0;background:url('assets/images/hero.jpeg') center/cover no-repeat;opacity:.12}
+.page-hero-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(114,117,98,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(114,117,98,.06) 1px,transparent 1px);background-size:60px 60px;opacity:.6}
+.page-hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,transparent 30%,rgba(17,20,16,.8) 100%)}
+.page-hero-glow{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(114,117,98,.2) 0%,transparent 70%);animation:float 8s ease-in-out infinite}
+.page-hero-content{position:relative;z-index:2;padding:80px 0}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:28px}
+.breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:var(--tr)}.breadcrumb a:hover{color:var(--sage-light)}
+.breadcrumb-sep{width:16px;height:1px;background:rgba(255,255,255,.2)}
+.breadcrumb-current{color:var(--sage-light)}
+.hero-overline{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px}
+.hero-overline-line{width:40px;height:2px;background:var(--sage)}
+.hero-overline-text{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--sage-light)}
+.page-hero h1{font-family:var(--font-h);font-size:clamp(2.8rem,6vw,5rem);font-weight:800;color:white;line-height:1.05;margin-bottom:24px}
+.page-hero h1 em{font-style:normal;color:var(--sage-light);display:block}
+.page-hero-desc{font-size:1.1rem;color:rgba(255,255,255,.6);line-height:1.85;max-width:560px;margin-bottom:48px}
+.hero-scroll-cue{display:flex;flex-direction:column;align-items:flex-start;gap:8px;color:rgba(255,255,255,.3);font-size:.78rem;font-weight:500;letter-spacing:1px;text-transform:uppercase}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,.3));animation:pulse 2s ease-in-out infinite}
+.hero-side-stat{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:32px;padding-right:48px;z-index:2}
+.side-stat-item{text-align:right}
+.side-stat-num{font-family:var(--font-h);font-size:3rem;font-weight:800;color:var(--sage);line-height:1}
+.side-stat-label{font-size:.72rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.side-stat-divider{width:100%;height:1px;background:rgba(255,255,255,.06)}
+
+/* ══ STORY SECTION ══ */
+.story-section{padding:120px 0;background:var(--white);position:relative;overflow:hidden}
+.story-section::after{content:'';position:absolute;right:-200px;top:50%;width:500px;height:500px;background:radial-gradient(circle,var(--sage-subtle) 0%,transparent 60%);transform:translateY(-50%);pointer-events:none}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.story-left{position:relative}
+.story-img-stack{position:relative;height:560px}
+.story-img-main{position:absolute;top:0;left:0;width:72%;aspect-ratio:3/4;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-xl)}
+.story-img-main img{width:100%;height:100%;object-fit:cover}
+.story-img-secondary{position:absolute;bottom:0;right:0;width:55%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);border:4px solid var(--white)}
+.story-img-secondary img{width:100%;height:100%;object-fit:cover}
+.story-year-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--sage-deeper);color:white;border-radius:16px;padding:24px 28px;text-align:center;box-shadow:var(--shadow-lg);z-index:3;white-space:nowrap}
+.story-year{font-family:var(--font-h);font-size:2.2rem;font-weight:800;color:var(--sage-light);line-height:1}
+.story-year-label{font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.story-right .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.story-right h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2;margin-bottom:28px}
+.story-right h2 span{color:var(--sage)}
+.story-body p{color:var(--gray-600);line-height:1.9;margin-bottom:20px;font-size:.97rem}
+.story-body strong{color:var(--gray-800)}
+.story-highlight{margin-top:36px;padding:28px 32px;background:var(--sage-subtle);border-radius:var(--radius);border-left:4px solid var(--sage)}
+.story-highlight p{color:var(--sage-dark);font-weight:600;font-size:1rem;line-height:1.6;margin:0;font-style:italic}
+.story-highlight p::before{content:'"';font-family:var(--font-h);font-size:2.5rem;color:var(--sage);opacity:.4;line-height:.5;display:block;margin-bottom:8px}
+
+/* ══ TIMELINE ══ */
+.timeline-section{padding:120px 0;background:var(--cream);position:relative;overflow:hidden}
+.timeline-header{text-align:center;margin-bottom:80px}
+.timeline-header .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.timeline-header h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2}
+.timeline{position:relative;max-width:800px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--sage),transparent);transform:translateX(-50%);transform-origin:top;animation:lineGrow 2s ease forwards}
+.tl-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-bottom:0;position:relative}
+.tl-item:nth-child(even) .tl-content{grid-column:3;text-align:left}
+.tl-item:nth-child(even) .tl-void{grid-column:1;grid-row:1}
+.tl-item:nth-child(odd) .tl-content{grid-column:1;text-align:right}
+.tl-content{padding:32px 40px 48px;position:relative}
+.tl-dot{grid-column:2;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;position:relative;z-index:2}
+.tl-dot-inner{width:18px;height:18px;border-radius:50%;background:var(--sage);border:3px solid var(--cream);box-shadow:0 0 0 4px var(--sage-glow),var(--shadow-sm);transition:var(--tr)}
+.tl-item:hover .tl-dot-inner{transform:scale(1.4);background:var(--sage-dark)}
+.tl-year{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;color:var(--sage);text-transform:uppercase;margin-bottom:8px}
+.tl-title{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:10px}
+.tl-text{font-size:.88rem;color:var(--gray-600);line-height:1.75}
+
+/* ══ VALUES / PILLARS ══ */
+.values-section{padding:120px 0;background:var(--gray-900);position:relative;overflow:hidden}
+.values-section::before{content:'';position:absolute;inset:0;background:url('assets/images/hero.jpeg') center/cover no-repeat;opacity:.04}
+.values-grid-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(114,117,98,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(114,117,98,.04) 1px,transparent 1px);background-size:80px 80px}
+.values-inner{position:relative;z-index:1}
+.values-header{text-align:center;margin-bottom:72px}
+.values-header .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage-light);margin-bottom:12px}
+.values-header h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:white;line-height:1.2}
+.values-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden}
+.value-card{background:rgba(255,255,255,.03);padding:56px 48px;position:relative;overflow:hidden;transition:var(--tr)}
+.value-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(114,117,98,.08) 0%,transparent 60%);opacity:0;transition:var(--tr)}
+.value-card:hover{background:rgba(255,255,255,.06)}.value-card:hover::before{opacity:1}
+.value-card-num{font-family:var(--font-h);font-size:5rem;font-weight:800;color:var(--sage);opacity:.12;position:absolute;top:20px;right:28px;line-height:1;pointer-events:none;transition:var(--tr)}
+.value-card:hover .value-card-num{opacity:.22;transform:scale(1.05)}
+.value-icon{width:56px;height:56px;background:rgba(114,117,98,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:var(--tr)}
+.value-card:hover .value-icon{background:rgba(114,117,98,.3);transform:scale(1.05)}
+.value-icon svg{width:28px;height:28px;color:var(--sage-light)}
+.value-card h3{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:white;margin-bottom:14px}
+.value-card p{color:rgba(255,255,255,.55);line-height:1.8;font-size:.92rem}
+.value-bottom-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sage),var(--sage-light));transform:scaleX(0);transform-origin:left;transition:var(--tr)}
+.value-card:hover .value-bottom-line{transform:scaleX(1)}
+
+/* ══ TEAM / LEADERSHIP ══ */
+.team-section{padding:120px 0;background:var(--white)}
+.team-header{margin-bottom:72px}
+.team-header .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.team-header h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2;margin-bottom:16px}
+.team-header p{color:var(--gray-600);max-width:540px;line-height:1.8}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.team-card{background:var(--gray-50);border-radius:20px;overflow:hidden;transition:var(--tr);border:1px solid var(--gray-100)}
+.team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--sage-light)}
+.team-card-img{aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--sage-subtle)}
+.team-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.team-card:hover .team-card-img img{transform:scale(1.05)}
+.team-card-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--sage-subtle),var(--gray-100))}
+.team-placeholder-icon{width:64px;height:64px;background:var(--sage-glow);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.team-placeholder-icon svg{width:32px;height:32px;color:var(--sage)}
+.team-card-body{padding:28px}
+.team-card-role{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:6px}
+.team-card h3{font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:10px}
+.team-card p{font-size:.86rem;color:var(--gray-600);line-height:1.7}
+
+/* ══ STATS STRIP ══ */
+.stats-strip{background:var(--sage-deeper);padding:72px 0;position:relative;overflow:hidden}
+.stats-strip::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.02) 40px,rgba(255,255,255,.02) 41px)}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:16px;overflow:hidden;position:relative;z-index:1}
+.stat-item{background:rgba(0,0,0,.15);padding:52px 32px;text-align:center;position:relative;overflow:hidden;transition:var(--tr)}
+.stat-item:hover{background:rgba(0,0,0,.25)}
+.stat-glow{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:120px;height:120px;background:radial-gradient(circle,rgba(114,117,98,.3) 0%,transparent 70%);pointer-events:none}
+.stat-num{font-family:var(--font-h);font-size:3.5rem;font-weight:800;color:var(--sage-light);line-height:1;margin-bottom:8px}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2.5px;font-weight:600}
+
+/* ══ PROCESS ══ */
+.process-section{padding:120px 0;background:var(--cream);position:relative;overflow:hidden}
+.process-header{text-align:center;margin-bottom:80px}
+.process-header .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.process-header h2{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.process-steps::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--sage-subtle),var(--sage),var(--sage-subtle));z-index:0}
+.process-step{text-align:center;padding:0 16px;position:relative;z-index:1}
+.step-circle{width:72px;height:72px;border-radius:50%;background:var(--white);border:2px solid var(--gray-100);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:var(--tr);position:relative;box-shadow:var(--shadow-sm)}
+.step-circle::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--sage);opacity:0;transform:scale(.85);transition:var(--tr)}
+.process-step:hover .step-circle{background:var(--sage);border-color:var(--sage);transform:scale(1.1);box-shadow:0 8px 24px var(--sage-glow)}
+.process-step:hover .step-circle::after{opacity:1;transform:scale(1)}
+.step-circle svg{width:28px;height:28px;color:var(--sage);transition:var(--tr)}
+.process-step:hover .step-circle svg{color:white}
+.step-num{position:absolute;top:-8px;right:-8px;width:22px;height:22px;background:var(--sage);border-radius:50%;font-family:var(--font-h);font-size:.65rem;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.step-title{font-family:var(--font-h);font-size:.92rem;font-weight:700;color:var(--gray-900);margin-bottom:8px}
+.step-text{font-size:.8rem;color:var(--gray-400);line-height:1.65}
+
+/* ══ CERTIFICATIONS ══ */
+.certs-section{padding:80px 0;background:var(--white);border-top:1px solid var(--gray-100)}
+.certs-inner{display:flex;align-items:center;gap:80px}
+.certs-label{flex-shrink:0}
+.certs-label .section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.certs-label h3{font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:var(--gray-900)}
+.certs-divider{width:1px;height:80px;background:var(--gray-100);flex-shrink:0}
+.certs-items{display:flex;flex-wrap:wrap;gap:24px;flex:1}
+.cert-item{display:flex;align-items:center;gap:12px;padding:16px 24px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-100);transition:var(--tr)}
+.cert-item:hover{border-color:var(--sage);box-shadow:var(--shadow-sm)}
+.cert-check{width:36px;height:36px;background:var(--sage-subtle);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cert-check svg{width:18px;height:18px;color:var(--sage)}
+.cert-text{font-size:.85rem;font-weight:600;color:var(--gray-800)}
+
+/* ══ CTA ══ */
+.cta-section{padding:100px 0;background:linear-gradient(135deg,var(--sage-deeper) 0%,var(--sage) 60%,var(--sage-light) 100%);position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 60%);border-radius:50%}
+.cta-section::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,0,0,.1) 0%,transparent 70%);border-radius:50%}
+.cta-inner{text-align:center;position:relative;z-index:1}
+.cta-inner h2{font-family:var(--font-h);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:white;margin-bottom:16px}
+.cta-inner p{color:rgba(255,255,255,.8);font-size:1.05rem;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--sage-dark);padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.95rem;transition:var(--tr)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.btn-ghost-white{display:inline-flex;align-items:center;gap:8px;background:transparent;color:white;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:600;font-size:.95rem;border:1.5px solid rgba(255,255,255,.4);transition:var(--tr)}
+.btn-ghost-white:hover{background:rgba(255,255,255,.1);border-color:white}
+.arr{width:16px;height:16px;vertical-align:middle}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand-text{font-size:.88rem;line-height:1.7;margin-top:16px;color:rgba(255,255,255,.5)}
+.footer h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:white;margin-bottom:16px;letter-spacing:.5px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li{font-size:.88rem;color:rgba(255,255,255,.5)}
+.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:var(--tr)}
+.footer-links a:hover{color:var(--sage-light)}
+.footer-socials{display:flex;gap:12px;margin-top:20px}
+.footer-socials a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.footer-socials a:hover{background:var(--sage);transform:translateY(-2px)}
+.footer-socials svg{width:18px;height:18px;fill:rgba(255,255,255,.6)}
+.footer-socials a:hover svg{fill:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.35)}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}.footer-bottom a:hover{color:var(--sage-light)}
+.footer-legal{display:flex;gap:24px}
+
+/* ══ COOKIE ══ */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:var(--gray-900);color:white;padding:20px 0;z-index:9999;transform:translateY(100%);transition:transform .4s ease;border-top:2px solid var(--sage)}
+.cookie-banner.show{transform:translateY(0)}
+.cookie-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.cookie-text{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.6}
+.cookie-text a{color:var(--sage-light);text-decoration:underline}
+.cookie-btns{display:flex;gap:12px;flex-shrink:0}
+.cookie-accept{background:var(--sage);color:white;padding:10px 24px;border-radius:50px;border:none;font-weight:600;font-size:.85rem;cursor:pointer;font-family:var(--font-b);transition:var(--tr)}
+.cookie-accept:hover{background:var(--sage-dark)}
+.cookie-decline{background:transparent;color:rgba(255,255,255,.6);padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);font-weight:500;font-size:.85rem;cursor:pointer;font-family:var(--font-b);transition:var(--tr)}
+.cookie-decline:hover{border-color:rgba(255,255,255,.4);color:white}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:968px){
+  .story-grid{grid-template-columns:1fr;gap:60px}
+  .story-img-stack{height:400px}
+  .hero-side-stat{display:none}
+  .values-cards{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:32px}
+  .process-steps::before{display:none}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .certs-inner{flex-direction:column;align-items:flex-start;gap:32px}
+  .certs-divider{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .tl-item{grid-template-columns:1fr 40px 1fr}
+  .tl-content{padding:24px 20px 40px}
+}
+@media(max-width:640px){
+  .page-hero h1{font-size:2.4rem}
+  .story-img-stack{height:300px}
+  .story-img-secondary{display:none}
+  .story-img-main{width:100%}
+  .team-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .nav-links{display:none}.hamburger{display:flex}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+  .cookie-inner{flex-direction:column;text-align:center}
+  .tl-item{grid-template-columns:32px 1fr}
+  .tl-item:nth-child(even) .tl-content{grid-column:2;text-align:left}
+  .tl-item:nth-child(even) .tl-void{display:none}
+  .tl-item:nth-child(odd) .tl-content{grid-column:2;text-align:left}
+  .tl-dot{grid-column:1;padding-top:28px}
+  .timeline::before{left:16px;transform:none}
+  .cta-btns{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('hu')">HU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="Estur Épker Kft."></a>
+  <ul class="nav-links">
+    <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+    <li><a href="rolunk.html" class="active-page" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+    <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+    <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+    <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+    <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="index.html#szolgaltatasok" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="index.html#kapcsolat" onclick="closeMobile()">Kapcsolat</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid-overlay"></div>
+  <div class="page-hero-vignette"></div>
+  <div class="page-hero-glow"></div>
+
+  <div class="container">
+    <div class="page-hero-content" style="animation:fadeUp .9s ease forwards">
+      <div class="breadcrumb">
+        <a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a>
+        <div class="breadcrumb-sep"></div>
+        <span class="breadcrumb-current" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</span>
+      </div>
+      <div class="hero-overline">
+        <div class="hero-overline-line"></div>
+        <span class="hero-overline-text" data-hu="Az Estur történet" data-en="The Estur Story" data-de="Die Estur Geschichte">Az Estur történet</span>
+      </div>
+      <h1>
+        <span data-hu="Épületek születnek." data-en="Buildings come alive." data-de="Gebäude entstehen.">Épületek születnek.</span>
+        <em data-hu="Alapoktól a kulcsig." data-en="From the ground up." data-de="Vom Fundament bis zum Schlüssel.">Alapoktól a kulcsig.</em>
+      </h1>
+      <p class="page-hero-desc" data-hu="Megismerjük az Estur Épker Kft. csapatát, értékeit és azt a küldetést, amellyel 2016 óta formálják Baja és az ország épített környezetét." data-en="Meet the Estur Épker Kft. team, their values, and the mission that has been shaping the built environment of Baja and beyond since 2016." data-de="Lernen Sie das Team der Estur Épker Kft. kennen, ihre Werte und die Mission, mit der sie seit 2016 die gebaute Umwelt in Baja und darüber hinaus prägen.">Megismerjük az Estur Épker Kft. csapatát, értékeit és azt a küldetést, amellyel 2016 óta formálják Baja és az ország épített környezetét.</p>
+      <div class="hero-scroll-cue">
+        <div class="scroll-line"></div>
+        <span data-hu="Görgess tovább" data-en="Scroll down" data-de="Weiter scrollen">Görgess tovább</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-side-stat" style="animation:fadeIn 1.2s ease .5s forwards;opacity:0">
+    <div class="side-stat-item">
+      <div class="side-stat-num">50+</div>
+      <div class="side-stat-label" data-hu="Elégedett ügyfél" data-en="Happy Clients" data-de="Zufriedene Kunden">Elégedett ügyfél</div>
+    </div>
+    <div class="side-stat-divider"></div>
+    <div class="side-stat-item">
+      <div class="side-stat-num">9+</div>
+      <div class="side-stat-label" data-hu="Év tapasztalat" data-en="Years Experience" data-de="Jahre Erfahrung">Év tapasztalat</div>
+    </div>
+    <div class="side-stat-divider"></div>
+    <div class="side-stat-item">
+      <div class="side-stat-num">30+</div>
+      <div class="side-stat-label" data-hu="Szakember" data-en="Specialists" data-de="Fachleute">Szakember</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-left reveal-left">
+        <div class="story-img-stack">
+          <div class="story-img-main">
+            <img src="assets/images/hero.jpeg" alt="Estur építkezés" loading="lazy">
+          </div>
+          <div class="story-img-secondary">
+            <img src="assets/images/Referenciak/Bonvital/imgi_5_8-1.png" alt="Estur referencia" loading="lazy">
+          </div>
+          <div class="story-year-badge">
+            <div class="story-year">2016</div>
+            <div class="story-year-label" data-hu="Alapítás éve" data-en="Founded" data-de="Gegründet">Alapítás éve</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-right reveal-right">
+        <div class="section-label" data-hu="Történetünk" data-en="Our Story" data-de="Unsere Geschichte">Történetünk</div>
+        <h2 data-hu="Egy vízió, amely <span>kőbe van vésve.</span>" data-en="A vision <span>built in stone.</span>" data-de="Eine Vision, <span>in Stein gemeißelt.</span>">Egy vízió, amely <span>kőbe van vésve.</span></h2>
+        <div class="story-body">
+          <p data-hu="Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri." data-en="<strong>Estur Épker Kft.</strong> was founded in 2016 with the goal of delivering high-quality general contracting projects in Baja and across Hungary. Its founder and managing director, <strong>Lengyel Olivér</strong>, knows every corner of the construction industry from the inside." data-de="Die <strong>Estur Épker Kft.</strong> wurde 2016 gegründet, um hochwertige Generalunternehmerprojekte in Baja und ganz Ungarn zu realisieren. Gründer und Geschäftsführer <strong>Lengyel Olivér</strong> kennt alle Bereiche der Baubranche von innen.">Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri.</p>
+          <p data-hu="Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modelülnk, és ez tesz bennünket egyedivé." data-en="Our experienced team handles every step from architectural planning to turnkey handover – from masonry to electricians and engineers. <strong>One point of contact, full responsibility</strong> – this is our model, and it's what makes us unique." data-de="Unser erfahrenes Team kümmert sich um jeden Schritt von der Planung bis zur schlüsselfertigen Übergabe. <strong>Ein Ansprechpartner, volle Verantwortung</strong> – das ist unser Modell und macht uns einzigartig.">Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modelülnk, és ez tesz bennünket egyedivé.</p>
+          <p data-hu="Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek – mert megbízhatóság, precizitás és minőség nélkül nem is hívnak vissza." data-en="Our main goal is maximum client satisfaction and building long-term partnerships. It's no coincidence that our clients return to us again and again – because without reliability, precision, and quality, they simply wouldn't call back." data-de="Unser Hauptziel ist maximale Kundenzufriedenheit und der Aufbau langfristiger Partnerschaften. Es ist kein Zufall, dass unsere Kunden immer wieder zu uns zurückkehren.">Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek – mert megbízhatóság, precizitás és minőség nélkül nem is hívnak vissza.</p>
+        </div>
+        <div class="story-highlight">
+          <p data-hu="Amit egyszer megígérünk, azt határidőre, minőségi anyagokkal, és mosolyogva adjuk át." data-en="What we promise, we deliver on time, with quality materials, and with a smile." data-de="Was wir versprechen, liefern wir pünktlich, mit Qualitätsmaterialien und mit einem Lächeln.">Amit egyszer megígérünk, azt határidőre, minőségi anyagokkal, és mosolyogva adjuk át.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-glow"></div>
+        <div class="stat-num" data-target="50">50+</div>
+        <div class="stat-label" data-hu="Elégedett ügyfél" data-en="Satisfied Clients" data-de="Zufriedene Kunden">Elégedett ügyfél</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-glow"></div>
+        <div class="stat-num">9+</div>
+        <div class="stat-label" data-hu="Év tapasztalat" data-en="Years Experience" data-de="Jahre Erfahrung">Év tapasztalat</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-glow"></div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label" data-hu="Minősített anyag" data-en="Certified Materials" data-de="Zertifizierte Materialien">Minősített anyag</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-glow"></div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label" data-hu="Fős szakmai csapat" data-en="Team Members" data-de="Teammitglieder">Fős szakmai csapat</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="values-grid-pattern"></div>
+  <div class="container values-inner">
+    <div class="values-header reveal">
+      <div class="section-label" data-hu="Értékeink" data-en="Our Values" data-de="Unsere Werte">Értékeink</div>
+      <h2 data-hu="Amire büszkék vagyunk" data-en="What we stand for" data-de="Wofür wir stehen">Amire büszkék vagyunk</h2>
+    </div>
+    <div class="values-cards reveal">
+      <div class="value-card">
+        <div class="value-card-num">01</div>
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 data-hu="Precizitás" data-en="Precision" data-de="Präzision">Precizitás</h3>
+        <p data-hu="Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk. Ezért nincs visszamunka, ezért nincs meglepetés." data-en="We pay attention to every detail – from planning to the final touch. Millimeter-accurate work is not a goal but a baseline requirement for us. That's why there are no do-overs, no surprises." data-de="Wir achten auf jedes Detail – von der Planung bis zum letzten Schliff. Millimetergenaue Arbeit ist kein Ziel, sondern eine Grundvoraussetzung.">Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk. Ezért nincs visszamunka, ezért nincs meglepetés.</p>
+        <div class="value-bottom-line"></div>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">02</div>
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 data-hu="Megbízhatóság" data-en="Reliability" data-de="Zuverlässigkeit">Megbízhatóság</h3>
+        <p data-hu="Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt. A megbízhatóság nem marketing szlogen nálunk, hanem az üzleti modellünk alapja." data-en="We deliver on time. What we commit to, we deliver – on paper and in reality alike. For us, reliability is not a marketing slogan but the foundation of our business model." data-de="Wir liefern pünktlich. Was wir versprechen, halten wir – auf dem Papier und in der Realität. Zuverlässigkeit ist bei uns kein Marketingslogan, sondern die Grundlage unseres Geschäftsmodells.">Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt. A megbízhatóság nem marketing szlogen nálunk, hanem az üzleti modellünk alapja.</p>
+        <div class="value-bottom-line"></div>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">03</div>
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 data-hu="Minőség" data-en="Quality" data-de="Qualität">Minőség</h3>
+        <p data-hu="Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya. A minőség nálunk nem emelt áron kapható extra, hanem az alapértelmezett megközelítés minden egyes projekten." data-en="We only work with certified materials – because durability is non-negotiable. Quality is not an expensive extra for us, but the default approach on every single project." data-de="Wir arbeiten nur mit zertifizierten Materialien – Haltbarkeit ist für uns nicht verhandelbar. Qualität ist bei uns kein teures Extra, sondern die Standardvorgehensweise.">Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya. A minőség nálunk nem emelt áron kapható extra, hanem az alapértelmezett megközelítés minden egyes projekten.</p>
+        <div class="value-bottom-line"></div>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">04</div>
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 data-hu="Teljesség" data-en="Completeness" data-de="Vollständigkeit">Teljesség</h3>
+        <p data-hu="Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van. Kőmuves, villanyszerelő, gépész, burkoló, festő: mind egy kézből, egy ütemtervben, egy garanciával." data-en="As general contractors, we coordinate every trade – you have just one partner. Masonry, electrical, mechanical, tiling, painting: all from one hand, one schedule, one warranty." data-de="Als Generalunternehmer koordinieren wir alle Gewerke – Sie haben nur einen Partner. Maurer, Elektriker, Heizung, Fliesen, Maler: alles aus einer Hand, einem Zeitplan, einer Garantie.">Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van. Kőmuves, villanyszerelő, gépész, burkoló, festő: mind egy kézből, egy ütemtervben, egy garanciával.</p>
+        <div class="value-bottom-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="timeline-header reveal">
+      <div class="section-label" data-hu="Mérföldköveink" data-en="Milestones" data-de="Meilensteine">Mérföldköveink</div>
+      <h2 data-hu="Útunk 2016-tól napjainkig" data-en="Our journey from 2016 to today" data-de="Unser Weg von 2016 bis heute">Útunk 2016-tól napjainkig</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2016</div>
+          <div class="tl-title" data-hu="Megalapítás" data-en="Founded" data-de="Gründung">Megalapítás</div>
+          <p class="tl-text" data-hu="Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban." data-en="Lengyel Olivér founds Estur Épker Kft. in Baja with the goal of providing a one-stop solution in the construction industry." data-de="Lengyel Olivér gründet die Estur Épker Kft. in Baja mit dem Ziel, eine One-Stop-Lösung in der Baubranche anzubieten.">Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-void"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-void"></div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-year">2018</div>
+          <div class="tl-title" data-hu="Első nagy projektek" data-en="First major projects" data-de="Erste Großprojekte">Első nagy projektek</div>
+          <p class="tl-text" data-hu="Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik." data-en="Successful completion of first complex general contracting assignments – the team and reputation grow simultaneously." data-de="Erfolgreicher Abschluss erster komplexer Generalunternehmeraufträge – Team und Reputation wachsen gleichzeitig.">Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2020–2021</div>
+          <div class="tl-title" data-hu="Országos terjeszkedés" data-en="National expansion" data-de="Nationale Expansion">Országos terjeszkedés</div>
+          <p class="tl-text" data-hu="A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül." data-en="After successful Baja projects, Estur appears on the national market – from Budapest to Hévíz. The team grows to 30 members." data-de="Nach erfolgreichen Projekten in Baja tritt Estur auf dem nationalen Markt auf – von Budapest bis Hévíz. Das Team wächst auf 30 Mitglieder.">A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-void"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-void"></div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-year">2022–2023</div>
+          <div class="tl-title" data-hu="Szálloda és prémium referenciák" data-en="Hotel & premium references" data-de="Hotel- & Premium-Referenzen">Szálloda és prémium referenciák</div>
+          <p class="tl-text" data-hu="A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe. Egyre több visszatérő ügyfél." data-en="Renovation of the Bonvital Hotel in Hévíz – Estur enters the premium hotel segment. An increasing number of repeat clients." data-de="Renovierung des Bonvital Hotels in Hévíz – Estur tritt in das Premium-Hotelsegment ein. Zunehmend wiederkehrende Kunden.">A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe. Egyre több visszatérő ügyfél.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2025–2026</div>
+          <div class="tl-title" data-hu="Ma" data-en="Today" data-de="Heute">Ma</div>
+          <p class="tl-text" data-hu="50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik – és a legjobbat nyújtja." data-en="50+ satisfied clients, 30+ team members, 9+ years of experience. Estur continues to grow – and continues to deliver its best." data-de="50+ zufriedene Kunden, 30+ Teammitglieder, 9+ Jahre Erfahrung. Estur wächst weiter – und liefert weiterhin sein Bestes.">50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik – és a legjobbat nyújtja.</p>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-void"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="team-header reveal">
+      <div class="section-label" data-hu="Csapatunk" data-en="Our Team" data-de="Unser Team">Csapatunk</div>
+      <h2 data-hu="Az emberek, akik mögöttünk állnak" data-en="The people behind the work" data-de="Die Menschen hinter der Arbeit">Az emberek, akik mögöttünk állnak</h2>
+      <p data-hu="30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig." data-en="Our team of 30+ specialists covers every area of construction – from planning to turnkey handover." data-de="Unser Team aus 30+ Spezialisten deckt jeden Bereich des Bauwesens ab – von der Planung bis zur schlüsselfertigen Übergabe.">30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-card-img">
+          <div class="team-card-img-placeholder">
+            <div class="team-placeholder-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-role" data-hu="Ügyvezető" data-en="CEO & Founder" data-de="Geschäftsführer">Ügyvezető</div>
+          <h3>Lengyel Olivér</h3>
+          <p data-hu="Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben, és személyesen felügyel minden nagyobb projektet." data-en="The founder and driving force behind Estur. With nearly ten years of general contracting experience, he personally oversees every major project." data-de="Gründer und treibende Kraft hinter Estur. Mit fast zehn Jahren Generalunternehmererfahrung überwacht er persönlich jedes größere Projekt.">Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben, és személyesen felügyel minden nagyobb projektet.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-card-img">
+          <div class="team-card-img-placeholder">
+            <div class="team-placeholder-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-role" data-hu="Projektmenedzsment" data-en="Project Management" data-de="Projektmanagement">Projektmenedzsment</div>
+          <h3 data-hu="Tervező &amp; Koordinátor csapat" data-en="Design &amp; Coordination team" data-de="Planungs- &amp; Koordinationsteam">Tervező &amp; Koordinátor csapat</h3>
+          <p data-hu="Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést, felügyelik a minőséget, és összehangolja a szakembereket." data-en="Our experienced project managers continuously monitor schedules, supervise quality, and coordinate all specialists." data-de="Unsere erfahrenen Projektmanager überwachen kontinuierlich Zeitpläne, Qualität und koordinieren alle Fachleute.">Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést, felügyelik a minőséget, és összehangolja a szakembereket.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-card-img">
+          <div class="team-card-img-placeholder">
+            <div class="team-placeholder-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-role" data-hu="Kivitelezői csapat" data-en="Construction team" data-de="Bauteam">Kivitelezői csapat</div>
+          <h3 data-hu="Szakipari mesterek" data-en="Trade specialists" data-de="Fachhandwerker">Szakipari mesterek</h3>
+          <p data-hu="Kőmivesektől villanyszerelőkön át gépészekig és burkolókig – 30+ szakember, akik nap mint nap az Estur minőségi standardjai szerint dolgoznak." data-en="From masons to electricians, engineers and tilers – 30+ specialists who work to Estur's quality standards day in, day out." data-de="Von Maurern über Elektriker, Mechaniker und Fliesenleger – 30+ Spezialisten, die täglich nach Esturs Qualitätsstandards arbeiten.">Kőmivesektől villanyszerelőkön át gépészekig és burkolókig – 30+ szakember, akik nap mint nap az Estur minőségi standardjai szerint dolgoznak.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="process-header reveal">
+      <div class="section-label" data-hu="Hogyan dolgozunk" data-en="How we work" data-de="Wie wir arbeiten">Hogyan dolgozunk</div>
+      <h2 data-hu="A projekt útja – lépésről lépésre" data-en="The project journey – step by step" data-de="Der Projektweg – Schritt für Schritt">A projekt útja – lépésről lépésre</h2>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-circle">
+          <span class="step-num">1</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="step-title" data-hu="Kapcsolatfelvétel" data-en="Initial Contact" data-de="Erstkontakt">Kapcsolatfelvétel</div>
+        <p class="step-text" data-hu="Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket." data-en="We get in touch and discuss your vision and requirements." data-de="Wir nehmen Kontakt auf und besprechen Ihre Vorstellungen.">Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">
+          <span class="step-num">2</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="step-title" data-hu="Tervezés" data-en="Planning" data-de="Planung">Tervezés</div>
+        <p class="step-text" data-hu="Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve." data-en="Detailed plans, permits, quote – everything documented on paper." data-de="Detailpläne, Genehmigungen, Angebot – alles schriftlich festgehalten.">Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">
+          <span class="step-num">3</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <div class="step-title" data-hu="Kivitelezés" data-en="Construction" data-de="Ausführung">Kivitelezés</div>
+        <p class="step-text" data-hu="A munkálatok megkezdése – koordináltan, ütemtervhez igazodva." data-en="Work begins – coordinated and on schedule." data-de="Die Arbeiten beginnen – koordiniert und nach Zeitplan.">A munkálatok megkezdése – koordináltan, ütemtervhez igazodva.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">
+          <span class="step-num">4</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="step-title" data-hu="Minőségellenőrzés" data-en="Quality Check" data-de="Qualitätskontrolle">Minőségellenőrzés</div>
+        <p class="step-text" data-hu="Folyamatos belső ellenőrzés minden fázisban – nincs meglepetés az átadáskor." data-en="Continuous internal checks at every phase – no surprises at handover." data-de="Kontinuierliche interne Kontrollen in jeder Phase – keine Überraschungen bei der Übergabe.">Folyamatos belső ellenőrzés minden fázisban – nincs meglepetés az átadáskor.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">
+          <span class="step-num">5</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="step-title" data-hu="Kulcsrakész átadás" data-en="Turnkey Handover" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</div>
+        <p class="step-text" data-hu="Határidőre, garanciával – az utolsó simítástól az első kulcsig." data-en="On time, with warranty – from the final touch to the first key." data-de="Pünktlich, mit Garantie – vom letzten Schliff bis zum ersten Schlüssel.">Határidőre, garanciával – az utolsó simítástól az első kulcsig.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<div class="certs-section">
+  <div class="container">
+    <div class="certs-inner reveal">
+      <div class="certs-label">
+        <div class="section-label" data-hu="Garanciáink" data-en="Our guarantees" data-de="Unsere Garantien">Garanciáink</div>
+        <h3 data-hu="Amire számíthat" data-en="What you can count on" data-de="Worauf Sie zählen können">Amire számíthat</h3>
+      </div>
+      <div class="certs-divider"></div>
+      <div class="certs-items">
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="Minősített alapanyagok" data-en="Certified materials" data-de="Zertifizierte Materialien">Minősített alapanyagok</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="Határidő-garancia" data-en="On-time guarantee" data-de="Termingarantie">Határidő-garancia</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="Egyetlen kapcsolattartó" data-en="Single point of contact" data-de="Zentraler Ansprechpartner">Egyetlen kapcsolattartó</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="Teljes körű kivitelezés" data-en="Full scope execution" data-de="Vollständige Ausführung">Teljes körű kivitelezés</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="Kulcsrakész átadás" data-en="Turnkey delivery" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="cert-text" data-hu="9+ év tapasztalat" data-en="9+ years experience" data-de="9+ Jahre Erfahrung">9+ év tapasztalat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2 data-hu="Készen állunk az Ön projektjére." data-en="We're ready for your project." data-de="Wir sind bereit für Ihr Projekt.">Készen állunk az Ön projektjére.</h2>
+      <p data-hu="Legyen szó lakásépítésről, generálkivitelezésről vagy felújításról – az Estur csapata mellette áll." data-en="Whether it's residential construction, general contracting, or renovation – the Estur team is by your side." data-de="Ob Wohnungsbau, Generalunternehmen oder Renovierung – das Estur-Team steht Ihnen zur Seite.">Legyen szó lakásépítésről, generálkivitelezésről vagy felújításról – az Estur csapata mellette áll.</p>
+      <div class="cta-btns">
+        <a href="index.html#kapcsolat" class="btn-white" data-hu="Ajánlatkérés" data-en="Request a Quote" data-de="Angebot anfordern">Ajánlatkérés <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="referenciak.html" class="btn-ghost-white" data-hu="Referenciák megtekintése" data-en="View References" data-de="Referenzen ansehen">Referenciák megtekintése</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-text">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+      <div class="footer-socials">
+        <a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+    </div>
+    <div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
+    <div><h4 data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</h4><ul class="footer-links"><li><a href="szolgaltatasok.html" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásépítés" data-en="Construction" data-de="Wohnungsbau">Lakásépítés</a></li></ul></div>
+    <div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html">Adatkezelési tájékoztató</a></div></div>
+</div></footer>
+
+<!-- COOKIE -->
+<div class="cookie-banner" id="cookieBanner"><div class="cookie-inner">
+  <p class="cookie-text">Weboldalunk a felhasználói élmény javítása érdekében sütiket használ. <a href="adatkezeles.html">Adatkezelési tájékoztató</a></p>
+  <div class="cookie-btns"><button class="cookie-accept" id="cookieAccept">Elfogadom</button><button class="cookie-decline" id="cookieDecline">Elutasítom</button></div>
+</div></div>
+
+<script>
+// Navbar
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',window.scrollY>20));
+
+// Mobile menu
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+hb.addEventListener('click',()=>{hb.classList.toggle('active');mm.classList.toggle('active');document.body.style.overflow=mm.classList.contains('active')?'hidden':''});
+function closeMobile(){hb.classList.remove('active');mm.classList.remove('active');document.body.style.overflow=''}
+
+// Reveal on scroll
+const obs=new IntersectionObserver(e=>{
+  e.forEach((en,i)=>{
+    if(en.isIntersecting){
+      setTimeout(()=>en.target.classList.add('visible'),i*100);
+      obs.unobserve(en.target);
+    }
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+
+// Cookie
+const cb=document.getElementById('cookieBanner');
+if(!localStorage.getItem('estur_cookies'))setTimeout(()=>cb.classList.add('show'),1500);
+document.getElementById('cookieAccept').addEventListener('click',()=>{localStorage.setItem('estur_cookies','accepted');cb.classList.remove('show')});
+document.getElementById('cookieDecline').addEventListener('click',()=>{localStorage.setItem('estur_cookies','declined');cb.classList.remove('show')});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+
+// Language switcher
+function setLang(lang){
+  localStorage.setItem('estur_lang',lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang));
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    const val=el.getAttribute('data-'+lang);
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=val;
+    else el.innerHTML=val;
+  });
+  document.documentElement.lang=lang==='hu'?'hu':lang==='en'?'en':'de';
+}
+(function(){const saved=localStorage.getItem('estur_lang')||'hu';setLang(saved);})();
+</script>
+</body>
+</html>

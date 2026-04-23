@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Szakmai Tippek | Estur Épker Kft. — Baja</title>
+<meta name="description" content="Építési, felújítási és kivitelezési tippek az Estur szakértőitől. Praktikus útmutatók lakástulajdonosoknak Baján és környékén.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estur.css">
+<style>
+/* ── Blog Hero ── */
+.hero{background:linear-gradient(160deg,var(--sage-deeper),var(--sage-dark));padding:130px 0 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;opacity:.05;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.7) 39px,rgba(255,255,255,.7) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.7) 39px,rgba(255,255,255,.7) 40px)}
+.hero-content{padding-bottom:80px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 16px;border-radius:50px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:20px;letter-spacing:.5px;text-transform:uppercase;animation:slideUp .8s ease both}
+.hero h1{font-family:var(--font-h);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;color:white;line-height:1.15;margin-bottom:16px;animation:slideUp .9s .1s ease both}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.68);max-width:520px;animation:slideUp 1s .2s ease both}
+.hero-wave{display:block;width:100%;overflow:hidden;line-height:0;margin-bottom:-2px}
+.hero-wave svg{display:block;width:100%}
+
+/* ── Filter ── */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;padding:40px 0 0}
+.filter-btn{background:var(--white);border:1px solid var(--gray-100);padding:8px 20px;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--gray-600);cursor:pointer;transition:var(--tr);font-family:var(--font-b)}
+.filter-btn:hover{border-color:var(--sage);color:var(--sage)}
+.filter-btn.active{background:var(--sage);border-color:var(--sage);color:white}
+
+/* ── Featured ── */
+.featured{padding:48px 0 0}
+.featured-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--white);border:1px solid var(--gray-100);border-radius:16px;overflow:hidden;transition:var(--tr);text-decoration:none;color:inherit}
+.featured-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.featured-img{background:linear-gradient(135deg,var(--sage-subtle),var(--cream));min-height:320px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.featured-img-icon{font-size:5rem;opacity:.35}
+.featured-img-badge{position:absolute;top:20px;left:20px;background:var(--sage);color:white;font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:50px;letter-spacing:.5px}
+.featured-body{padding:48px 40px;display:flex;flex-direction:column;justify-content:center}
+.article-category{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.featured-body h2{font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--gray-900);line-height:1.25;margin-bottom:12px}
+.featured-body p{font-size:.93rem;color:var(--gray-600);line-height:1.75;margin-bottom:24px}
+.article-meta{display:flex;align-items:center;gap:16px;font-size:.8rem;color:var(--gray-400);margin-bottom:24px}
+.read-btn{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:white;padding:12px 24px;border-radius:50px;font-weight:600;font-size:.88rem;transition:var(--tr);width:fit-content}
+.read-btn:hover{background:var(--sage-dark);transform:translateX(4px)}
+
+/* ── Blog Grid ── */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:48px 0}
+.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);overflow:hidden;transition:var(--tr);display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.blog-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--gray-200)}
+.card-img{height:180px;background:linear-gradient(135deg,var(--sage-subtle),var(--cream));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.card-img-badge{position:absolute;top:12px;left:12px;background:var(--sage);color:white;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px}
+.card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.card-body .article-category{margin-bottom:8px}
+.card-body h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--gray-900);line-height:1.35;margin-bottom:10px}
+.card-body p{font-size:.87rem;color:var(--gray-600);line-height:1.7;flex:1;margin-bottom:16px}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--gray-50)}
+.card-date{font-size:.78rem;color:var(--gray-400)}
+.card-link{font-size:.82rem;font-weight:600;color:var(--sage);display:flex;align-items:center;gap:4px}
+
+/* ── Newsletter ── */
+.newsletter{background:var(--gray-50);border-radius:16px;padding:56px;text-align:center;margin:0 0 80px}
+.newsletter h3{font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--gray-900);margin-bottom:12px}
+.newsletter p{color:var(--gray-600);margin-bottom:28px;font-size:.95rem}
+.nl-form{display:flex;gap:12px;max-width:440px;margin:0 auto}
+.nl-input{flex:1;padding:13px 20px;border:1px solid var(--gray-100);border-radius:50px;font-family:var(--font-b);font-size:.9rem;outline:none;transition:var(--tr)}
+.nl-input:focus{border-color:var(--sage)}
+.nl-btn{background:var(--sage);color:white;border:none;padding:13px 24px;border-radius:50px;font-family:var(--font-h);font-weight:700;font-size:.88rem;cursor:pointer;transition:var(--tr);white-space:nowrap}
+.nl-btn:hover{background:var(--sage-dark)}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .featured-card{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .blog-grid{grid-template-columns:1fr}
+  .nl-form{flex-direction:column}
+  .newsletter{padding:36px 24px}
+  .featured-body{padding:28px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('hu')">HU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <ul class="nav-links">
+    <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+    <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+    <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+    <li><a href="blog.html" class="active" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+    <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+    <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-label" data-hu="📖 Szakmai tudástár" data-en="📖 Knowledge Base" data-de="📖 Wissensdatenbank">📖 Szakmai tudástár</div>
+    <h1 data-hu="Építési & felújítási<br>tippek a szakértőktől" data-en="Construction & renovation<br>tips from the experts" data-de="Bau- & Renovierungstipps<br>von den Experten">Építési & felújítási<br>tippek a szakértőktől</h1>
+    <p data-hu="Praktikus útmutatók, költségbecslések és szakmai tanácsok lakástulajdonosoknak — az Estur csapatától." data-en="Practical guides, cost estimates and expert advice for homeowners — from the Estur team." data-de="Praktische Leitfäden, Kostenschätzungen und Expertenrat für Hausbesitzer — vom Estur-Team.">Praktikus útmutatók, költségbecslések és szakmai tanácsok lakástulajdonosoknak — az Estur csapatától.</p>
+  </div>
+  <div class="hero-wave"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 C360,70 1080,0 1440,40 L1440,64 L0,64 Z" fill="#ffffff"/></svg></div>
+</section>
+
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterPosts('mind')" data-hu="Összes" data-en="All" data-de="Alle">Összes</button>
+    <button class="filter-btn" onclick="filterPosts('koltseg')" data-hu="Költségek & árak" data-en="Costs & prices" data-de="Kosten & Preise">Költségek & árak</button>
+    <button class="filter-btn" onclick="filterPosts('utmutato')" data-hu="Útmutatók" data-en="Guides" data-de="Ratgeber">Útmutatók</button>
+    <button class="filter-btn" onclick="filterPosts('szezon')" data-hu="Szezonális" data-en="Seasonal" data-de="Saisonal">Szezonális</button>
+    <button class="filter-btn" onclick="filterPosts('jogi')" data-hu="Jogi & engedélyek" data-en="Legal & permits" data-de="Rechtliches">Jogi & engedélyek</button>
+  </div>
+
+  <div class="featured reveal">
+    <a class="featured-card" href="blog/blog-felujitas-koltseg-2025.html">
+      <div class="featured-img"><span class="featured-img-icon">🏠</span><span class="featured-img-badge">⭐ Kiemelt cikk</span></div>
+      <div class="featured-body">
+        <div class="article-category">Költségek & árak</div>
+        <h2>Mennyibe kerül egy lakásfelújítás 2025-ben? Teljes áttekintő</h2>
+        <p>Az egyik leggyakrabban keresett kérdés az interneten — és joggal. Összegyűjtöttük a legfontosabb tételeket, reális árakkal, hogy ne érjenek kellemetlen meglepetések.</p>
+        <div class="article-meta"><span>📅 2025. január 15.</span><span>⏱ 8 perc olvasás</span><span>👁 2 400 megtekintés</span></div>
+        <span class="read-btn">Cikk olvasása →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="blog-grid" id="blogGrid">
+    <a class="blog-card reveal" href="blog/blog-generalkivitelezo-vs-sajat-szervezes.html" data-cat="utmutato" style="transition-delay:.05s">
+      <div class="card-img">🤝<span class="card-img-badge">Útmutató</span></div>
+      <div class="card-body"><div class="article-category">Útmutatók</div><h3>Generálkivitelező vs. saját szervezés — mikor melyik éri meg?</h3><p>Sokan próbálják meg saját maguk koordinálni az építési munkákat — de mikor érdemes inkább generálkivitelezőt megbízni?</p><div class="card-footer"><span class="card-date">2025. február 3.</span><span class="card-link">Olvasás →</span></div></div>
+    </a>
+    <a class="blog-card reveal" href="blog/blog-engedely-koteles-munkak.html" data-cat="jogi" style="transition-delay:.1s">
+      <div class="card-img">📋<span class="card-img-badge">Jogi</span></div>
+      <div class="card-body"><div class="article-category">Jogi & engedélyek</div><h3>Engedélyköteles vs. engedély nélküli munkák Magyarországon</h3><p>Mikor kell építési engedély és mikor nem? Egy egyszerű útmutató, hogy ne kerülj jogsértő helyzetbe.</p><div class="card-footer"><span class="card-date">2025. április 8.</span><span class="card-link">Olvasás →</span></div></div>
+    </a>
+    <a class="blog-card reveal" href="blog/blog-epites-engedely-bacs-kiskun.html" data-cat="jogi" style="transition-delay:.15s">
+      <div class="card-img">🗂️<span class="card-img-badge">Jogi</span></div>
+      <div class="card-body"><div class="article-category">Jogi & engedélyek</div><h3>Építési engedély Bács-Kiskun megyében — hogyan működik 2025-ben?</h3><p>Lépésről lépésre végigvezetjük az engedélyezési folyamaton, hogy ne veszítsen feleslegesen időt és pénzt.</p><div class="card-footer"><span class="card-date">2025. június 2.</span><span class="card-link">Olvasás →</span></div></div>
+    </a>
+  </div>
+
+  <div class="newsletter reveal">
+    <h3 data-hu="Értesülj elsőként az új cikkekről" data-en="Be the first to know about new articles" data-de="Erfahre als Erster von neuen Artikeln">Értesülj elsőként az új cikkekről</h3>
+    <p data-hu="Havonta 1-2 hasznos útmutató — spam nélkül. Iratkozz fel és ne maradj le a legfrissebb tippekről." data-en="1-2 useful guides per month — no spam. Subscribe and don't miss the latest tips." data-de="1-2 nützliche Ratgeber pro Monat — kein Spam. Melde dich an und verpasse keine Tipps.">Havonta 1-2 hasznos útmutató — spam nélkül. Iratkozz fel és ne maradj le a legfrissebb tippekről.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="email@cimed.hu" data-hu="email@cimed.hu" data-en="your@email.com" data-de="deine@email.de">
+      <button class="nl-btn" data-hu="Feliratkozás" data-en="Subscribe" data-de="Abonnieren">Feliratkozás</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="nav-logo"><img src="assets/images/logo.png" alt="Estur" style="height:44px;width:auto;filter:brightness(0) invert(1)"></a>
+      <p class="footer-brand-text" data-hu="Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan." data-en="Estur Kft. has been providing high-quality general contracting, residential construction and renovation in Baja and nationwide since 2016." data-de="Die Estur Kft. bietet seit 2016 hochwertige Generalunternehmertätigkeit, Wohnungsbau und Renovierung in Baja und landesweit.">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+      <div class="footer-socials">
+        <a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+    </div>
+    <div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
+    <div><h4 data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</h4><ul class="footer-links"><li><a href="szolgaltatasok.html" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásépítés" data-en="Construction" data-de="Wohnungsbau">Lakásépítés</a></li></ul></div>
+    <div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html" data-hu="Adatkezelési tájékoztató" data-en="Privacy Policy" data-de="Datenschutz">Adatkezelési tájékoztató</a></div></div>
+</div></footer>
+
+<script src="assets/js/estur.js"></script>
+<script>
+function filterPosts(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(c => {
+    c.style.display = (cat === 'mind' || c.dataset.cat === cat) ? 'flex' : 'none';
+  });
+}
+</script>
+</body>
+</html>

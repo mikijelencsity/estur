@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Szolgáltatások | Estur Épker Kft. — Baja</title>
+<meta name="description" content="Generálkivitelezés, lakásépítés, felújítás Baján és környékén. Estur Épker Kft. — 2016 óta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sage:#727562;--sage-dark:#5a5d4e;--sage-deeper:#3e4134;--sage-light:#95987f;
+  --sage-subtle:#e8eae0;--sage-glow:rgba(114,117,98,.18);
+  --cream:#f6f6f2;--white:#ffffff;
+  --gray-50:#f0f1ec;--gray-100:#dfe1d9;--gray-200:#c0c4b8;
+  --gray-400:#7d8274;--gray-600:#434840;--gray-800:#222620;--gray-900:#111410;
+  --font-h:'Sora',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;
+  --shadow-sm:0 1px 3px rgba(17,20,16,.08);
+  --shadow-md:0 4px 20px rgba(17,20,16,.1);
+  --shadow-lg:0 12px 40px rgba(17,20,16,.14);
+  --radius:12px;--radius-sm:8px;
+  --tr:.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ LANG BAR ══ */
+.lang-bar{
+  position:fixed;top:0;left:0;right:0;z-index:1100;
+  background:var(--gray-900);height:32px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:0 24px;gap:12px
+}
+.lang-btn{
+  background:none;border:none;color:rgba(255,255,255,.5);
+  font-size:.75rem;font-family:var(--font-b);font-weight:600;
+  cursor:pointer;padding:2px 8px;border-radius:4px;transition:var(--tr)
+}
+.lang-btn.active{color:white;background:rgba(255,255,255,.12)}
+.lang-btn:hover{color:white}
+
+/* ══ NAVBAR ══ */
+.navbar{
+  position:fixed;top:32px;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.04);transition:var(--tr)
+}
+.navbar.scrolled{box-shadow:var(--shadow-sm)}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;max-width:1200px;margin:0 auto;padding:0 24px
+}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--gray-600);font-size:.88rem;
+  font-weight:500;transition:var(--tr);position:relative
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:2px;background:var(--sage);transition:var(--tr)
+}
+.nav-links a:hover{color:var(--sage)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--sage)}
+.nav-cta{
+  background:var(--sage)!important;color:white!important;
+  padding:10px 22px;border-radius:50px;font-weight:600!important;font-size:.84rem!important
+}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--sage-dark)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--gray-800);transition:var(--tr);border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu{
+  display:none;position:fixed;top:104px;left:0;right:0;bottom:0;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
+  z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  overflow-y:auto
+}
+.mobile-menu.active{display:flex}
+.mobile-menu a{
+  text-decoration:none;font-family:var(--font-h);font-size:1.3rem;
+  font-weight:600;color:var(--gray-800);transition:var(--tr)
+}
+.mobile-menu a:hover{color:var(--sage)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{
+  padding:180px 0 80px;
+  background:linear-gradient(165deg,var(--white) 0%,var(--sage-subtle) 50%,var(--cream) 100%);
+  position:relative;overflow:hidden
+}
+.page-hero::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,var(--sage-glow) 0%,transparent 70%);
+  animation:float 6s ease-in-out infinite
+}
+.page-hero-inner{position:relative;z-index:1}
+.page-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);border:1px solid var(--gray-100);
+  padding:8px 16px;border-radius:50px;font-size:.8rem;
+  font-weight:600;color:var(--sage-dark);margin-bottom:28px;box-shadow:var(--shadow-sm)
+}
+.page-badge-dot{width:7px;height:7px;background:var(--sage);border-radius:50%;animation:pulse 2s infinite}
+.page-hero h1{
+  font-family:var(--font-h);font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:800;color:var(--gray-900);line-height:1.15;margin-bottom:20px
+}
+.page-hero p{font-size:1.05rem;color:var(--gray-600);max-width:580px;line-height:1.8}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--gray-400);margin-bottom:24px}
+.breadcrumb a{color:var(--sage);text-decoration:none;font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* ══ TAB NAV ══ */
+.tab-nav-wrap{
+  background:var(--white);border-bottom:1px solid var(--gray-100);
+  position:sticky;top:104px;z-index:100
+}
+.tab-nav{
+  display:flex;max-width:1200px;margin:0 auto;
+  padding:0 24px;overflow-x:auto;scrollbar-width:none
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  padding:18px 24px;font-family:var(--font-b);font-size:.88rem;
+  font-weight:600;color:var(--gray-400);background:none;border:none;
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:var(--tr);white-space:nowrap
+}
+.tab-btn:hover{color:var(--sage)}
+.tab-btn.active{color:var(--sage);border-bottom-color:var(--sage)}
+
+/* ══ SERVICE SECTIONS ══ */
+.service-section{padding:80px 0;border-bottom:1px solid var(--gray-100)}
+.service-section:last-of-type{border-bottom:none}
+
+.service-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:center
+}
+.service-grid.reverse > .service-text{order:2}
+.service-grid.reverse > .service-img{order:1}
+
+.service-label{
+  font-family:var(--font-h);font-size:.72rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:10px
+}
+.service-title{
+  font-family:var(--font-h);font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:800;color:var(--gray-900);line-height:1.2;margin-bottom:16px
+}
+.service-desc{font-size:.94rem;color:var(--gray-600);line-height:1.85;margin-bottom:16px}
+.service-subtitle{
+  font-family:var(--font-h);font-size:.95rem;font-weight:700;
+  color:var(--sage-dark);margin-bottom:6px;margin-top:20px
+}
+.service-subtitle:first-of-type{margin-top:0}
+.service-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.service-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.88rem;color:var(--gray-600)
+}
+.service-list li::before{
+  content:'';flex-shrink:0;margin-top:3px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--sage-subtle)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23727562' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+    no-repeat center
+}
+
+/* ══ SERVICE IMAGE / SLIDER ══ */
+.service-img{
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-lg);aspect-ratio:4/3;
+  background:var(--sage-subtle);position:relative;user-select:none
+}
+.svc-slider{position:absolute;inset:0;overflow:hidden}
+.svc-slides{display:flex;width:100%;height:100%;transition:transform .45s cubic-bezier(.4,0,.2,1);will-change:transform}
+.svc-slide{flex:0 0 100%;width:100%;height:100%}
+.svc-slide img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.svc-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:20;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.92);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);transition:background .2s,box-shadow .2s;
+  backdrop-filter:blur(4px)
+}
+.svc-arrow:hover{background:white;box-shadow:0 4px 20px rgba(0,0,0,.22)}
+.svc-arrow svg{width:16px;height:16px;color:var(--gray-800);display:block}
+.svc-arrow-prev{left:14px}
+.svc-arrow-next{right:14px}
+.svc-dots{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:20
+}
+.svc-dot{
+  width:6px;height:6px;border-radius:3px;
+  background:rgba(255,255,255,.5);border:none;cursor:pointer;
+  padding:0;transition:width .25s,background .25s;flex-shrink:0
+}
+.svc-dot.active{background:white;width:20px}
+.svc-counter{
+  position:absolute;top:14px;right:14px;
+  background:rgba(0,0,0,.45);color:white;
+  font-family:var(--font-h);font-size:.72rem;font-weight:700;
+  padding:4px 10px;border-radius:50px;z-index:20;
+  backdrop-filter:blur(4px);letter-spacing:.5px
+}
+
+/* ══ BTN ══ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:50px;font-family:var(--font-b);
+  font-size:.93rem;font-weight:600;cursor:pointer;
+  transition:var(--tr);border:none;text-decoration:none
+}
+.btn-sage{background:var(--sage);color:white;box-shadow:0 4px 20px var(--sage-glow)}
+.btn-sage:hover{background:var(--sage-dark);transform:translateY(-2px);box-shadow:0 8px 28px var(--sage-glow)}
+.btn-white{background:white;color:var(--sage-dark)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.btn-outline-white{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4)}
+.btn-outline-white:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+
+/* ══ STATS BAND ══ */
+.stats-band{padding:60px 0;background:var(--gray-900)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.stat-num{font-family:var(--font-h);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:6px}
+.stat-label{font-size:.85rem;color:rgba(255,255,255,.5)}
+
+/* ══ PROCESS ══ */
+.process-section{padding:80px 0;background:var(--gray-50)}
+.section-label{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.section-title{font-family:var(--font-h);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2;margin-bottom:16px}
+.section-sub{font-size:1.05rem;color:var(--gray-600);max-width:520px;line-height:1.8;margin-bottom:52px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+.process-steps::before{
+  content:'';position:absolute;top:28px;
+  left:calc(12.5% + 16px);right:calc(12.5% + 16px);
+  height:2px;background:linear-gradient(90deg,var(--sage-subtle),var(--sage),var(--sage-subtle));z-index:0
+}
+.process-step{text-align:center;position:relative;z-index:1}
+.process-num{
+  width:56px;height:56px;border-radius:50%;background:var(--sage);
+  color:white;font-family:var(--font-h);font-size:1.2rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;box-shadow:0 4px 20px var(--sage-glow)
+}
+.process-step-title{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:8px}
+.process-step-desc{font-size:.82rem;color:var(--gray-600);line-height:1.6}
+
+/* ══ CTA ══ */
+.cta-section{
+  padding:100px 0;
+  background:linear-gradient(135deg,var(--sage-deeper) 0%,var(--sage-dark) 100%);
+  text-align:center;position:relative;overflow:hidden
+}
+.cta-section::before{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:600px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%)
+}
+.cta-title{font-family:var(--font-h);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:white;margin-bottom:16px}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.7);max-width:480px;margin:0 auto 40px;line-height:1.8}
+.cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 0 0}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.footer-brand-text{font-size:.85rem;line-height:1.8;margin:16px 0 20px;color:rgba(255,255,255,.5)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a,.footer-links li{font-size:.85rem;color:rgba(255,255,255,.55);text-decoration:none;transition:var(--tr)}
+.footer-links a:hover{color:white}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 0;font-size:.8rem;color:rgba(255,255,255,.3)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{color:rgba(255,255,255,.35);text-decoration:none;transition:var(--tr)}
+.footer-legal a:hover{color:white}
+.footer-socials{display:flex;gap:10px;margin-top:16px}
+.footer-socials a{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:var(--tr);text-decoration:none}
+.footer-socials a:hover{background:var(--sage);border-color:var(--sage)}
+.footer-socials svg{width:16px;height:16px;fill:rgba(255,255,255,.55);transition:var(--tr)}
+.footer-socials a:hover svg{fill:white}
+
+/* ══ EGYÉB section label/title for the intro ══ */
+.egyeb-intro{padding:80px 0 40px;background:var(--gray-50)}
+.section-header{margin-bottom:0}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  .service-grid{grid-template-columns:1fr;gap:40px}
+  .service-grid.reverse > .service-text,.service-grid.reverse > .service-img{order:unset}
+  .service-grid.reverse > .service-img{order:-1}
+  .process-steps{grid-template-columns:1fr 1fr;gap:24px}
+  .process-steps::before{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .process-steps,.stats-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-legal{flex-direction:column;gap:8px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .tab-btn{padding:16px 18px;font-size:.82rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('hu')">HU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="Estur Épker Kft.">
+    </a>
+    <ul class="nav-links">
+      <li><a href="szolgaltatasok.html" class="active" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+      <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+      <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+      <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+      <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+      <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+      <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()" style="color:var(--sage)">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Főoldal</a>
+      <span style="color:var(--gray-200)">›</span>
+      <span data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</span>
+    </div>
+    <div class="page-badge">
+      <span class="page-badge-dot"></span>
+      <span data-hu="Baja és környéke · Országosan" data-en="Baja area · Nationwide" data-de="Baja und Umgebung · Landesweit">Baja és környéke · Országosan</span>
+    </div>
+    <h1 data-hu="Teljes körű építőipari<br>szolgáltatások" data-en="Full-range construction<br>services" data-de="Umfassende Bau-<br>dienstleistungen">Teljes körű építőipari<br>szolgáltatások</h1>
+    <p data-hu="Az alapoktól a kulcsátadásig — generálkivitelezéstől a precíz burkolásig minden munkát saját, tapasztalt csapatunkkal végzünk, 2016 óta." data-en="From foundations to handover — from general contracting to precise tiling, every job is done by our own experienced team, since 2016." data-de="Von den Fundamenten bis zur Schlüsselübergabe — alles mit unserem eigenen erfahrenen Team seit 2016.">Az alapoktól a kulcsátadásig — generálkivitelezéstől a precíz burkolásig minden munkát saját, tapasztalt csapatunkkal végzünk, 2016 óta.</p>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="tab-nav-wrap" id="tabNavWrap">
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="scrollToSection('generalkivitelez')" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</button>
+    <button class="tab-btn" onclick="scrollToSection('lakasepites')" data-hu="Lakásépítés, átalakítás" data-en="House Construction" data-de="Hausbau">Lakásépítés</button>
+    <button class="tab-btn" onclick="scrollToSection('egyeb')" data-hu="Egyéb szolgáltatások" data-en="Other Services" data-de="Weitere Leistungen">Egyéb szolgáltatások</button>
+  </nav>
+</div>
+
+<!-- ══ SERVICE 01: GENERÁLKIVITELEZÉS ══ -->
+<div id="generalkivitelez" class="service-section">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="01 — Generálkivitelezés" data-en="01 — General Contracting" data-de="01 — Generalunternehmen">01 — Generálkivitelezés</div>
+        <h2 class="service-title" data-hu="Tervezéstől az átadásig — egyetlen kézből" data-en="From design to handover — from a single hand" data-de="Von der Planung bis zur Übergabe — aus einer Hand">Tervezéstől az átadásig — egyetlen kézből</h2>
+
+        <h3 class="service-subtitle" data-hu="Tervezés" data-en="Planning" data-de="Planung">Tervezés</h3>
+        <p class="service-desc" data-hu="Vállaljuk az építészeti és mérnöki tervezést, a szükséges engedélyek beszerzését, valamint minden építési és szakipari munka teljes körű elvégzését." data-en="We undertake architectural and engineering design, obtaining the necessary permits, and full execution of all construction and specialist work." data-de="Wir übernehmen Architektur- und Ingenieurplanung, Genehmigungseinholung sowie die vollständige Ausführung aller Bau- und Facharbeiten.">Vállaljuk az építészeti és mérnöki tervezést, a szükséges engedélyek beszerzését, valamint minden építési és szakipari munka teljes körű elvégzését.</p>
+
+        <h3 class="service-subtitle" data-hu="Teljesség" data-en="Completeness" data-de="Vollständigkeit">Teljesség</h3>
+        <p class="service-desc" data-hu="Gondoskodunk a kőműves-, villanyszerelési-, gépészeti-, burkolási-, festési- és egyéb kiegészítő munkálatokról, hogy Önnek ne kelljen több kivitelezővel egyeztetnie." data-en="We take care of masonry, electrical, mechanical, tiling, painting and other supplementary works, so you don't have to coordinate with multiple contractors." data-de="Wir kümmern uns um Maurer-, Elektro-, Heizungs-, Fliesen-, Mal- und sonstige Ergänzungsarbeiten, damit Sie nicht mit mehreren Auftragnehmern koordinieren müssen.">Gondoskodunk a kőműves-, villanyszerelési-, gépészeti-, burkolási-, festési- és egyéb kiegészítő munkálatokról, hogy Önnek ne kelljen több kivitelezővel egyeztetnie.</p>
+
+        <h3 class="service-subtitle" data-hu="Precizitás" data-en="Precision" data-de="Präzision">Precizitás</h3>
+        <p class="service-desc" data-hu="Projektmenedzsment csapatunk folyamatosan nyomon követi az ütemezést, felügyeli a minőséget, és összehangolja a munkafolyamatokat a különböző szakemberek között." data-en="Our project management team continuously tracks scheduling, monitors quality, and coordinates workflows between different specialists." data-de="Unser Projektmanagement-Team verfolgt kontinuierlich Zeitpläne, überwacht die Qualität und koordiniert Arbeitsabläufe zwischen verschiedenen Fachleuten.">Projektmenedzsment csapatunk folyamatosan nyomon követi az ütemezést, felügyeli a minőséget, és összehangolja a munkafolyamatokat a különböző szakemberek között.</p>
+
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Generalkivitelezes/generalkivitelezes.jpeg" alt="Generálkivitelezés 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Generalkivitelezes/generalkivitelezes1.jpg" alt="Generálkivitelezés 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Generalkivitelezes/generalkivitelezes2.jpg" alt="Generálkivitelezés 3" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICE 02: LAKÁSÉPÍTÉS ══ -->
+<div id="lakasepites" class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="02 — Lakásépítés, átalakítás" data-en="02 — House Construction" data-de="02 — Hausbau">02 — Lakásépítés, átalakítás</div>
+        <h2 class="service-title" data-hu="Az álmok otthona, alapoktól felépítve" data-en="Your dream home, built from the ground up" data-de="Ihr Traumhaus, von Grund auf gebaut">Az álmok otthona, alapoktól felépítve</h2>
+        <p class="service-desc" data-hu="Új lakóépületek és családi házak építését vállaljuk a tervek elkészítésétől az engedélyezésen át a kulcsátadásig. Minden részletre odafigyelünk, hogy az Ön elképzelése valósággá váljon." data-en="We undertake the construction of new residential buildings and family houses from drafting plans through permitting to handover. We pay attention to every detail so your vision becomes reality." data-de="Wir übernehmen den Bau von Neubauten und Einfamilienhäusern von der Planung über die Genehmigung bis zur Übergabe. Wir achten auf jedes Detail, damit Ihre Vision Wirklichkeit wird.">Új lakóépületek és családi házak építését vállaljuk a tervek elkészítésétől az engedélyezésen át a kulcsátadásig. Minden részletre odafigyelünk, hogy az Ön elképzelése valósággá váljon.</p>
+        <ul class="service-list">
+          <li data-hu="Alapozás, szerkezetépítés, falazás" data-en="Foundations, structural work, masonry" data-de="Fundament, Rohbau, Mauerwerk">Alapozás, szerkezetépítés, falazás</li>
+          <li data-hu="Tetőszerkezet és héjalás" data-en="Roof structure and tiling" data-de="Dachkonstruktion und Eindeckung">Tetőszerkezet és héjalás</li>
+          <li data-hu="Nyílászárók beépítése, szigetelés" data-en="Window/door installation, insulation" data-de="Fenster-/Türmontage, Dämmung">Nyílászárók beépítése, szigetelés</li>
+          <li data-hu="Gépészet, villanyszerelés koordináció" data-en="HVAC and electrical coordination" data-de="HLS und Elektrokoordination">Gépészet, villanyszerelés koordináció</li>
+          <li data-hu="Belső és külső befejező munkák" data-en="Interior and exterior finishing" data-de="Innen- und Außenausbau">Belső és külső befejező munkák</li>
+        </ul>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Lakasfelujitas/Lakasfelujitas.jpeg" alt="Lakásépítés 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Lakasfelujitas/Lakasfelujitas1.jpeg" alt="Lakásépítés 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Lakasfelujitas/Lakasfelujitas2.jpeg" alt="Lakásépítés 3" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Lakasfelujitas/Lakasfelujitas3.jpeg" alt="Lakásépítés 3" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ EGYÉB INTRO ══ -->
+<div id="egyeb" class="egyeb-intro" style="background:var(--gray-200)">
+  <div class="container">
+    <div class="section-label reveal" data-hu="03 — Egyéb szolgáltatások" data-en="03 — Other Services" data-de="03 — Weitere Leistungen">04 — Egyéb szolgáltatások</div>
+    <h2 class="section-title reveal" data-hu="Szakipari munkák<br>teljes spektruma" data-en="The full spectrum<br>of specialist trades" data-de="Das volle Spektrum<br>der Fachgewerke">Szakipari munkák<br>teljes spektruma</h2>
+    <p class="section-sub reveal" data-hu="Saját szakembereinkkel végezzük az összes kiegészítő munkát — nem kell alvállalkozókat keresni." data-en="All supplementary works are carried out by our own tradespeople — no need to search for subcontractors." data-de="Alle Ergänzungsarbeiten werden von unseren eigenen Fachleuten ausgeführt.">Saját szakembereinkkel végezzük az összes kiegészítő munkát — nem kell alvállalkozókat keresni.</p>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 01: FÖLDMUNKA ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.1 — Földmunka" data-en="03.1 — Earthworks" data-de="03.1 — Erdarbeiten">04.1 — Földmunka</div>
+        <h2 class="service-title" data-hu="Tereprendezés és földmozgatás" data-en="Site levelling and earthmoving" data-de="Geländegestaltung und Erdarbeiten">Tereprendezés és földmozgatás</h2>
+        <p class="service-desc" data-hu="A földmunka magában foglalja a tereprendezést, ásást, árokásást, földtöltést és az építkezés előkészítéséhez szükséges minden földmozgatást. Modern gépekkel és tapasztalt szakemberekkel biztosítjuk a gyors, pontos és megbízható kivitelezést." data-en="Earthworks cover site levelling, excavation, trenching, backfilling and all earthmoving required for construction preparation. With modern machinery and experienced specialists we ensure fast, accurate and reliable execution." data-de="Erdarbeiten umfassen Geländegestaltung, Aushub, Grabenaushub, Auffüllung und alle Erdbewegungen für die Bauvorbereitung. Mit modernen Maschinen und erfahrenen Fachleuten sorgen wir für schnelle, präzise Ausführung.">A földmunka magában foglalja a tereprendezést, ásást, árokásást, földtöltést és az építkezés előkészítéséhez szükséges minden földmozgatást. Modern gépekkel és tapasztalt szakemberekkel biztosítjuk a gyors, pontos és megbízható kivitelezést.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Foldmunka/foldmunka1.jpeg" alt="Földmunka 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Foldmunka/foldmunka2.jpeg" alt="Földmunka 2" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 02: BETONOZÁS ══ -->
+<div class="service-section"">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.2 — Betonozás" data-en="03.2 — Concreting" data-de="03.2 — Betonarbeiten">04.2 — Betonozás</div>
+        <h2 class="service-title" data-hu="Tartós és teherbíró betonszerkezetek" data-en="Durable and load-bearing concrete structures" data-de="Dauerhafte und tragfähige Betonkonstruktionen">Tartós és teherbíró betonszerkezetek</h2>
+        <p class="service-desc" data-hu="A betonozás az építkezés egyik alapvető folyamata, amely során tartós és teherbíró szerkezetek készülnek. Ide tartozik az alapok, járdák, padlók és egyéb betonfelületek kialakítása. A megfelelő előkészítés, pontos kivitelezés és minőségi anyaghasználat biztosítja a hosszú élettartamot és a stabil szerkezetet." data-en="Concreting is one of the fundamental construction processes, producing durable and load-bearing structures. This includes foundations, walkways, floors and other concrete surfaces. Proper preparation, precise execution and quality materials guarantee long service life." data-de="Betonarbeiten sind ein grundlegender Bauprozess, bei dem dauerhafte und tragfähige Strukturen entstehen. Dazu gehören Fundamente, Wege, Böden und andere Betonflächen. Sorgfältige Vorbereitung und hochwertige Materialien garantieren Langlebigkeit.">A betonozás az építkezés egyik alapvető folyamata, amely során tartós és teherbíró szerkezetek készülnek. Ide tartozik az alapok, járdák, padlók és egyéb betonfelületek kialakítása. A megfelelő előkészítés, pontos kivitelezés és minőségi anyaghasználat biztosítja a hosszú élettartamot és a stabil szerkezetet.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok//Betonozas/betonozas.jpeg" alt="Betonozás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok//Betonozas/betonozas1.jpeg" alt="Betonozás 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok//Betonozas/betonozas2.jpeg" alt="Betonozás 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok//Betonozas/betonozas3.jpeg" alt="Betonozás 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok//Betonozas/betonozas4.jpeg" alt="Betonozás 2" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 03: TÁMFAL ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.3 — Támfal építés" data-en="03.3 — Retaining Wall" data-de="03.3 — Stützmauerbau">04.3 — Támfal építés</div>
+        <h2 class="service-title" data-hu="Stabil és biztonságos szintkülönbségek" data-en="Stable and safe level differences" data-de="Stabile und sichere Niveauunterschiede">Stabil és biztonságos szintkülönbségek</h2>
+        <p class="service-desc" data-hu="A támfal építés célja a talaj megtámasztása és a szintkülönbségek biztonságos kialakítása. Alkalmas lejtős területek stabilizálására, teraszok kialakítására és földcsuszamlás megelőzésére. A megfelelő tervezés, vízelvezetés és szakszerű kivitelezés biztosítja a tartós és biztonságos szerkezetet." data-en="Retaining wall construction stabilises soil and safely manages level differences. Suitable for stabilising sloped areas, creating terraces and preventing landslides. Proper design, drainage and expert execution ensure a durable and safe structure." data-de="Der Stützmauerbau dient der Bodenstabilisierung und der sicheren Gestaltung von Niveauunterschieden. Geeignet für Hangstabilisierung, Terrassierung und Erdrutschprävention. Fachgerechte Planung und Ausführung sichern eine dauerhafte Konstruktion.">A támfal építés célja a talaj megtámasztása és a szintkülönbségek biztonságos kialakítása. Alkalmas lejtős területek stabilizálására, teraszok kialakítására és földcsuszamlás megelőzésére. A megfelelő tervezés, vízelvezetés és szakszerű kivitelezés biztosítja a tartós és biztonságos szerkezetet.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Tamfal/tamfal.jpeg" alt="Támfal 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Tamfal/tamfal1.jpeg" alt="Támfal 2" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 04: FALAZÁS ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.4 — Falazás" data-en="03.4 — Masonry" data-de="03.4 — Mauerwerk">04.4 — Falazás</div>
+        <h2 class="service-title" data-hu="Stabil falszerkezetek minden igényre" data-en="Stable wall structures for every need" data-de="Stabile Wandkonstruktionen für jeden Bedarf">Stabil falszerkezetek minden igényre</h2>
+        <p class="service-desc" data-hu="A falazás az építés egyik alapvető folyamata, amely során a teherhordó és válaszfalak készülnek. Tégla, beton vagy egyéb építőanyag felhasználásával történik, a pontos méretezés és szakszerű kivitelezés biztosítja a stabil, tartós és egyenes szerkezetet." data-en="Masonry is one of the fundamental construction processes, building load-bearing and partition walls. Using brick, block or other materials, precise dimensioning and expert execution ensure a stable, durable and straight structure." data-de="Mauerwerk ist ein grundlegender Bauprozess für tragende Wände und Trennwände. Mit Ziegel, Beton oder anderen Materialien sorgen genaue Bemessung und fachgerechte Ausführung für eine stabile, dauerhafte Struktur.">A falazás az építés egyik alapvető folyamata, amely során a teherhordó és válaszfalak készülnek. Tégla, beton vagy egyéb építőanyag felhasználásával történik, a pontos méretezés és szakszerű kivitelezés biztosítja a stabil, tartós és egyenes szerkezetet.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas2.jpeg" alt="Falazás 2" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas3.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas4.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas5.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas6.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas7.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas8.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas9.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas10.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas11.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas12.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas13.jpeg" alt="Falazás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Falazas/Falazas14.jpeg" alt="Falazás 1" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 14</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 05: ZSALUZÁS ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.5 — Zsaluzás" data-en="03.5 — Formwork" data-de="03.5 — Schalung">04.5 — Zsaluzás</div>
+        <h2 class="service-title" data-hu="Precíz formázás a stabil betonhoz" data-en="Precise forming for stable concrete" data-de="Präzise Formgebung für stabilen Beton">Precíz formázás a stabil betonhoz</h2>
+        <p class="service-desc" data-hu="A zsaluzás a betonozás előkészítő folyamata, amely során ideiglenes szerkezet készül a friss beton megtartására és formázására. Biztosítja, hogy a beton a kívánt alakot és méretet vegye fel. A pontos kivitelezés és a megfelelő alátámasztás elengedhetetlen a stabil és minőségi végeredményhez." data-en="Formwork is the preparatory process for concreting, creating a temporary structure to retain and shape fresh concrete. It ensures the concrete takes the desired form and dimensions. Precise execution and adequate support are essential for a stable, quality result." data-de="Die Schalung ist der Vorbereitungsprozess für das Betonieren, bei dem eine temporäre Konstruktion zur Aufnahme und Formgebung von Frischbeton erstellt wird. Präzise Ausführung und ausreichende Unterstützung sind unerlässlich.">A zsaluzás a betonozás előkészítő folyamata, amely során ideiglenes szerkezet készül a friss beton megtartására és formázására. Biztosítja, hogy a beton a kívánt alakot és méretet vegye fel. A pontos kivitelezés és a megfelelő alátámasztás elengedhetetlen a stabil és minőségi végeredményhez.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas.jpeg" alt="Zsaluzás 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas1.jpeg" alt="Zsaluzás 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas2.jpeg" alt="Zsaluzás 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas3.jpeg" alt="Zsaluzás 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas4.jpeg" alt="Zsaluzás 5" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas5.jpeg" alt="Zsaluzás 6" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas6.jpeg" alt="Zsaluzás 7" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Zsaluzas/Zsaluzas7.jpeg" alt="Zsaluzás 8" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 06: HOMLOKZATI SZIGETELÉS ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.6 — Homlokzati szigetelés" data-en="03.6 — Facade Insulation" data-de="03.6 — Fassadendämmung">04.6 — Homlokzati szigetelés</div>
+        <h2 class="service-title" data-hu="Energiahatékonyság és tartós védelem" data-en="Energy efficiency and lasting protection" data-de="Energieeffizienz und dauerhafter Schutz">Energiahatékonyság és tartós védelem</h2>
+        <p class="service-desc" data-hu="A homlokzati szigetelés javítja az épület hőmegtartó képességét, csökkenti az energiafogyasztást és növeli a komfortérzetet. Megvédi a falazatot az időjárási hatásoktól, valamint hozzájárul az épület esztétikus megjelenéséhez. A szakszerű kivitelezés hosszú távon biztosít tartós és hatékony megoldást." data-en="Facade insulation improves the building's heat retention, reduces energy consumption and increases comfort. It protects the masonry from weather and contributes to the aesthetic appearance of the building. Expert execution provides a long-lasting, efficient solution." data-de="Fassadendämmung verbessert die Wärmespeicherung, reduziert den Energieverbrauch und erhöht den Komfort. Sie schützt das Mauerwerk vor Witterungseinflüssen und trägt zur ästhetischen Erscheinung bei. Fachgerechte Ausführung gewährleistet eine dauerhafte Lösung.">A homlokzati szigetelés javítja az épület hőmegtartó képességét, csökkenti az energiafogyasztást és növeli a komfortérzetet. Megvédi a falazatot az időjárási hatásoktól, valamint hozzájárul az épület esztétikus megjelenéséhez. A szakszerű kivitelezés hosszú távon biztosít tartós és hatékony megoldást.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles.jpeg" alt="Homlokzati szigetelés 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles2.jpeg" alt="Homlokzati szigetelés 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles3.jpeg" alt="Homlokzati szigetelés 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles4.jpeg" alt="Homlokzati szigetelés 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles5.jpeg" alt="Homlokzati szigetelés 5" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Homlokzati szigeteles/homlokzati-szigeteles6.jpeg" alt="Homlokzati szigetelés 6" loading="lazy">
+            </div>
+            
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 07: GIPSZKARTONOZÁS ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.7 — Gipszkartonozás" data-en="03.7 — Drywall" data-de="03.7 — Gipskartonsysteme">04.7 — Gipszkartonozás</div>
+        <h2 class="service-title" data-hu="Gyors és esztétikus belső terek" data-en="Fast and aesthetic interior spaces" data-de="Schnelle und ästhetische Innenräume">Gyors és esztétikus belső terek</h2>
+        <p class="service-desc" data-hu="A gipszkartonozás gyors és hatékony megoldás belső terek kialakítására és felújítására. Alkalmas válaszfalak, álmennyezetek és burkolatok készítésére, valamint egyenetlen felületek kiegyenlítésére. A precíz kivitelezés sima, esztétikus és jól alakítható felületeket eredményez." data-en="Drywalling is a fast and efficient solution for creating and renovating interior spaces. Suitable for partition walls, suspended ceilings and cladding, as well as levelling uneven surfaces. Precise execution produces smooth, aesthetic and easily shaped surfaces." data-de="Gipskartonarbeiten sind eine schnelle und effiziente Lösung für die Gestaltung und Renovierung von Innenräumen. Geeignet für Trennwände, Unterdecken und Verkleidungen sowie zur Ausgleichung unebener Flächen.">A gipszkartonozás gyors és hatékony megoldás belső terek kialakítására és felújítására. Alkalmas válaszfalak, álmennyezetek és burkolatok készítésére, valamint egyenetlen felületek kiegyenlítésére. A precíz kivitelezés sima, esztétikus és jól alakítható felületeket eredményez.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Gipszkartonozas/gipszkarton.jpeg" alt="Gipszkartonozás 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Gipszkartonozas/gipszkarton1.jpeg" alt="Gipszkartonozás 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Gipszkartonozas/gipszkarton2.jpeg" alt="Gipszkartonozás 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Gipszkartonozas/gipszkarton3.jpeg" alt="Gipszkartonozás 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Gipszkartonozas/gipszkarton4.jpeg" alt="Gipszkartonozás 5" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 08: HIDEGBURKOLÁS ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.8 — Hidegburkolás" data-en="03.8 — Ceramic Tiling" data-de="03.8 — Fliesenarbeiten">04.8 — Hidegburkolás</div>
+        <h2 class="service-title" data-hu="Tartós burkolatok padlón és falon" data-en="Durable coverings on floors and walls" data-de="Langlebige Beläge auf Böden und Wänden">Tartós burkolatok padlón és falon</h2>
+        <p class="service-desc" data-hu="A hidegburkolás során kerámia, járólap vagy kő burkolatok kerülnek elhelyezésre padlón és falon. Tartós, könnyen tisztán tartható és esztétikus felületet biztosít, amely ellenáll a nedvességnek és a kopásnak. A pontos előkészítés és szakszerű kivitelezés garantálja a hosszú élettartamot és a kifogástalan megjelenést." data-en="Ceramic tiling places ceramic, floor tile or stone coverings on floors and walls. It provides a durable, easy-to-clean and aesthetic surface resistant to moisture and wear. Precise preparation and expert execution guarantee long service life and a flawless finish." data-de="Beim Fliesenlegen werden Keramik-, Boden- oder Steinbeläge auf Böden und Wänden verlegt. Sie bieten eine dauerhafte, pflegeleichte und ästhetische Oberfläche, die feuchtigkeits- und verschleißbeständig ist.">A hidegburkolás során kerámia, járólap vagy kő burkolatok kerülnek elhelyezésre padlón és falon. Tartós, könnyen tisztán tartható és esztétikus felületet biztosít, amely ellenáll a nedvességnek és a kopásnak. A pontos előkészítés és szakszerű kivitelezés garantálja a hosszú élettartamot és a kifogástalan megjelenést.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas.jpeg" alt="Hidegburkolás 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas2.jpeg" alt="Hidegburkolás 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas3.jpeg" alt="Hidegburkolás 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas4.jpeg" alt="Hidegburkolás 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas5.jpeg" alt="Hidegburkolás 5" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Hidegburkolas/hidegburkolas6.jpeg" alt="Hidegburkolás 6" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 09: MELEGBURKOLÁS ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.9 — Melegburkolás" data-en="03.9 — Warm Flooring" data-de="03.9 — Warmbodenbelag">04.9 — Melegburkolás</div>
+        <h2 class="service-title" data-hu="Meleg és esztétikus padlóburkolatok" data-en="Warm and aesthetic floor coverings" data-de="Warme und ästhetische Bodenbeläge">Meleg és esztétikus padlóburkolatok</h2>
+        <p class="service-desc" data-hu="A melegburkolás során parketta, laminált padló vagy egyéb fa- és műanyag burkolatok kerülnek lerakásra. Kellemes, meleg érzetet biztosít, miközben esztétikus és komfortos felületet ad a belső tereknek. A megfelelő aljzat-előkészítés és precíz kivitelezés garantálja a tartós és hibamentes végeredményt." data-en="Warm flooring involves laying parquet, laminate or other wood and composite floor coverings. It provides a pleasant, warm feeling while giving aesthetic and comfortable surfaces to interiors. Proper subfloor preparation and precise execution guarantee a durable, flawless result." data-de="Beim Warmbodenbelag werden Parkett, Laminat oder andere Holz- und Kunstbeläge verlegt. Sie bieten ein angenehmes, warmes Gefühl und ästhetische Oberflächen. Sorgfältige Untergrundvorbereitung garantiert ein dauerhaftes Ergebnis.">A melegburkolás során parketta, laminált padló vagy egyéb fa- és műanyag burkolatok kerülnek lerakásra. Kellemes, meleg érzetet biztosít, miközben esztétikus és komfortos felületet ad a belső tereknek. A megfelelő aljzat-előkészítés és precíz kivitelezés garantálja a tartós és hibamentes végeredményt.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Melegburkolas/Melegburkolas.jpeg" alt="Melegburkolás 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Melegburkolas/Melegburkolas1.jpeg" alt="Melegburkolás 1" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 10: ÉPÜLETGÉPÉSZET ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.10 — Épületgépészet" data-en="03.10 — Building Services" data-de="03.10 — Gebäudetechnik">04.10 — Épületgépészet</div>
+        <h2 class="service-title" data-hu="Fűtés, víz, csatorna, szellőzés" data-en="Heating, water, drainage, ventilation" data-de="Heizung, Wasser, Abwasser, Lüftung">Fűtés, víz, csatorna, szellőzés</h2>
+        <p class="service-desc" data-hu="Az épületgépészet magában foglalja a fűtési, víz-, csatorna- és szellőztető rendszerek kialakítását és kiépítését. A megfelelően megtervezett és kivitelezett rendszerek biztosítják az épület kényelmét, hatékony működését és energiahatékonyságát." data-en="Building services engineering covers the design and installation of heating, water, drainage and ventilation systems. Properly planned and executed systems ensure the building's comfort, efficient operation and energy efficiency." data-de="Die Gebäudetechnik umfasst die Planung und Installation von Heizungs-, Wasser-, Abwasser- und Lüftungssystemen. Richtig geplante Systeme gewährleisten Komfort, effizienten Betrieb und Energieeffizienz.">Az épületgépészet magában foglalja a fűtési, víz-, csatorna- és szellőztető rendszerek kialakítását és kiépítését. A megfelelően megtervezett és kivitelezett rendszerek biztosítják az épület kényelmét, hatékony működését és energiahatékonyságát.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Epuletgepeszet/Epuletgepeszet.jpeg" alt="Épületgépészet 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Epuletgepeszet/Epuletgepeszet1.jpeg" alt="Épületgépészet 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Epuletgepeszet/Epuletgepeszet2.jpeg" alt="Épületgépészet 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Epuletgepeszet/Epuletgepeszet3.jpeg" alt="Épületgépészet 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Epuletgepeszet/Epuletgepeszet4.jpeg" alt="Épületgépészet 5" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 11: TÉRKÖVEZÉS ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.11 — Térkövezés" data-en="03.11 — Paving" data-de="03.11 — Pflasterarbeiten">04.11 — Térkövezés</div>
+        <h2 class="service-title" data-hu="Esztétikus és tartós külső burkolatok" data-en="Aesthetic and durable exterior paving" data-de="Ästhetische und langlebige Außenpflasterung">Esztétikus és tartós külső burkolatok</h2>
+        <p class="service-desc" data-hu="A térkövezés esztétikus és tartós megoldást nyújt járdák, autóbeállók és udvarok kialakítására. A megfelelő alapozás és precíz lerakás biztosítja a stabil, időtálló és jól terhelhető felületet." data-en="Paving provides an aesthetic and durable solution for walkways, driveways and courtyards. Proper foundation and precise laying ensure a stable, long-lasting and load-bearing surface." data-de="Pflasterarbeiten bieten eine ästhetische und dauerhafte Lösung für Gehwege, Einfahrten und Höfe. Sorgfältige Grundlage und präzises Verlegen gewährleisten eine stabile, langlebige Oberfläche.">A térkövezés esztétikus és tartós megoldást nyújt járdák, autóbeállók és udvarok kialakítására. A megfelelő alapozás és precíz lerakás biztosítja a stabil, időtálló és jól terhelhető felületet.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Terkovezes/terkovezes.jpeg" alt="Térkövezés 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Terkovezes/terkovezes1.jpeg" alt="Térkövezés 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Terkovezes/terkovezes2.jpeg" alt="Térkövezés 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Terkovezes/terkovezes3.jpeg" alt="Térkövezés 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Terkovezes/terkovezes4.jpeg" alt="Térkövezés 5" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 12: MEDENCE ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.12 — Medence építés" data-en="03.12 — Pool Construction" data-de="03.12 — Poolbau">04.12 — Medence építés</div>
+        <h2 class="service-title" data-hu="Egyedi medencék, tartós kivitelezéssel" data-en="Custom pools, built to last" data-de="Individuelle Pools, dauerhaft gebaut">Egyedi medencék, tartós kivitelezéssel</h2>
+        <p class="service-desc" data-hu="A medence építés során egyedi igényekhez igazított, tartós és esztétikus medencék készülnek. A gondos tervezés, vízszigetelés és kivitelezés biztosítja a hosszú élettartamot és a biztonságos használatot." data-en="Pool construction creates durable and aesthetic pools tailored to individual needs. Careful planning, waterproofing and execution ensure long service life and safe use." data-de="Der Poolbau erstellt individuelle, langlebige und ästhetische Pools. Sorgfältige Planung, Abdichtung und Ausführung gewährleisten Langlebigkeit und sicheren Betrieb.">A medence építés során egyedi igényekhez igazított, tartós és esztétikus medencék készülnek. A gondos tervezés, vízszigetelés és kivitelezés biztosítja a hosszú élettartamot és a biztonságos használatot.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Medence/medence-epites.jpeg" alt="Medence 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Medence/medence-epites1.jpeg" alt="Medence 1" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 13: TETŐSZIGETELÉS ══ -->
+<div class="service-section" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="service-grid reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.13 — Tetőszigetelés" data-en="03.13 — Roof Waterproofing" data-de="03.13 — Dachabdichtung">04.13 — Tetőszigetelés</div>
+        <h2 class="service-title" data-hu="Beázásmentes, energiahatékony tető" data-en="Leak-free, energy-efficient roof" data-de="Leckagefreies, energieeffizientes Dach">Beázásmentes, energiahatékony tető</h2>
+        <p class="service-desc" data-hu="A tetőszigetelés kulcsfontosságú az épület védelme és energiahatékonysága szempontjából. Megakadályozza a beázást, csökkenti a hőveszteséget, és hozzájárul a kellemes belső hőmérséklet fenntartásához. Alkalmas lapostetők és magastetők szigetelésére egyaránt." data-en="Roof waterproofing is essential for building protection and energy efficiency. It prevents water ingress, reduces heat loss and helps maintain comfortable indoor temperatures. Suitable for both flat roofs and pitched roofs." data-de="Dachabdichtung ist entscheidend für den Gebäudeschutz und die Energieeffizienz. Sie verhindert Wassereinbruch, reduziert Wärmeverlust und hilft bei der Aufrechterhaltung angenehmer Innentemperaturen.">A tetőszigetelés kulcsfontosságú az épület védelme és energiahatékonysága szempontjából. Megakadályozza a beázást, csökkenti a hőveszteséget, és hozzájárul a kellemes belső hőmérséklet fenntartásához. Alkalmas lapostetők és magastetők szigetelésére egyaránt.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Tetoszigeteles/tetoszigeteles.jpeg" alt="Tetőszigetelés 1" loading="lazy"></div>
+            <div class="svc-slide"><img src="assets/images/Szolgaltatasok/Tetoszigeteles/tetoszigeteles1.jpeg" alt="Tetőszigetelés 1" loading="lazy"></div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EGYÉB 14: KERÍTÉS ══ -->
+<div class="service-section">
+  <div class="container">
+    <div class="service-grid reverse reveal">
+      <div class="service-text">
+        <div class="service-label" data-hu="03.14 — Kerítés építés" data-en="03.14 — Fence Construction" data-de="03.14 — Zaunbau">04.14 — Kerítés építés</div>
+        <h2 class="service-title" data-hu="Biztonság és esztétika egy időben" data-en="Security and aesthetics in one" data-de="Sicherheit und Ästhetik in einem">Biztonság és esztétika egy időben</h2>
+        <p class="service-desc" data-hu="A kerítés építés az ingatlan biztonságát, határolását és esztétikus megjelenését szolgálja. Különböző anyagokból – például fából, fémből vagy betonból – készülhet az egyedi igényeknek megfelelően. A megfelelő alapozás, pontos kivitelezés és minőségi anyaghasználat biztosítja a tartós, stabil és időjárásálló szerkezetet." data-en="Fence construction serves the security, demarcation and aesthetic appearance of the property. It can be built from various materials – wood, metal or concrete – according to individual needs. Proper foundation, precise execution and quality materials ensure a durable, stable and weather-resistant structure." data-de="Der Zaunbau dient der Sicherheit, Abgrenzung und ästhetischen Gestaltung des Grundstücks. Er kann aus verschiedenen Materialien – Holz, Metall oder Beton – nach individuellen Bedürfnissen gefertigt werden.">A kerítés építés az ingatlan biztonságát, határolását és esztétikus megjelenését szolgálja. Különböző anyagokból – például fából, fémből vagy betonból – készülhet az egyedi igényeknek megfelelően. A megfelelő alapozás, pontos kivitelezés és minőségi anyaghasználat biztosítja a tartós, stabil és időjárásálló szerkezetet.</p>
+        <a href="ajanlatkeres.html" class="btn btn-sage">
+          <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="service-img">
+        <div class="svc-slider">
+          <div class="svc-slides">
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur.jpeg" alt="Kerítés 1" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur1.jpg" alt="Kerítés 2" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur2.jpg" alt="Kerítés 3" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur3.jpeg" alt="Kerítés 4" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur4.jpeg" alt="Kerítés 5" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur5.jpeg" alt="Kerítés 6" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur6.jpg" alt="Kerítés 7" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur7.jpeg" alt="Kerítés 8" loading="lazy">
+            </div>
+            
+            <div class="svc-slide">
+              <img src="assets/images/Szolgaltatasok/Kert-epites/kert-epites-estur8.jpeg" alt="Kerítés 9" loading="lazy">
+            </div>
+          </div>
+          <button class="svc-arrow svc-arrow-prev" type="button" aria-label="Előző"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="svc-arrow svc-arrow-next" type="button" aria-label="Következő"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="svc-dots"></div>
+          <div class="svc-counter">1 / 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STATS BAND ══ -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal"><div class="stat-num">9+</div><div class="stat-label" data-hu="év tapasztalat" data-en="years experience" data-de="Jahre Erfahrung">év tapasztalat</div></div>
+      <div class="reveal"><div class="stat-num">100+</div><div class="stat-label" data-hu="befejezett projekt" data-en="completed projects" data-de="abgeschlossene Projekte">befejezett projekt</div></div>
+      <div class="reveal"><div class="stat-num">48h</div><div class="stat-label" data-hu="ajánlat visszahívás" data-en="quote callback" data-de="Angebot-Rückruf">ajánlat visszahívás</div></div>
+      <div class="reveal"><div class="stat-num">5★</div><div class="stat-label" data-hu="ügyfél-elégedettség" data-en="client satisfaction" data-de="Kundenzufriedenheit">ügyfél-elégedettség</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROCESS ══ -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-label" data-hu="Hogyan dolgozunk" data-en="How we work" data-de="Wie wir arbeiten">Hogyan dolgozunk</div>
+    <h2 class="section-title reveal" data-hu="Átlátható folyamat,<br>nincs meglepetés" data-en="Transparent process,<br>no surprises" data-de="Transparenter Prozess,<br>keine Überraschungen">Átlátható folyamat,<br>nincs meglepetés</h2>
+    <p class="section-sub reveal" data-hu="Minden projektnél ugyanazt a bevált, átlátható munkafolyamatot követjük." data-en="For every project we follow the same proven, transparent workflow." data-de="Bei jedem Projekt folgen wir demselben bewährten, transparenten Arbeitsablauf.">Minden projektnél ugyanazt a bevált, átlátható munkafolyamatot követjük.</p>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-num">1</div>
+        <div class="process-step-title" data-hu="Kapcsolatfelvétel" data-en="First contact" data-de="Erstkontakt">Kapcsolatfelvétel</div>
+        <div class="process-step-desc" data-hu="Ajánlatkérés elküldése online vagy telefonon." data-en="Submit your quote request online or by phone." data-de="Angebotsanfrage online oder telefonisch.">Ajánlatkérés elküldése online vagy telefonon.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">2</div>
+        <div class="process-step-title" data-hu="Helyszíni felmérés" data-en="On-site survey" data-de="Vor-Ort-Besichtigung">Helyszíni felmérés</div>
+        <div class="process-step-desc" data-hu="Szakembereink ingyenesen felmérik a munkaterületet." data-en="Our experts survey the site free of charge." data-de="Unsere Experten besichtigen die Baustelle kostenlos.">Szakembereink ingyenesen felmérik a munkaterületet.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">3</div>
+        <div class="process-step-title" data-hu="Részletes ajánlat" data-en="Detailed quote" data-de="Detailliertes Angebot">Részletes ajánlat</div>
+        <div class="process-step-desc" data-hu="Átlátható, tételes árajánlatot küldünk 48 órán belül." data-en="We send a transparent, itemised quote within 48 hours." data-de="Wir senden ein transparentes Angebot innerhalb von 48 Stunden.">Átlátható, tételes árajánlatot küldünk 48 órán belül.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">4</div>
+        <div class="process-step-title" data-hu="Kivitelezés & átadás" data-en="Execution & handover" data-de="Ausführung & Übergabe">Kivitelezés & átadás</div>
+        <div class="process-step-desc" data-hu="A megbeszélt határidőre, dokumentálva adjuk át a munkát." data-en="We hand over the work on time, fully documented." data-de="Wir übergeben die Arbeit termingerecht und vollständig dokumentiert.">A megbeszélt határidőre, dokumentálva adjuk át a munkát.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1">
+    <h2 class="cta-title reveal" data-hu="Készen áll a projektre?" data-en="Ready for your project?" data-de="Bereit für Ihr Projekt?">Készen áll a projektre?</h2>
+    <p class="cta-sub reveal" data-hu="Kérjen ingyenes, kötelezettségmentes ajánlatot — 48 órán belül visszahívjuk." data-en="Request a free, non-binding quote — we'll call you back within 48 hours." data-de="Fordern Sie ein kostenloses, unverbindliches Angebot an — wir rufen Sie innerhalb von 48 Stunden zurück.">Kérjen ingyenes, kötelezettségmentes ajánlatot — 48 órán belül visszahívjuk.</p>
+    <div class="cta-btns">
+      <a href="ajanlatkeres.html" class="btn btn-white">
+        <span data-hu="Ajánlatot kérek" data-en="Request a quote" data-de="Angebot anfordern">Ajánlatot kérek</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="referenciak.html" class="btn btn-outline-white">
+        <span data-hu="Referenciáink" data-en="Our references" data-de="Unsere Referenzen">Referenciáink</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+          <img src="assets/images/logo.png" alt="Estur" style="height:44px;filter:brightness(0) invert(1)">
+        </a>
+        <p class="footer-brand-text" data-hu="Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan." data-en="Estur Kft. has been providing high-quality general contracting, residential construction and renovation in Baja and nationwide since 2016." data-de="Die Estur Kft. bietet seit 2016 hochwertige Generalunternehmertätigkeit, Wohnungsbau und Renovierung in Baja und landesweit.">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li>
+          <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+          <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+          <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+          <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+          <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+          <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+          <li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</h4>
+        <ul class="footer-links">
+          <li><a href="#generalkivitelez" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</a></li>
+          <li><a href="#lakasepites" data-hu="Lakásépítés" data-en="House Construction" data-de="Hausbau">Lakásépítés</a></li>
+          <li><a href="#lakasfelujitas" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</a></li>
+          <li><a href="#egyeb" data-hu="Egyéb szolgáltatások" data-en="Other Services" data-de="Weitere Leistungen">Egyéb szolgáltatások</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4>
+        <ul class="footer-links">
+          <li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li>
+          <li>Cégjegyzékszám: 03-09-129683</li>
+          <li>Erste Bank:<br>11600006-00000000-94622137</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Estur Épker Kft.</span>
+      <div class="footer-legal">
+        <a href="aszf.html">ÁSZF</a>
+        <a href="adatkezeles.html">Adatkezelési tájékoztató</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ══ SLIDERS ══
+document.querySelectorAll('.svc-slider').forEach(function(slider) {
+  var slidesWrap = slider.querySelector('.svc-slides');
+  var slides     = slider.querySelectorAll('.svc-slide');
+  var dotsWrap   = slider.querySelector('.svc-dots');
+  var counter    = slider.querySelector('.svc-counter');
+  var prevBtn    = slider.querySelector('.svc-arrow-prev');
+  var nextBtn    = slider.querySelector('.svc-arrow-next');
+  var total      = slides.length;
+  var current    = 0;
+
+  for (var i = 0; i < total; i++) {
+    (function(idx) {
+      var d = document.createElement('button');
+      d.className = 'svc-dot';
+      d.setAttribute('aria-label', (idx + 1) + '. kép');
+      d.setAttribute('type', 'button');
+      d.addEventListener('click', function(e) { e.stopPropagation(); goTo(idx); });
+      dotsWrap.appendChild(d);
+    })(i);
+  }
+
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    slidesWrap.style.transform = 'translateX(-' + (current * 100) + '%)';
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
+    dotsWrap.querySelectorAll('.svc-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  prevBtn.addEventListener('click', function(e) { e.stopPropagation(); goTo(current - 1); });
+  nextBtn.addEventListener('click', function(e) { e.stopPropagation(); goTo(current + 1); });
+
+  var touchStartX = 0;
+  slider.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+  }, { passive: true });
+
+  goTo(0);
+});
+
+// ══ NAVBAR SCROLL ══
+var nb = document.getElementById('navbar');
+window.addEventListener('scroll', function() {
+  nb.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ══ HAMBURGER ══
+var hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+hb.addEventListener('click', function() {
+  hb.classList.toggle('active');
+  mm.classList.toggle('active');
+  document.body.style.overflow = mm.classList.contains('active') ? 'hidden' : '';
+});
+function closeMobile() {
+  hb.classList.remove('active');
+  mm.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ══ REVEAL ══
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(en, i) {
+    if (en.isIntersecting) {
+      setTimeout(function() { en.target.classList.add('visible'); }, i * 80);
+      obs.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+// ══ SCROLL TO SECTION ══
+function scrollToSection(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var offset = 32 + 72 + 56;
+  var top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+// ══ ACTIVE TAB ON SCROLL ══
+var sections = ['generalkivitelez', 'lakasepites', 'lakasfelujitas', 'egyeb'];
+var tabBtns  = document.querySelectorAll('.tab-btn');
+window.addEventListener('scroll', function() {
+  var current = '';
+  var offset = 180;
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= offset) current = id;
+  });
+  tabBtns.forEach(function(b, i) {
+    b.classList.toggle('active', i === sections.indexOf(current));
+  });
+});
+
+// ══ LANGUAGE SWITCHER ══
+function setLang(lang) {
+  localStorage.setItem('estur_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+    var val = el.getAttribute('data-' + lang);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+    else el.innerHTML = val;
+  });
+  document.documentElement.lang = lang === 'hu' ? 'hu' : lang === 'en' ? 'en' : 'de';
+}
+(function() { setLang(localStorage.getItem('estur_lang') || 'hu'); })();
+</script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajánlatkérés | Estur Épker Kft. — Baja</title>
+<meta name="description" content="Kérjen személyre szabott ajánlatot generálkivitelezésre, lakásfelújításra vagy lakásépítésre. Estur Épker Kft. — Baja és környéke.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estur.css">
+<style>
+/* ══ PAGE HERO ══ */
+.page-hero{padding:180px 0 80px;background:linear-gradient(165deg,var(--white) 0%,var(--sage-subtle) 50%,var(--cream) 100%);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,var(--sage-glow) 0%,transparent 70%);animation:float 6s ease-in-out infinite}
+.page-hero-inner{position:relative;z-index:1}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--gray-100);padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--sage-dark);margin-bottom:28px;box-shadow:var(--shadow-sm)}
+.page-badge-dot{width:7px;height:7px;background:var(--sage);border-radius:50%;animation:pulse 2s infinite}
+.page-hero h1{font-family:var(--font-h);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;color:var(--gray-900);line-height:1.15;margin-bottom:20px}
+.page-hero p{font-size:1.1rem;color:var(--gray-600);max-width:560px;line-height:1.8}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--gray-400);margin-bottom:24px}
+.breadcrumb a{color:var(--sage);text-decoration:none;font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb-sep{color:var(--gray-200)}
+
+/* ══ STEPPER ══ */
+.stepper-section{padding:60px 0 0}
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:60px;flex-wrap:wrap;gap:8px}
+.step{display:flex;align-items:center;gap:10px;cursor:pointer;transition:var(--tr)}
+.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:.85rem;font-weight:700;border:2px solid var(--gray-200);color:var(--gray-400);background:var(--white);transition:var(--tr);flex-shrink:0}
+.step.active .step-circle{background:var(--sage);border-color:var(--sage);color:white;box-shadow:0 4px 16px var(--sage-glow)}
+.step.done .step-circle{background:var(--sage-subtle);border-color:var(--sage);color:var(--sage-dark)}
+.step.done .step-circle::after{content:'✓';font-size:.8rem}
+.step-label{font-size:.8rem;font-weight:600;color:var(--gray-400);transition:var(--tr);white-space:nowrap}
+.step.active .step-label{color:var(--sage-dark)}
+.step.done .step-label{color:var(--sage)}
+.step-line{width:40px;height:2px;background:var(--gray-100);transition:var(--tr);flex-shrink:0}
+.step-line.done{background:var(--sage)}
+
+/* ══ FORM PANELS ══ */
+.form-section{padding:0 0 100px}
+.form-panel{display:none}
+.form-panel.active{display:block;animation:fadeUp .5s ease forwards}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:.85rem;font-weight:600;color:var(--gray-700,var(--gray-800));letter-spacing:.3px}
+.form-label span{color:#c0392b;margin-left:2px}
+.form-input,.form-select,.form-textarea{font-family:var(--font-b);font-size:.95rem;color:var(--gray-800);background:var(--white);border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);padding:14px 18px;transition:var(--tr);outline:none;width:100%}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-glow)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--gray-200)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237d8274' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px;cursor:pointer}
+.form-textarea{resize:vertical;min-height:120px}
+.form-hint{font-size:.78rem;color:var(--gray-400)}
+
+/* ══ TYPE SELECTOR ══ */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.type-card{border:2px solid var(--gray-100);border-radius:var(--radius);padding:24px 20px;cursor:pointer;transition:var(--tr);text-align:center;background:var(--white);position:relative;overflow:hidden}
+.type-card:hover{border-color:var(--sage-light);box-shadow:var(--shadow-md)}
+.type-card.selected{border-color:var(--sage);background:var(--sage-subtle)}
+.type-card.selected::before{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--sage);color:white;border-radius:50%;font-size:.75rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.type-icon{font-size:2rem;margin-bottom:12px;display:block}
+.type-title{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.type-desc{font-size:.78rem;color:var(--gray-600);line-height:1.5}
+
+/* ══ BUDGET SLIDER ══ */
+.budget-track{margin:12px 0 6px}
+.budget-labels{display:flex;justify-content:space-between;font-size:.78rem;color:var(--gray-400);margin-top:8px}
+.budget-display{text-align:center;font-family:var(--font-h);font-size:1.5rem;font-weight:800;color:var(--sage-dark);margin-bottom:4px}
+.budget-display span{font-size:.9rem;font-weight:400;color:var(--gray-400)}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--gray-100);border-radius:2px;outline:none}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;background:var(--sage);border-radius:50%;cursor:pointer;box-shadow:0 2px 8px var(--sage-glow);transition:var(--tr)}
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);background:var(--sage-dark)}
+
+/* ══ TIMELINE ══ */
+.timeline-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tl-opt{border:2px solid var(--gray-100);border-radius:var(--radius-sm);padding:16px;text-align:center;cursor:pointer;transition:var(--tr)}
+.tl-opt:hover{border-color:var(--sage-light)}
+.tl-opt.selected{border-color:var(--sage);background:var(--sage-subtle)}
+.tl-opt-label{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:var(--gray-900)}
+.tl-opt-sub{font-size:.72rem;color:var(--gray-400);margin-top:4px}
+
+/* ══ CHECKBOX LIST ══ */
+.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.check-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);cursor:pointer;transition:var(--tr)}
+.check-item:hover{border-color:var(--sage-light);background:var(--gray-50)}
+.check-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--sage);cursor:pointer;flex-shrink:0}
+.check-item label{font-size:.88rem;color:var(--gray-700,var(--gray-800));cursor:pointer;line-height:1.4}
+
+/* ══ PANEL HEADER ══ */
+.panel-header{margin-bottom:40px}
+.panel-step-label{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.panel-title{font-family:var(--font-h);font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--gray-900);margin-bottom:10px}
+.panel-sub{font-size:.95rem;color:var(--gray-600);max-width:500px}
+
+/* ══ NAV BUTTONS ══ */
+.form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:44px;padding-top:32px;border-top:1px solid var(--gray-100)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:var(--font-b);font-size:.95rem;font-weight:600;cursor:pointer;transition:var(--tr);border:none;text-decoration:none}
+.btn-primary{background:var(--sage);color:white;box-shadow:0 4px 20px var(--sage-glow)}
+.btn-primary:hover{background:var(--sage-dark);transform:translateY(-2px);box-shadow:0 8px 28px var(--sage-glow)}
+.btn-secondary{background:var(--white);color:var(--gray-600);border:1.5px solid var(--gray-200)}
+.btn-secondary:hover{border-color:var(--sage);color:var(--sage);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn-submit{background:linear-gradient(135deg,var(--sage) 0%,var(--sage-dark) 100%);color:white;font-size:1rem;padding:16px 44px;box-shadow:0 6px 24px var(--sage-glow)}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 36px var(--sage-glow)}
+
+/* ══ SUMMARY ══ */
+.summary-card{background:var(--sage-subtle);border:1.5px solid var(--gray-100);border-radius:var(--radius);padding:32px;margin-bottom:32px}
+.summary-title{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.summary-rows{display:flex;flex-direction:column;gap:10px}
+.summary-row{display:flex;gap:12px;font-size:.9rem}
+.summary-row dt{color:var(--gray-400);min-width:180px;flex-shrink:0;font-weight:500}
+.summary-row dd{color:var(--gray-800);font-weight:600}
+.summary-divider{height:1px;background:var(--gray-100);margin:16px 0}
+
+/* ══ SUCCESS ══ */
+.success-panel{text-align:center;padding:60px 24px;display:none}
+.success-panel.active{display:block;animation:fadeUp .6s ease forwards}
+.success-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--sage),var(--sage-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;box-shadow:0 8px 32px var(--sage-glow)}
+.success-icon svg{width:36px;height:36px;fill:none;stroke:white;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.success-title{font-family:var(--font-h);font-size:2rem;font-weight:800;color:var(--gray-900);margin-bottom:16px}
+.success-text{font-size:1rem;color:var(--gray-600);max-width:480px;margin:0 auto 36px;line-height:1.8}
+.success-note{display:inline-flex;align-items:center;gap:8px;background:var(--sage-subtle);border:1px solid var(--gray-100);padding:12px 20px;border-radius:50px;font-size:.85rem;color:var(--sage-dark);font-weight:500}
+
+/* ══ SIDEBAR ══ */
+.main-grid{display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:start}
+.sidebar{position:sticky;top:120px}
+.sidebar-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+.sidebar-card h3{font-family:var(--font-h);font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:16px}
+.trust-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.trust-item:last-child{margin-bottom:0}
+.trust-icon{width:36px;height:36px;background:var(--sage-subtle);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.trust-label{font-size:.85rem;font-weight:600;color:var(--gray-800)}
+.trust-sub{font-size:.75rem;color:var(--gray-400);margin-top:2px}
+.contact-mini{font-size:.88rem;color:var(--gray-600);line-height:2}
+.contact-mini a{color:var(--sage);text-decoration:none;font-weight:600}
+.contact-mini a:hover{text-decoration:underline}
+.progress-bar-wrap{margin:28px 0 8px}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.progress-track{height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-dark));border-radius:2px;transition:width .5s ease}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 0 0}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.footer-brand-text{font-size:.85rem;line-height:1.8;margin:16px 0 20px;color:rgba(255,255,255,.5)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a,.footer-links li{font-size:.85rem;color:rgba(255,255,255,.55);text-decoration:none;transition:var(--tr)}
+.footer-links a:hover{color:white}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 0;font-size:.8rem;color:rgba(255,255,255,.3)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{color:rgba(255,255,255,.35);text-decoration:none;transition:var(--tr)}
+.footer-legal a:hover{color:white}
+.footer-socials{display:flex;gap:10px;margin-top:16px}
+.footer-socials a{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:var(--tr);text-decoration:none}
+.footer-socials a:hover{background:var(--sage);border-color:var(--sage)}
+.footer-socials svg{width:16px;height:16px;fill:rgba(255,255,255,.55);transition:var(--tr)}
+.footer-socials a:hover svg{fill:white}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  .main-grid{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .type-grid{grid-template-columns:1fr 1fr}
+  .timeline-opts{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .type-grid{grid-template-columns:1fr}
+  .check-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .stepper{gap:4px}
+  .step-label{display:none}
+  .step-line{width:20px}
+  .timeline-opts{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-legal{flex-direction:column;gap:8px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('hu')">HU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="Estur Épker Kft."></a>
+  <ul class="nav-links">
+    <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+    <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+    <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+    <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+    <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+    <li><a href="ajanlatkeres.html" class="nav-cta active" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-badge">
+      <span class="page-badge-dot"></span>
+      <span data-hu="Ingyenes, kötelezettségmentes" data-en="Free, no obligation" data-de="Kostenlos, unverbindlich">Ingyenes, kötelezettségmentes</span>
+    </div>
+    <h1 data-hu="Kérjen személyre szabott<br>ajánlatot" data-en="Request a personalised<br>quote" data-de="Fordern Sie ein<br>persönliches Angebot an">Kérjen személyre szabott<br>ajánlatot</h1>
+    <p data-hu="Töltse ki az alábbi űrlapot, és munkatársaink 48 órán belül felveszik Önnel a kapcsolatot, hogy részletes, ingyenes árajánlatot állíthassunk össze." data-en="Fill in the form below and our team will contact you within 48 hours to prepare a detailed, free quote." data-de="Füllen Sie das Formular aus und unser Team meldet sich innerhalb von 48 Stunden für ein kostenloses Angebot.">Töltse ki az alábbi űrlapot, és munkatársaink 48 órán belül felveszik Önnel a kapcsolatot, hogy részletes, ingyenes árajánlatot állíthassunk össze.</p>
+  </div>
+</section>
+
+<!-- STEPPER + FORM -->
+<section class="stepper-section">
+  <div class="container">
+    <!-- STEPPER -->
+    <div class="stepper" id="stepper">
+      <div class="step active" id="step-ind-1" onclick="goToStep(1)">
+        <div class="step-circle" id="sc-1">1</div>
+        <div class="step-label" data-hu="Munka típusa" data-en="Work type" data-de="Arbeitstyp">Munka típusa</div>
+      </div>
+      <div class="step-line" id="sl-1"></div>
+      <div class="step" id="step-ind-2" onclick="goToStep(2)">
+        <div class="step-circle" id="sc-2">2</div>
+        <div class="step-label" data-hu="Projekt részletek" data-en="Project details" data-de="Projektdetails">Projekt részletek</div>
+      </div>
+      <div class="step-line" id="sl-2"></div>
+      <div class="step" id="step-ind-3" onclick="goToStep(3)">
+        <div class="step-circle" id="sc-3">3</div>
+        <div class="step-label" data-hu="Kapcsolat" data-en="Contact" data-de="Kontakt">Kapcsolat</div>
+      </div>
+      <div class="step-line" id="sl-3"></div>
+      <div class="step" id="step-ind-4" onclick="goToStep(4)">
+        <div class="step-circle" id="sc-4">4</div>
+        <div class="step-label" data-hu="Összefoglalás" data-en="Summary" data-de="Zusammenfassung">Összefoglalás</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section">
+  <div class="container">
+    <div class="main-grid">
+
+      <!-- FORM -->
+      <div>
+
+        <!-- PANEL 1 — WORK TYPE -->
+        <div class="form-panel active" id="panel-1">
+          <div class="panel-header">
+            <div class="panel-step-label" data-hu="1. lépés / 4" data-en="Step 1 / 4" data-de="Schritt 1 / 4">1. lépés / 4</div>
+            <h2 class="panel-title" data-hu="Milyen munkát szeretne elvégeztetni?" data-en="What type of work do you need?" data-de="Welche Art von Arbeit benötigen Sie?">Milyen munkát szeretne elvégeztetni?</h2>
+            <p class="panel-sub" data-hu="Válasszon egyet az alábbi kategóriák közül. Az ajánlatot a kiválasztott típushoz igazítjuk." data-en="Choose one of the categories below. The quote will be tailored to the selected type." data-de="Wählen Sie eine der folgenden Kategorien. Das Angebot wird auf den ausgewählten Typ zugeschnitten.">Válasszon egyet az alábbi kategóriák közül. Az ajánlatot a kiválasztott típushoz igazítjuk.</p>
+          </div>
+
+          <div class="type-grid" id="typeGrid">
+            <div class="type-card" data-type="generalkivitelez" onclick="selectType(this)">
+              <span class="type-icon">🏗️</span>
+              <div class="type-title" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</div>
+              <div class="type-desc" data-hu="Teljes körű építési projekt koordináció, tervezéstől az átadásig." data-en="Full project coordination from design to handover." data-de="Vollständige Projektkoordination von der Planung bis zur Übergabe.">Teljes körű építési projekt koordináció, tervezéstől az átadásig.</div>
+            </div>
+            <div class="type-card" data-type="lakasepites" onclick="selectType(this)">
+              <span class="type-icon">🏠</span>
+              <div class="type-title" data-hu="Lakásépítés" data-en="House Construction" data-de="Hausbau">Lakásépítés</div>
+              <div class="type-desc" data-hu="Új lakóépület vagy ház építése alapoktól kulcsrakészen." data-en="New residential building from foundations to turnkey delivery." data-de="Neubau von Wohngebäude, schlüsselfertig.">Új lakóépület vagy ház építése alapoktól kulcsrakészen.</div>
+            </div>
+            <div class="type-card" data-type="lakasfelujitas" onclick="selectType(this)">
+              <span class="type-icon">🔨</span>
+              <div class="type-title" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</div>
+              <div class="type-desc" data-hu="Részleges vagy teljes körű felújítás, belső átalakítás." data-en="Partial or complete interior renovation and remodelling." data-de="Teilweise oder vollständige Innenrenovierung.">Részleges vagy teljes körű felújítás, belső átalakítás.</div>
+            </div>
+            <div class="type-card" data-type="burkolat" onclick="selectType(this)">
+              <span class="type-icon">🪟</span>
+              <div class="type-title" data-hu="Burkolás / Festés" data-en="Tiling / Painting" data-de="Fliesen / Streichen">Burkolás / Festés</div>
+              <div class="type-desc" data-hu="Padló-, falburkolás, festési és mázolási munkák." data-en="Floor and wall tiling, painting works." data-de="Boden- und Wandverkleidung, Streich- und Anstricharbeiten.">Padló-, falburkolás, festési és mázolási munkák.</div>
+            </div>
+            <div class="type-card" data-type="tetoszerk" onclick="selectType(this)">
+              <span class="type-icon">🏚️</span>
+              <div class="type-title" data-hu="Tetőszerkezet" data-en="Roofing" data-de="Dachkonstruktion">Tetőszerkezet</div>
+              <div class="type-desc" data-hu="Tetőfelújítás, héjalás, szigetelés, faszerkezet csere." data-en="Roof renovation, tiling, insulation, timber frame replacement." data-de="Dachrenovierung, Eindeckung, Dämmung, Holzkonstruktionswechsel.">Tetőfelújítás, héjalás, szigetelés, faszerkezet csere.</div>
+            </div>
+            <div class="type-card" data-type="egyeb" onclick="selectType(this)">
+              <span class="type-icon">📋</span>
+              <div class="type-title" data-hu="Egyéb / Nem tudom" data-en="Other / Not sure" data-de="Sonstiges / Unsicher">Egyéb / Nem tudom</div>
+              <div class="type-desc" data-hu="Pontosan nem besorolható munka, vagy még egyeztetni kell." data-en="Work not easily classified, or details to be discussed." data-de="Nicht eindeutig klassifizierbare Arbeiten oder noch zu besprechen.">Pontosan nem besorolható munka, vagy még egyeztetni kell.</div>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <div></div>
+            <button class="btn btn-primary" onclick="nextStep()" id="btn-next-1" disabled>
+              <span data-hu="Tovább" data-en="Next" data-de="Weiter">Tovább</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 2 — PROJECT DETAILS -->
+        <div class="form-panel" id="panel-2">
+          <div class="panel-header">
+            <div class="panel-step-label" data-hu="2. lépés / 4" data-en="Step 2 / 4" data-de="Schritt 2 / 4">2. lépés / 4</div>
+            <h2 class="panel-title" data-hu="Projekt részletei" data-en="Project details" data-de="Projektdetails">Projekt részletei</h2>
+            <p class="panel-sub" data-hu="Minél pontosabb információkat ad meg, annál pontosabb ajánlatot tudunk készíteni." data-en="The more accurate information you provide, the more precise quote we can prepare." data-de="Je genauer die Informationen, desto präziser das Angebot.">Minél pontosabb információkat ad meg, annál pontosabb ajánlatot tudunk készíteni.</p>
+          </div>
+
+          <div class="form-grid">
+            <!-- Ingatlan helyszíne -->
+            <div class="form-group">
+              <label class="form-label" for="helyszin" data-hu="Helyszín (város / település)<span> *</span>" data-en="Location (city / town)<span> *</span>" data-de="Standort (Stadt / Ort)<span> *</span>">Helyszín (város / település)<span style="color:#c0392b"> *</span></label>
+              <input class="form-input" id="helyszin" type="text" placeholder="pl. Baja, Kalocsa..." required>
+            </div>
+            <!-- Alapterület -->
+            <div class="form-group">
+              <label class="form-label" for="alapterulet" data-hu="Becsült alapterület (m²)" data-en="Estimated floor area (m²)" data-de="Geschätzte Grundfläche (m²)">Becsült alapterület (m²)</label>
+              <input class="form-input" id="alapterulet" type="number" min="1" placeholder="pl. 80">
+            </div>
+            <!-- Érintett területek -->
+            <div class="form-group full">
+              <label class="form-label" data-hu="Érintett területek / helyiségek" data-en="Affected areas / rooms" data-de="Betroffene Bereiche / Räume">Érintett területek / helyiségek</label>
+              <div class="check-grid">
+                <div class="check-item"><input type="checkbox" id="nap" value="Nappali"><label for="nap" data-hu="Nappali" data-en="Living room" data-de="Wohnzimmer">Nappali</label></div>
+                <div class="check-item"><input type="checkbox" id="kony" value="Konyha"><label for="kony" data-hu="Konyha / étkező" data-en="Kitchen / dining" data-de="Küche / Esszimmer">Konyha / étkező</label></div>
+                <div class="check-item"><input type="checkbox" id="hal" value="Hálószoba"><label for="hal" data-hu="Hálószoba(k)" data-en="Bedroom(s)" data-de="Schlafzimmer">Hálószoba(k)</label></div>
+                <div class="check-item"><input type="checkbox" id="furd" value="Fürdőszoba"><label for="furd" data-hu="Fürdőszoba / WC" data-en="Bathroom / WC" data-de="Badezimmer / WC">Fürdőszoba / WC</label></div>
+                <div class="check-item"><input type="checkbox" id="lep" value="Lépcsőház"><label for="lep" data-hu="Lépcsőház / folyosó" data-en="Staircase / hallway" data-de="Treppenhaus / Flur">Lépcsőház / folyosó</label></div>
+                <div class="check-item"><input type="checkbox" id="terasz" value="Terasz"><label for="terasz" data-hu="Terasz / erkély" data-en="Terrace / balcony" data-de="Terrasse / Balkon">Terasz / erkély</label></div>
+                <div class="check-item"><input type="checkbox" id="homlok" value="Homlokzat"><label for="homlok" data-hu="Homlokzat / külső" data-en="Facade / exterior" data-de="Fassade / Außenbereich">Homlokzat / külső</label></div>
+                <div class="check-item"><input type="checkbox" id="teto" value="Tető"><label for="teto" data-hu="Tetőtér / tető" data-en="Attic / roof" data-de="Dachboden / Dach">Tetőtér / tető</label></div>
+              </div>
+            </div>
+            <!-- Tervezett időkeret -->
+            <div class="form-group full">
+              <label class="form-label" data-hu="Mikor szeretné megkezdeni a munkát?" data-en="When would you like the work to start?" data-de="Wann soll mit der Arbeit begonnen werden?">Mikor szeretné megkezdeni a munkát?</label>
+              <div class="timeline-opts" id="timelineOpts">
+                <div class="tl-opt" data-tl="azonnal" onclick="selectTimeline(this)">
+                  <div class="tl-opt-label" data-hu="Azonnal" data-en="Immediately" data-de="Sofort">Azonnal</div>
+                  <div class="tl-opt-sub" data-hu="1–2 héten belül" data-en="Within 1–2 weeks" data-de="Innerhalb 1–2 Wochen">1–2 héten belül</div>
+                </div>
+                <div class="tl-opt" data-tl="hamarosan" onclick="selectTimeline(this)">
+                  <div class="tl-opt-label" data-hu="Hamarosan" data-en="Soon" data-de="Bald">Hamarosan</div>
+                  <div class="tl-opt-sub" data-hu="1 hónapon belül" data-en="Within 1 month" data-de="Innerhalb 1 Monat">1 hónapon belül</div>
+                </div>
+                <div class="tl-opt" data-tl="tervezett" onclick="selectTimeline(this)">
+                  <div class="tl-opt-label" data-hu="Tervezett" data-en="Planned" data-de="Geplant">Tervezett</div>
+                  <div class="tl-opt-sub" data-hu="2–6 hónapon belül" data-en="Within 2–6 months" data-de="Innerhalb 2–6 Monate">2–6 hónapon belül</div>
+                </div>
+                <div class="tl-opt" data-tl="kesobb" onclick="selectTimeline(this)">
+                  <div class="tl-opt-label" data-hu="Később" data-en="Later" data-de="Später">Később</div>
+                  <div class="tl-opt-sub" data-hu="6 hónap után" data-en="After 6 months" data-de="Nach 6 Monaten">6 hónap után</div>
+                </div>
+              </div>
+            </div>
+            <!-- Tervezett büdzsé -->
+            <div class="form-group full">
+              <label class="form-label" data-hu="Tervezett büdzsé" data-en="Estimated budget" data-de="Geplantes Budget">Tervezett büdzsé</label>
+              <div class="budget-display" id="budgetDisplay">5 000 000 <span>Ft</span></div>
+              <div class="budget-track">
+                <input type="range" id="budgetRange" min="500000" max="50000000" step="500000" value="5000000" oninput="updateBudget(this.value)">
+              </div>
+              <div class="budget-labels">
+                <span>500 000 Ft</span>
+                <span>50 000 000 Ft+</span>
+              </div>
+              <p class="form-hint" style="margin-top:6px" data-hu="A büdzsé segít az ajánlat meghatározásában, nem kötelező erejű." data-en="The budget helps us prepare the quote and is not binding." data-de="Das Budget hilft bei der Angebotserstellung und ist unverbindlich.">A büdzsé segít az ajánlat meghatározásában, nem kötelező erejű.</p>
+            </div>
+            <!-- Leírás -->
+            <div class="form-group full">
+              <label class="form-label" for="leiras" data-hu="A projekt részletes leírása" data-en="Detailed description of the project" data-de="Ausführliche Projektbeschreibung">A projekt részletes leírása</label>
+              <textarea class="form-textarea" id="leiras" placeholder="Pl. 80 m²-es ház teljes belső felújítása: burkolás, festés, fürdőszoba csere, villanyszerelés..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span data-hu="Vissza" data-en="Back" data-de="Zurück">Vissza</span>
+            </button>
+            <button class="btn btn-primary" onclick="nextStep()">
+              <span data-hu="Tovább" data-en="Next" data-de="Weiter">Tovább</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 3 — CONTACT -->
+        <div class="form-panel" id="panel-3">
+          <div class="panel-header">
+            <div class="panel-step-label" data-hu="3. lépés / 4" data-en="Step 3 / 4" data-de="Schritt 3 / 4">3. lépés / 4</div>
+            <h2 class="panel-title" data-hu="Elérhetőségei" data-en="Your contact details" data-de="Ihre Kontaktdaten">Elérhetőségei</h2>
+            <p class="panel-sub" data-hu="Munkatársaink ezen az elérhetőségen keresik Önt az ajánlattal." data-en="Our team will contact you at these details with the quote." data-de="Unser Team wird Sie unter diesen Angaben mit dem Angebot kontaktieren.">Munkatársaink ezen az elérhetőségen keresik Önt az ajánlattal.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="nev" data-hu="Teljes neve<span> *</span>" data-en="Full name<span> *</span>" data-de="Vollständiger Name<span> *</span>">Teljes neve<span style="color:#c0392b"> *</span></label>
+              <input class="form-input" id="nev" type="text" placeholder="Kovács János" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="tel" data-hu="Telefonszám<span> *</span>" data-en="Phone number<span> *</span>" data-de="Telefonnummer<span> *</span>">Telefonszám<span style="color:#c0392b"> *</span></label>
+              <input class="form-input" id="tel" type="tel" placeholder="+36 30 000 0000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email" data-hu="E-mail cím<span> *</span>" data-en="Email address<span> *</span>" data-de="E-Mail-Adresse<span> *</span>">E-mail cím<span style="color:#c0392b"> *</span></label>
+              <input class="form-input" id="email" type="email" placeholder="pelda@email.hu" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="kontakt-mod" data-hu="Preferált kapcsolatfelvétel" data-en="Preferred contact method" data-de="Bevorzugte Kontaktmethode">Preferált kapcsolatfelvétel</label>
+              <select class="form-select" id="kontakt-mod">
+                <option value="telefon" data-hu="Telefonhívás" data-en="Phone call" data-de="Telefonanruf">Telefonhívás</option>
+                <option value="email" data-hu="E-mail" data-en="Email" data-de="E-Mail">E-mail</option>
+                <option value="helyszin" data-hu="Helyszíni felmérés" data-en="On-site assessment" data-de="Vor-Ort-Besichtigung">Helyszíni felmérés</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="megjegyzes" data-hu="Egyéb megjegyzés" data-en="Additional notes" data-de="Weitere Anmerkungen">Egyéb megjegyzés</label>
+              <textarea class="form-textarea" id="megjegyzes" style="min-height:90px" placeholder="Pl. legjobb visszahívási időpont..."></textarea>
+            </div>
+            <div class="form-group full">
+              <div class="check-item" style="border:none;padding:0;gap:10px">
+                <input type="checkbox" id="adatvedelem" required>
+                <label for="adatvedelem" style="font-size:.82rem;color:var(--gray-600)" data-hu="Elfogadom az <a href='adatkezeles.html' style='color:var(--sage)'>Adatkezelési tájékoztatót</a> és hozzájárulok adataim kezeléséhez.<span style='color:#c0392b'> *</span>" data-en="I accept the <a href='adatkezeles.html' style='color:var(--sage)'>Privacy Policy</a> and consent to data processing.<span style='color:#c0392b'> *</span>" data-de="Ich akzeptiere die <a href='adatkezeles.html' style='color:var(--sage)'>Datenschutzerklärung</a> und stimme der Datenverarbeitung zu.<span style='color:#c0392b'> *</span>">Elfogadom az <a href="adatkezeles.html" style="color:var(--sage)">Adatkezelési tájékoztatót</a> és hozzájárulok adataim kezeléséhez.<span style="color:#c0392b"> *</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span data-hu="Vissza" data-en="Back" data-de="Zurück">Vissza</span>
+            </button>
+            <button class="btn btn-primary" onclick="nextStep()">
+              <span data-hu="Összefoglalás" data-en="Summary" data-de="Zusammenfassung">Összefoglalás</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 4 — SUMMARY -->
+        <div class="form-panel" id="panel-4">
+          <div class="panel-header">
+            <div class="panel-step-label" data-hu="4. lépés / 4" data-en="Step 4 / 4" data-de="Schritt 4 / 4">4. lépés / 4</div>
+            <h2 class="panel-title" data-hu="Összefoglalás és küldés" data-en="Summary & submit" data-de="Zusammenfassung & Absenden">Összefoglalás és küldés</h2>
+            <p class="panel-sub" data-hu="Ellenőrizze az adatokat, majd küldje el az ajánlatkérést." data-en="Check the details, then submit the quote request." data-de="Überprüfen Sie die Angaben und senden Sie dann die Anfrage ab.">Ellenőrizze az adatokat, majd küldje el az ajánlatkérést.</p>
+          </div>
+
+          <div class="summary-card" id="summaryCard">
+            <!-- filled by JS -->
+          </div>
+
+          <div style="background:var(--sage-subtle);border-radius:var(--radius);padding:20px 24px;margin-bottom:28px;display:flex;align-items:flex-start;gap:12px">
+            <span style="font-size:1.2rem">ℹ️</span>
+            <p style="font-size:.85rem;color:var(--gray-600);line-height:1.7" data-hu="Az ajánlatkérés elküldése után munkatársaink <strong>48 órán belül</strong> felveszik Önnel a kapcsolatot. Az ajánlat teljesen <strong>ingyenes és kötelezettségtől mentes</strong>." data-en="After submitting your request, our team will contact you within <strong>48 hours</strong>. The quote is completely <strong>free and non-binding</strong>." data-de="Nach dem Absenden nimmt unser Team innerhalb von <strong>48 Stunden</strong> Kontakt auf. Das Angebot ist völlig <strong>kostenlos und unverbindlich</strong>.">Az ajánlatkérés elküldése után munkatársaink <strong>48 órán belül</strong> felveszik Önnel a kapcsolatot. Az ajánlat teljesen <strong>ingyenes és kötelezettségtől mentes</strong>.</p>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span data-hu="Módosítás" data-en="Edit" data-de="Bearbeiten">Módosítás</span>
+            </button>
+            <button class="btn btn-submit" onclick="submitForm()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+              <span data-hu="Ajánlatkérés küldése" data-en="Send quote request" data-de="Angebot absenden">Ajánlatkérés küldése</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="success-panel" id="successPanel">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="success-title" data-hu="Köszönjük ajánlatkérését!" data-en="Thank you for your request!" data-de="Vielen Dank für Ihre Anfrage!">Köszönjük ajánlatkérését!</h2>
+          <p class="success-text" data-hu="Sikeresen megkaptuk az ajánlatkérést. Munkatársaink hamarosan felveszik Önnel a kapcsolatot — általában 48 órán belül visszahívunk." data-en="We have received your quote request. Our team will contact you shortly — typically we call back within 48 hours." data-de="Wir haben Ihre Anfrage erhalten. Unser Team meldet sich in Kürze — in der Regel innerhalb von 48 Stunden.">Sikeresen megkaptuk az ajánlatkérést. Munkatársaink hamarosan felveszik Önnel a kapcsolatot — általában 48 órán belül visszahívunk.</p>
+          <div class="success-note">
+            <span>📞</span>
+            <span data-hu="Sürgős esetben hívjon minket: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>" data-en="For urgent matters call: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>" data-de="Bei Dringlichkeit rufen Sie uns an: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>">Sürgős esetben hívjon minket: <strong><a href="tel:+36301234567" style="color:var(--sage-dark)">+36 30 123 4567</a></strong></span>
+          </div>
+          <div style="margin-top:40px">
+            <a href="index.html" class="btn btn-secondary" style="display:inline-flex">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span data-hu="Vissza a főoldalra" data-en="Back to homepage" data-de="Zurück zur Startseite">Vissza a főoldalra</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- Progress -->
+        <div class="sidebar-card" id="progressCard">
+          <h3 data-hu="Haladás" data-en="Progress" data-de="Fortschritt">Haladás</h3>
+          <div class="progress-bar-wrap">
+            <div class="progress-label">
+              <span id="progressLabel" data-hu="1. lépés / 4" data-en="Step 1 / 4" data-de="Schritt 1 / 4">1. lépés / 4</span>
+              <span id="progressPct">25%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
+          </div>
+        </div>
+        <!-- Trust -->
+        <div class="sidebar-card">
+          <h3 data-hu="Miért válasszon minket?" data-en="Why choose us?" data-de="Warum uns wählen?">Miért válasszon minket?</h3>
+          <div class="trust-item">
+            <div class="trust-icon">🏆</div>
+            <div>
+              <div class="trust-label" data-hu="9+ év tapasztalat" data-en="9+ years experience" data-de="9+ Jahre Erfahrung">9+ év tapasztalat</div>
+              <div class="trust-sub" data-hu="2016 óta a régióban" data-en="In the region since 2016" data-de="Seit 2016 in der Region">2016 óta a régióban</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">✅</div>
+            <div>
+              <div class="trust-label" data-hu="100+ sikeres projekt" data-en="100+ completed projects" data-de="100+ abgeschlossene Projekte">100+ sikeres projekt</div>
+              <div class="trust-sub" data-hu="Baja és környéke, országosan" data-en="Baja area and nationwide" data-de="Baja und umgebung, landesweit">Baja és környéke, országosan</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">📄</div>
+            <div>
+              <div class="trust-label" data-hu="Részletes, átlátható ajánlat" data-en="Detailed, transparent quote" data-de="Detailliertes, transparentes Angebot">Részletes, átlátható ajánlat</div>
+              <div class="trust-sub" data-hu="Nincsenek rejtett költségek" data-en="No hidden costs" data-de="Keine versteckten Kosten">Nincsenek rejtett költségek</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">⚡</div>
+            <div>
+              <div class="trust-label" data-hu="48 órán belül visszahívunk" data-en="We call back within 48h" data-de="Rückruf innerhalb 48h">48 órán belül visszahívunk</div>
+              <div class="trust-sub" data-hu="Gyors, rugalmas ügyintézés" data-en="Fast, flexible administration" data-de="Schnelle, flexible Abwicklung">Gyors, rugalmas ügyintézés</div>
+            </div>
+          </div>
+        </div>
+        <!-- Contact -->
+        <div class="sidebar-card">
+          <h3 data-hu="Közvetlen elérhetőség" data-en="Direct contact" data-de="Direktkontakt">Közvetlen elérhetőség</h3>
+          <div class="contact-mini">
+            <div>📞 <a href="tel:+36301234567">+36 30 123 4567</a></div>
+            <div>✉️ <a href="mailto:info@estur.hu">info@estur.hu</a></div>
+            <div>📍 6500 Baja, Hungary</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-text" data-hu="Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan." data-en="Estur Kft. has been providing high-quality general contracting, residential construction and renovation in Baja and nationwide since 2016." data-de="Die Estur Kft. bietet seit 2016 hochwertige Generalunternehmertätigkeit, Wohnungsbau und Renovierung in Baja und landesweit.">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+      <div class="footer-socials">
+        <a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+    </div>
+    <div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
+    <div><h4 data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</h4><ul class="footer-links"><li><a href="szolgaltatasok.html" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásépítés" data-en="Construction" data-de="Wohnungsbau">Lakásépítés</a></li></ul></div>
+    <div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html" data-hu="Adatkezelési tájékoztató" data-en="Privacy Policy" data-de="Datenschutz">Adatkezelési tájékoztató</a></div></div>
+</div></footer>
+
+<script src="assets/js/estur.js"></script>
+<script>
+
+// ══ STATE ══
+let currentStep = 1;
+const totalSteps = 4;
+const state = { type: null, timeline: null };
+
+// ══ TYPE SELECTOR ══
+function selectType(card) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  state.type = card.dataset.type;
+  document.getElementById('btn-next-1').disabled = false;
+}
+
+// ══ TIMELINE SELECTOR ══
+function selectTimeline(opt) {
+  document.querySelectorAll('.tl-opt').forEach(o => o.classList.remove('selected'));
+  opt.classList.add('selected');
+  state.timeline = opt.dataset.tl;
+}
+
+// ══ BUDGET ══
+function updateBudget(val) {
+  const n = parseInt(val);
+  const formatted = n >= 50000000 ? '50 000 000+ Ft' : n.toLocaleString('hu-HU') + ' Ft';
+  document.getElementById('budgetDisplay').innerHTML = formatted.replace(' Ft', ' <span>Ft</span>');
+  if (n >= 50000000) document.getElementById('budgetDisplay').innerHTML = '50 000 000+ <span>Ft</span>';
+}
+
+// ══ STEPPER NAV ══
+function nextStep() {
+  if (currentStep === 3) {
+    const nev = document.getElementById('nev').value.trim();
+    const tel = document.getElementById('tel').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const adatv = document.getElementById('adatvedelem').checked;
+    if (!nev || !tel || !email) { alert('Kérjük töltse ki a kötelező mezőket!'); return; }
+    if (!adatv) { alert('Kérjük fogadja el az adatkezelési tájékoztatót!'); return; }
+    buildSummary();
+  }
+  if (currentStep < totalSteps) {
+    goToStep(currentStep + 1);
+  }
+}
+function prevStep() {
+  if (currentStep > 1) goToStep(currentStep - 1);
+}
+function goToStep(n) {
+  if (n > currentStep && !canAdvanceTo(n)) return;
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  // stepper UI
+  for (let i = 1; i <= totalSteps; i++) {
+    const ind = document.getElementById('step-ind-' + i);
+    const sc = document.getElementById('sc-' + i);
+    ind.classList.remove('active', 'done');
+    if (i < n) { ind.classList.add('done'); sc.innerHTML = ''; }
+    else if (i === n) { ind.classList.add('active'); sc.textContent = i; }
+    else { sc.textContent = i; }
+    if (i < totalSteps) {
+      const sl = document.getElementById('sl-' + i);
+      sl.classList.toggle('done', i < n);
+    }
+  }
+  // progress
+  const pct = Math.round((n / totalSteps) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressLabel').textContent = n + '. lépés / ' + totalSteps;
+  currentStep = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function canAdvanceTo(n) {
+  if (n <= currentStep) return true;
+  return true; // allow forward nav (validation on submit)
+}
+
+// ══ SUMMARY ══
+const typeLabels = {
+  generalkivitelez:'Generálkivitelezés', lakasepites:'Lakásépítés',
+  lakasfelujitas:'Lakásfelújítás', burkolat:'Burkolás / Festés',
+  tetoszerk:'Tetőszerkezet', egyeb:'Egyéb / Nem tudom'
+};
+const tlLabels = { azonnal:'Azonnal (1–2 héten belül)', hamarosan:'Hamarosan (1 hónapon belül)', tervezett:'Tervezett (2–6 hónap)', kesobb:'Később (6 hónap után)' };
+
+function buildSummary() {
+  const rooms = [...document.querySelectorAll('.check-grid input:checked')].map(i => i.value).join(', ') || '—';
+  const budget = document.getElementById('budgetDisplay').textContent.trim();
+  const rows = [
+    ['Munka típusa', typeLabels[state.type] || '—'],
+    ['Helyszín', document.getElementById('helyszin').value || '—'],
+    ['Alapterület', document.getElementById('alapterulet').value ? document.getElementById('alapterulet').value + ' m²' : '—'],
+    ['Érintett területek', rooms],
+    ['Kezdési idő', tlLabels[state.timeline] || '—'],
+    ['Büdzsé', budget],
+    ['Leírás', document.getElementById('leiras').value || '—'],
+    null,
+    ['Név', document.getElementById('nev').value],
+    ['Telefon', document.getElementById('tel').value],
+    ['E-mail', document.getElementById('email').value],
+    ['Kapcsolatfelvétel', document.getElementById('kontakt-mod').value],
+  ];
+  let html = '<div class="summary-title">📋 Adatok összefoglalása</div><dl class="summary-rows">';
+  rows.forEach(r => {
+    if (r === null) { html += '</dl><div class="summary-divider"></div><dl class="summary-rows">'; return; }
+    html += `<div class="summary-row"><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`;
+  });
+  html += '</dl>';
+  document.getElementById('summaryCard').innerHTML = html;
+}
+
+// ══ SUBMIT ══
+function submitForm() {
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('stepper').style.display = 'none';
+  document.querySelector('.sidebar').style.display = 'none';
+  document.getElementById('successPanel').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══ NAVBAR ══
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 20));
+
+// ══ MOBILE MENU ══
+const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+hb.addEventListener('click', () => { hb.classList.toggle('active'); mm.classList.toggle('active'); document.body.style.overflow = mm.classList.contains('active') ? 'hidden' : ''; });
+function closeMobile() { hb.classList.remove('active'); mm.classList.remove('active'); document.body.style.overflow = ''; }
+
+// ══ REVEAL ══
+const obs = new IntersectionObserver(e => { e.forEach((en, i) => { if (en.isIntersecting) { setTimeout(() => en.target.classList.add('visible'), i * 80); obs.unobserve(en.target); } }); }, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ══ LANG ══
+function setLang(lang) {
+  localStorage.setItem('estur_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+    else el.innerHTML = val;
+  });
+  document.documentElement.lang = lang === 'hu' ? 'hu' : lang === 'en' ? 'en' : 'de';
+}
+
+// Override shared navbar/reveal (already handled by estur.js)
+(function(){const saved=localStorage.getItem('estur_lang')||'hu';setLang(saved);})();
+</script>
+</body>
+</html>

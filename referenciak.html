@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referenciák | Estur Épker Kft.</title>
+<meta name="description" content="Az Estur Épker Kft. elvégzett projektjei – generálkivitelezés, lakásépítés, felújítás Baján és országosan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--sage:#727562;--sage-dark:#5a5d4e;--sage-deeper:#3e4134;--sage-light:#95987f;--sage-subtle:#e8eae0;--sage-glow:rgba(114,117,98,.18);--sage-text-shadow:0 1px 4px rgba(50,54,40,.28);
+--cream:#f6f6f2;--white:#ffffff;--gray-50:#f0f1ec;--gray-100:#dfe1d9;--gray-200:#c0c4b8;--gray-400:#7d8274;--gray-600:#434840;--gray-800:#222620;--gray-900:#111410;
+--font-h:'Sora',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;
+--shadow-sm:0 1px 3px rgba(17,20,16,.08);--shadow-md:0 4px 20px rgba(17,20,16,.1);--shadow-lg:0 12px 40px rgba(17,20,16,.14);
+--radius:12px;--radius-sm:8px;--tr:.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ LANG BAR ══ */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:1100;background:var(--gray-900);height:32px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;gap:12px}
+.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:.75rem;font-family:var(--font-b);font-weight:600;cursor:pointer;padding:2px 8px;border-radius:4px;transition:var(--tr);letter-spacing:.5px}
+.lang-btn.active{color:white;background:rgba(255,255,255,.12)}
+.lang-btn:hover{color:white}
+
+/* ══ NAVBAR ══ */
+.navbar{position:fixed;top:32px;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.navbar.scrolled{box-shadow:var(--shadow-sm)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--gray-600);font-size:.9rem;font-weight:500;transition:var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--sage);transition:var(--tr)}
+.nav-links a:hover{color:var(--sage)}.nav-links a:hover::after{width:100%}
+.nav-links a.active-page{color:var(--sage)}.nav-links a.active-page::after{width:100%}
+.nav-cta{background:var(--sage)!important;color:white!important;padding:10px 24px;border-radius:50px;font-weight:600!important;font-size:.85rem!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--sage-dark)!important;transform:translateY(-1px);box-shadow:0 4px 16px var(--sage-glow)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--gray-800);transition:var(--tr);border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:104px;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{text-decoration:none;font-family:var(--font-h);font-size:1.3rem;font-weight:600;color:var(--gray-800);transition:var(--tr)}
+.mobile-menu a:hover{color:var(--sage)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{padding:160px 0 80px;background:linear-gradient(165deg,#eeeee8 0%,#ddddd3 60%,#e4e4de 100%);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(114,117,98,.2) 0%,transparent 70%);animation:float 7s ease-in-out infinite}
+.page-hero-inner{position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--gray-400);margin-bottom:20px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none;transition:var(--tr)}.breadcrumb a:hover{color:var(--sage)}
+.breadcrumb-sep{opacity:.4}
+.page-hero h1{font-family:var(--font-h);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:var(--gray-900);line-height:1.15;margin-bottom:16px}
+.page-hero h1 span{color:var(--sage);text-shadow:var(--sage-text-shadow)}
+.page-hero p{font-size:1.05rem;color:var(--gray-600);max-width:520px;line-height:1.8}
+
+/* ══ PAGINATION NAV ══ */
+.ref-page-section{padding:80px 0 100px}
+.pagination-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:60px}
+.tab-btn{font-family:var(--font-h);font-size:.8rem;font-weight:600;padding:9px 20px;border-radius:50px;border:1.5px solid var(--gray-100);background:var(--white);color:var(--gray-600);cursor:pointer;transition:var(--tr);letter-spacing:.3px}
+.tab-btn:hover{border-color:var(--sage);color:var(--sage)}
+.tab-btn.active{background:var(--sage);border-color:var(--sage);color:white}
+
+/* ══ PROJECT DISPLAY ══ */
+.project-panel{display:none}
+.project-panel.active{display:block}
+.project-header{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--gray-100)}
+.project-header h2{font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--gray-900);padding-left:16px;border-left:3px solid var(--sage)}
+.project-header p{font-size:.9rem;color:var(--gray-400);margin-top:6px;padding-left:20px}
+.ref-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.ref-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-sm);transition:var(--tr);cursor:pointer;border:1px solid var(--gray-100)}
+.ref-gallery img:hover{transform:scale(1.02);box-shadow:var(--shadow-md)}
+
+/* ══ PAGINATION CONTROLS ══ */
+.pagination-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:64px;padding-top:48px;border-top:1px solid var(--gray-100)}
+.page-btn{font-family:var(--font-h);font-size:.85rem;font-weight:600;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--gray-100);background:var(--white);color:var(--gray-600);cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center}
+.page-btn:hover{border-color:var(--sage);color:var(--sage)}
+.page-btn.active{background:var(--sage);border-color:var(--sage);color:white}
+.page-btn.arrow{width:auto;padding:0 18px;border-radius:50px;gap:6px;font-size:.82rem}
+.page-btn.arrow:disabled{opacity:.3;cursor:default;pointer-events:none}
+.page-info{font-size:.85rem;color:var(--gray-400);padding:0 8px}
+
+/* ══ LIGHTBOX ══ */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:10000;display:none;align-items:center;justify-content:center;cursor:zoom-out}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:var(--radius);object-fit:contain}
+.lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:white;font-size:2rem;cursor:pointer;font-family:var(--font-h)}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr);backdrop-filter:blur(8px)}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
+.lb-prev{left:20px}.lb-next{right:20px}
+
+/* ══ BACK CTA ══ */
+.back-cta{background:var(--cream);padding:60px 0;text-align:center}
+.back-cta p{color:var(--gray-600);margin-bottom:20px;font-size:1rem}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:white;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:600;font-size:.95rem;transition:var(--tr)}
+.btn-primary:hover{background:var(--sage-dark);transform:translateY(-2px);box-shadow:0 6px 24px var(--sage-glow)}
+.arr{width:16px;height:16px;vertical-align:middle}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand-text{font-size:.88rem;line-height:1.7;margin-top:16px;color:rgba(255,255,255,.5)}
+.footer h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:white;margin-bottom:16px;letter-spacing:.5px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li{font-size:.88rem;color:rgba(255,255,255,.5)}
+.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:var(--tr)}
+.footer-links a:hover{color:var(--sage-light)}
+.footer-socials{display:flex;gap:12px;margin-top:20px}
+.footer-socials a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.footer-socials a:hover{background:var(--sage);transform:translateY(-2px)}
+.footer-socials svg{width:18px;height:18px;fill:rgba(255,255,255,.6)}
+.footer-socials a:hover svg{fill:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.35)}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}.footer-bottom a:hover{color:var(--sage-light)}
+.footer-legal{display:flex;gap:24px}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:968px){
+.footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+.ref-gallery{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+}
+@media(max-width:640px){
+.nav-links{display:none}.hamburger{display:flex}
+.pagination-tabs{gap:8px}.tab-btn{font-size:.75rem;padding:7px 14px}
+.ref-gallery{grid-template-columns:1fr 1fr;gap:8px}
+.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:12px;text-align:center}
+.lb-prev,.lb-next{width:36px;height:36px;font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+<button class="lang-btn active" onclick="setLang('hu')">HU</button>
+<button class="lang-btn" onclick="setLang('en')">EN</button>
+<button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="Estur Épker Kft."></a>
+  <ul class="nav-links">
+    <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+    <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="referenciak.html" class="active-page" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+    <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+    <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+    <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+    <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+<!-- PAGE HERO -->
+<section class="page-hero">
+<div class="container page-hero-inner">
+<div class="breadcrumb">
+<a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a>
+<span class="breadcrumb-sep">/</span>
+<span data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</span>
+</div>
+<h1 data-hu="Elvégzett <span>Projektjeink</span>" data-en="Our Completed <span>Projects</span>" data-de="Unsere abgeschlossenen <span>Projekte</span>">Elvégzett <span>Projektjeink</span></h1>
+<p data-hu="Generálkivitelezéstől a lakásépítésen át a felújításig – minden projekt a precizitásunkról és megbízhatóságunkról tanúskodik." data-en="From general contracting to residential construction and renovation – every project reflects our precision and reliability." data-de="Von der Generalplanung über den Wohnungsbau bis zur Renovierung – jedes Projekt zeugt von unserer Präzision und Zuverlässigkeit.">Generálkivitelezéstől a lakásépítésen át a felújításig – minden projekt a precizitásunkról és megbízhatóságunkról tanúskodik.</p>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section class="ref-page-section">
+<div class="container">
+
+<!-- TAB GOMBOK -->
+<div class="pagination-tabs" id="tabs"></div>
+
+<!-- PROJEKT PANELEK -->
+<div id="panels">
+
+<div class="project-panel" id="panel-bonvital">
+<div class="project-header">
+<h2 id="bonvital">Hévíz – Bonvital Hotel</h2>
+<p data-hu="Szállodai felújítás · 10 fotó" data-en="Hotel renovation · 10 photos" data-de="Hotelrenovierung · 10 Fotos">Szállodai felújítás · 10 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Bonvital/imgi_5_8-1.png" alt="Bonvital 1" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_6_3-2.png" alt="Bonvital 2" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_7_4-2.png" alt="Bonvital 3" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_8_9-1.png" alt="Bonvital 4" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_9_1-2.png" alt="Bonvital 5" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_10_2-2.png" alt="Bonvital 6" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_11_6-1.png" alt="Bonvital 7" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_12_5-1.png" alt="Bonvital 8" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_13_7-1.png" alt="Bonvital 9" loading="lazy">
+<img src="assets/images/Referenciak/Bonvital/imgi_14_10-2.png" alt="Bonvital 10" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-diofa">
+<div class="project-header">
+<h2 id="diofa">Budapest – Diófa utca</h2>
+<p data-hu="Lakásfelújítás · 6 fotó" data-en="Apartment renovation · 6 photos" data-de="Wohnungsrenovierung · 6 Fotos">Lakásfelújítás · 6 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Diófa utca/imgi_15_44-1.png" alt="Diófa 1" loading="lazy">
+<img src="assets/images/Referenciak/Diófa utca/imgi_16_43-1-2.png" alt="Diófa 2" loading="lazy">
+<img src="assets/images/Referenciak/Diófa utca/imgi_17_46-1.png" alt="Diófa 3" loading="lazy">
+<img src="assets/images/Referenciak/Diófa utca/imgi_18_45-1.png" alt="Diófa 4" loading="lazy">
+<img src="assets/images/Referenciak/Diófa utca/imgi_19_42-2.png" alt="Diófa 5" loading="lazy">
+<img src="assets/images/Referenciak/Diófa utca/imgi_20_47-1.png" alt="Diófa 6" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-nagybanya">
+<div class="project-header">
+<h2 id="nagybanya">Nagybánya utca</h2>
+<p data-hu="Kivitelezés · 21 fotó" data-en="Construction · 21 photos" data-de="Bauausführung · 21 Fotos">Kivitelezés · 21 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_21_063a5988fa95e593c1b91509ed5e927e.jpg" alt="Nagybánya 1" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_22_a0a3a8d6e777071eecd6789a9959cd61.jpg" alt="Nagybánya 2" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_23_f4c22df0d2abbb4e968a590b180e528b.jpg" alt="Nagybánya 3" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_24_4323e5931a49f3a8145201564477d8d5.jpg" alt="Nagybánya 4" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_25_6ad6f653a8f95e7e1c3bd055ca3178b5.jpg" alt="Nagybánya 5" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_27_falazas-szerkezetepites.jpg" alt="Nagybánya 6" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_28_csaladi-haz-epites-bacs-kiskun-megye-1.jpg" alt="Nagybánya 7" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_29_teljes-epuletfelujitas.jpg" alt="Nagybánya 8" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_30_ipari-epulet-referencia.jpg" alt="Nagybánya 9" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_31_betonozasi-munkak-baja.jpg" alt="Nagybánya 10" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_32_belso-felujitas-epitoipar.jpg" alt="Nagybánya 11" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_33_lakohaz-epites-estur-baja-epitoripar-1.jpg" alt="Nagybánya 12" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_34_baja-csaladi-haz-epites-es-felujitas-1.jpg" alt="Nagybánya 13" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_35_lakohaz-referencia-bacs-kiskun.jpg" alt="Nagybánya 14" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_36_kesz-epulet-referencia-estur.jpg" alt="Nagybánya 15" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_37_homlokzat-felujitas-szigeteles.jpg" alt="Nagybánya 16" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_38_munkaterulet-epitkezes-baja.jpg" alt="Nagybánya 17" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_39_epitoipari-referencia-baja.jpg" alt="Nagybánya 18" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_40_ecbc69d82bf86b414a273e507c21c966-1.jpg" alt="Nagybánya 19" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_41_09e92ac2f8d699990b9df16543b8b782-1.jpg" alt="Nagybánya 20" loading="lazy">
+<img src="assets/images/Referenciak/Nagybánya utca/imgi_42_ac2520cd3826fef35dddd972262a724f-2.jpg" alt="Nagybánya 21" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-arena">
+<div class="project-header">
+<h2 id="arena">Aréna Pláza – Reserved</h2>
+<p data-hu="Kereskedelmi felszerelés · 14 fotó" data-en="Commercial fit-out · 14 photos" data-de="Gewerblicher Ausbau · 14 Fotos">Kereskedelmi felszerelés · 14 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_43_16.png" alt="Aréna 1" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_44_14.png" alt="Aréna 2" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_45_11.png" alt="Aréna 3" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_46_18.png" alt="Aréna 4" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_47_12.png" alt="Aréna 5" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_48_19.png" alt="Aréna 6" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_49_17.png" alt="Aréna 7" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_50_13.png" alt="Aréna 8" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_51_15.png" alt="Aréna 9" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_52_Arena-plaza-epites-estur.jpg" alt="Aréna 10" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_53_Arena-Plaza-Estur.jpg" alt="Aréna 11" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_54_plaza-estur-kft.jpg" alt="Aréna 12" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_55_estur-arena-plaza.jpg" alt="Aréna 13" loading="lazy">
+<img src="assets/images/Referenciak/Aréna pláza/imgi_56_estur-plaza.jpg" alt="Aréna 14" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-felsoszentivan">
+<div class="project-header">
+<h2 id="felsoszentivan">Felsőszentiván – Családi ház</h2>
+<p data-hu="Lakásépítés · 5 fotó" data-en="Residential construction · 5 photos" data-de="Wohnungsbau · 5 Fotos">Lakásépítés · 5 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Felsőszentiván/imgi_57_estur-kft-csaladi-haz.jpg" alt="Felsőszentiván 1" loading="lazy">
+<img src="assets/images/Referenciak/Felsőszentiván/imgi_58_esturkft-csaladihaz.jpg" alt="Felsőszentiván 2" loading="lazy">
+<img src="assets/images/Referenciak/Felsőszentiván/imgi_59_estur-kft-epitkezes.jpg" alt="Felsőszentiván 3" loading="lazy">
+<img src="assets/images/Referenciak/Felsőszentiván/imgi_60_felsoszentivan-epitkezes-estur.jpg" alt="Felsőszentiván 4" loading="lazy">
+<img src="assets/images/Referenciak/Felsőszentiván/imgi_61_csaladi-haz-epites-estur.jpg" alt="Felsőszentiván 5" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-monor">
+<div class="project-header">
+<h2 id="monor">Monor – Családi ház</h2>
+<p data-hu="Lakásépítés · 5 fotó" data-en="Residential construction · 5 photos" data-de="Wohnungsbau · 5 Fotos">Lakásépítés · 5 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Monor/imgi_62_monor-estur-baja-epitoripar.jpg" alt="Monor 1" loading="lazy">
+<img src="assets/images/Referenciak/Monor/imgi_63_epitkezes-baja.jpg" alt="Monor 2" loading="lazy">
+<img src="assets/images/Referenciak/Monor/imgi_64_baja-csaladi-haz-epitkezes.jpg" alt="Monor 3" loading="lazy">
+<img src="assets/images/Referenciak/Monor/imgi_65_csaladihaz-baja-epites.jpg" alt="Monor 4" loading="lazy">
+<img src="assets/images/Referenciak/Monor/imgi_66_baja-estur-csaladi-haz.jpg" alt="Monor 5" loading="lazy">
+</div>
+</div>
+
+<div class="project-panel" id="panel-kisfaludy">
+<div class="project-header">
+<h2 id="kisfaludy">Budapest – Kisfaludy utca</h2>
+<p data-hu="Lakásfelújítás · 20 fotó" data-en="Apartment renovation · 20 photos" data-de="Wohnungsrenovierung · 20 Fotos">Lakásfelújítás · 20 fotó</p>
+</div>
+<div class="ref-gallery">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_67_27.png" alt="Kisfaludy 1" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_68_28.png" alt="Kisfaludy 2" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_69_21.png" alt="Kisfaludy 3" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_70_35.png" alt="Kisfaludy 4" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_71_20.png" alt="Kisfaludy 5" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_72_25.png" alt="Kisfaludy 6" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_73_24.png" alt="Kisfaludy 7" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_74_33.png" alt="Kisfaludy 8" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_75_26.png" alt="Kisfaludy 9" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_76_23.png" alt="Kisfaludy 10" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_77_29.png" alt="Kisfaludy 11" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_78_30.png" alt="Kisfaludy 12" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_79_34.png" alt="Kisfaludy 13" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_80_32.png" alt="Kisfaludy 14" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_81_22.png" alt="Kisfaludy 15" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_82_31.png" alt="Kisfaludy 16" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_83_epitkezes-estur-kft-tetofedes.jpg" alt="Kisfaludy 17" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_84_epito-vallalat-estur.jpg" alt="Kisfaludy 18" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_85_estur-kft-epitkezes-epitoipar.jpg" alt="Kisfaludy 19" loading="lazy">
+<img src="assets/images/Referenciak/Kisfaludy utca/imgi_86_tetofedes-estur-epitkezes.jpg" alt="Kisfaludy 20" loading="lazy">
+</div>
+</div>
+
+</div><!-- /panels -->
+
+<!-- PAGINATION CONTROLS -->
+<div class="pagination-controls">
+<button class="page-btn arrow" id="prevBtn" onclick="changePage(-1)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+<span data-hu="Előző" data-en="Prev" data-de="Zurück">Előző</span>
+</button>
+<span class="page-info" id="pageInfo"></span>
+<button class="page-btn arrow" id="nextBtn" onclick="changePage(1)">
+<span data-hu="Következő" data-en="Next" data-de="Weiter">Következő</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</button>
+</div>
+
+</div>
+</section>
+
+<!-- BACK CTA -->
+<div class="back-cta">
+<div class="container">
+<p data-hu="Érdekli a munkánk? Kérjen ajánlatot most!" data-en="Interested in our work? Request a quote now!" data-de="Interessiert an unserer Arbeit? Fordern Sie jetzt ein Angebot an!">Érdekli a munkánk? Kérjen ajánlatot most!</p>
+<a href="index.html#kapcsolat" class="btn-primary" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot anfordern">Ajánlatkérés <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div>
+<p class="footer-brand-text" data-hu="Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan." data-en="Estur Kft. has been providing high-quality general contracting, residential construction and renovation in Baja and nationwide since 2016." data-de="Die Estur Kft. bietet seit 2016 hochwertige Generalunternehmertätigkeit, Wohnungsbau und Renovierung in Baja und landesweit.">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+<div class="footer-socials">
+<a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+<a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+<a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+</div>
+</div>
+<div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
+<div><h4 data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</h4><ul class="footer-links"><li><a href="szolgaltatasok.html" data-hu="Generálkivitelezés" data-en="General Contracting" data-de="Generalunternehmen">Generálkivitelezés</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásfelújítás" data-en="Renovation" data-de="Renovierung">Lakásfelújítás</a></li><li><a href="szolgaltatasok.html" data-hu="Lakásépítés" data-en="Construction" data-de="Wohnungsbau">Lakásépítés</a></li></ul></div>
+<div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
+</div>
+<div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html" data-hu="Adatkezelési tájékoztató" data-en="Privacy Policy" data-de="Datenschutz">Adatkezelési tájékoztató</a></div></div>
+</div></footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+<button class="lightbox-close" id="lightboxClose">&times;</button>
+<button class="lb-prev" id="lbPrev">&#8249;</button>
+<img id="lightboxImg" src="" alt="">
+<button class="lb-next" id="lbNext">&#8250;</button>
+</div>
+
+<script>
+// ── Projekt adatok ──
+const projects = [
+  {id:'bonvital', label:'Bonvital Hotel'},
+  {id:'diofa',    label:'Diófa utca'},
+  {id:'nagybanya',label:'Nagybánya utca'},
+  {id:'arena',    label:'Aréna Pláza'},
+  {id:'felsoszentivan', label:'Felsőszentiván'},
+  {id:'monor',    label:'Monor'},
+  {id:'kisfaludy',label:'Kisfaludy utca'},
+];
+let current = 0;
+
+// Tab gombok build
+const tabsEl = document.getElementById('tabs');
+projects.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.className = 'tab-btn' + (i===0?' active':'');
+  b.textContent = p.label;
+  b.onclick = () => goTo(i);
+  tabsEl.appendChild(b);
+});
+
+// Oldal számok build - eltávolítva
+function buildPageNums() {}
+
+function goTo(idx) {
+  document.getElementById('panel-'+projects[current].id).classList.remove('active');
+  document.querySelectorAll('.tab-btn')[current].classList.remove('active');
+  current = idx;
+  document.getElementById('panel-'+projects[current].id).classList.add('active');
+  document.querySelectorAll('.tab-btn')[current].classList.add('active');
+  buildPageNums();
+  updateControls();
+  window.scrollTo({top: document.querySelector('.ref-page-section').offsetTop - 120, behavior:'smooth'});
+}
+
+function changePage(dir) { goTo(current + dir); }
+
+function updateControls() {
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === projects.length - 1;
+  document.getElementById('pageInfo').textContent = (current+1) + ' / ' + projects.length;
+}
+
+// Init
+document.getElementById('panel-'+projects[0].id).classList.add('active');
+buildPageNums();
+updateControls();
+
+// Hash navigation (pl. referenciak.html#bonvital)
+function checkHash() {
+  const hash = location.hash.replace('#','');
+  if (hash) {
+    const idx = projects.findIndex(p => p.id === hash);
+    if (idx >= 0) goTo(idx);
+  }
+}
+window.addEventListener('load', checkHash);
+
+// Navbar scroll
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 20));
+
+// Mobile menu
+const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+hb.addEventListener('click', () => { hb.classList.toggle('active'); mm.classList.toggle('active'); });
+function closeMobile() { hb.classList.remove('active'); mm.classList.remove('active'); }
+
+// Reveal
+const obs = new IntersectionObserver(e => {
+  e.forEach((en, i) => { if(en.isIntersecting) { setTimeout(()=>en.target.classList.add('visible'), i*80); obs.unobserve(en.target); } });
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Lightbox
+const lb = document.getElementById('lightbox'), lbi = document.getElementById('lightboxImg');
+let lbImages = [], lbIndex = 0;
+
+document.addEventListener('click', e => {
+  if (e.target.matches('.ref-gallery img')) {
+    const gallery = e.target.closest('.ref-gallery');
+    lbImages = Array.from(gallery.querySelectorAll('img'));
+    lbIndex = lbImages.indexOf(e.target);
+    openLb();
+  }
+});
+function openLb() { lbi.src = lbImages[lbIndex].src; lb.classList.add('active'); }
+lb.addEventListener('click', e => { if(e.target===lb) lb.classList.remove('active'); });
+document.getElementById('lightboxClose').addEventListener('click', () => lb.classList.remove('active'));
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); lbIndex=(lbIndex-1+lbImages.length)%lbImages.length; openLb(); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); lbIndex=(lbIndex+1)%lbImages.length; openLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('active')) return;
+  if (e.key==='Escape') lb.classList.remove('active');
+  if (e.key==='ArrowLeft') { lbIndex=(lbIndex-1+lbImages.length)%lbImages.length; openLb(); }
+  if (e.key==='ArrowRight') { lbIndex=(lbIndex+1)%lbImages.length; openLb(); }
+});
+
+// Lang switcher
+function setLang(lang) {
+  localStorage.setItem('estur_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase()===lang));
+  document.querySelectorAll('[data-'+lang+']').forEach(el => {
+    const val = el.getAttribute('data-'+lang);
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=val;
+    else el.innerHTML=val;
+  });
+  document.documentElement.lang = lang==='hu'?'hu':lang==='en'?'en':'de';
+}
+(function(){const saved=localStorage.getItem('estur_lang')||'hu';setLang(saved);})();
+</script>
+</body>
+</html>

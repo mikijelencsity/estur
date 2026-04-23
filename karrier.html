@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karrier | Estur Épker Kft. — Baja</title>
+<meta name="description" content="Csatlakozz az Estur csapatához! Nyitott pozíciók és spontán jelentkezés lehetősége Baján és környékén.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sage:#727562;--sage-dark:#5a5d4e;--sage-deeper:#3e4134;--sage-light:#95987f;--sage-subtle:#e8eae0;--sage-glow:rgba(114,117,98,.18);
+  --cream:#f6f6f2;--white:#ffffff;--gray-50:#f0f1ec;--gray-100:#dfe1d9;--gray-200:#c0c4b8;--gray-400:#7d8274;--gray-600:#434840;--gray-800:#222620;--gray-900:#111410;
+  --font-h:'Sora',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;
+  --shadow-sm:0 1px 3px rgba(17,20,16,.08);--shadow-md:0 4px 20px rgba(17,20,16,.1);--shadow-lg:0 12px 40px rgba(17,20,16,.14);
+  --radius:12px;--radius-sm:8px;--tr:.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* NAVBAR */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:1100;background:var(--gray-900);height:32px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;gap:12px}
+.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:.75rem;font-family:var(--font-b);font-weight:600;cursor:pointer;padding:2px 8px;border-radius:4px;transition:var(--tr)}
+.lang-btn.active{color:white;background:rgba(255,255,255,.12)}
+.navbar{position:fixed;top:32px;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.navbar.scrolled{box-shadow:var(--shadow-sm)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--gray-600);font-size:.9rem;font-weight:500;transition:var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--sage);transition:var(--tr)}
+.nav-links a:hover{color:var(--sage)}.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--sage)}
+.nav-cta{background:var(--sage)!important;color:white!important;padding:10px 24px;border-radius:50px;font-weight:600!important;font-size:.85rem!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--sage-dark)!important;transform:translateY(-1px);box-shadow:0 4px 16px var(--sage-glow)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--gray-800);transition:var(--tr);border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:104px;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{text-decoration:none;font-family:var(--font-h);font-size:1.3rem;font-weight:600;color:var(--gray-800);transition:var(--tr)}
+.mobile-menu a:hover{color:var(--sage)}
+
+/* HERO */
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--sage-deeper) 0%,var(--sage-dark) 50%,var(--sage) 100%);padding:0}
+.hero-bg-pattern{position:absolute;inset:0;opacity:.06;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.7) 39px,rgba(255,255,255,.7) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.7) 39px,rgba(255,255,255,.7) 40px)}
+.hero-glow{position:absolute;top:-100px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 65%);animation:float 7s ease-in-out infinite}
+.hero-glow2{position:absolute;bottom:-80px;left:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 65%);animation:float 9s ease-in-out infinite reverse}
+.hero-inner{position:relative;z-index:2;padding:140px 0 72px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);padding:7px 16px;border-radius:50px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:24px;letter-spacing:.5px;text-transform:uppercase;animation:slideUp .8s ease both}
+.hero-dot{width:7px;height:7px;background:#a8f0a0;border-radius:50%;animation:pulse 2s infinite}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:800;color:white;line-height:1.1;margin-bottom:20px;animation:slideUp .9s .1s ease both}
+.hero h1 em{font-style:normal;color:rgba(255,255,255,.55)}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.72);max-width:540px;line-height:1.75;animation:slideUp 1s .2s ease both;margin-bottom:36px}
+.hero-stats{display:flex;gap:40px;animation:slideUp 1s .35s ease both}
+.hero-stat{text-align:left}
+.hero-stat-num{font-family:var(--font-h);font-size:1.9rem;font-weight:800;color:white;line-height:1}
+.hero-stat-label{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:4px;font-weight:500}
+.hero-wave{display:block;width:100%;overflow:hidden;line-height:0;margin-bottom:-2px}
+.hero-wave svg{display:block;width:100%}
+
+/* WHY US */
+.section{padding:96px 0}
+.section-label{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.section-title{font-family:var(--font-h);font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:800;color:var(--gray-900);line-height:1.2;margin-bottom:16px}
+.section-sub{font-size:1.02rem;color:var(--gray-600);max-width:540px;line-height:1.8}
+
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.why-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:32px 28px;transition:var(--tr);position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--sage-light));transform:scaleX(0);transform-origin:left;transition:var(--tr)}
+.why-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--gray-200)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-icon{width:48px;height:48px;background:var(--sage-subtle);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.4rem}
+.why-card h3{font-family:var(--font-h);font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:10px}
+.why-card p{font-size:.9rem;color:var(--gray-600);line-height:1.7}
+
+/* POSITIONS */
+.positions-bg{background:var(--gray-50)}
+.positions-header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+.job-list{display:flex;flex-direction:column;gap:16px}
+.job-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:28px 32px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;transition:var(--tr);cursor:pointer;text-decoration:none;color:inherit}
+.job-card:hover{box-shadow:var(--shadow-md);border-color:var(--sage-light);transform:translateX(4px)}
+.job-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.job-tag{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;background:var(--sage-subtle);color:var(--sage-dark);letter-spacing:.3px}
+.job-tag.full{background:#e8f5e9;color:#2e7d32}
+.job-tag.part{background:#fff3e0;color:#e65100}
+.job-title{font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+.job-loc{font-size:.88rem;color:var(--gray-400);display:flex;align-items:center;gap:5px}
+.job-arrow{width:42px;height:42px;background:var(--sage-subtle);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--tr);flex-shrink:0}
+.job-card:hover .job-arrow{background:var(--sage);color:white}
+.job-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--sage-dark);transition:var(--tr)}
+.job-card:hover .job-arrow svg{color:white}
+
+/* PROCESS */
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:calc(12.5%);right:calc(12.5%);height:2px;background:repeating-linear-gradient(90deg,var(--sage-light) 0,var(--sage-light) 12px,transparent 12px,transparent 24px);z-index:0}
+.step{text-align:center;padding:0 16px;position:relative;z-index:1}
+.step-num{width:56px;height:56px;background:var(--white);border:2px solid var(--sage-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;font-size:1.1rem;color:var(--sage);margin:0 auto 20px;transition:var(--tr)}
+.step:hover .step-num{background:var(--sage);border-color:var(--sage);color:white}
+.step h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--gray-900);margin-bottom:8px}
+.step p{font-size:.85rem;color:var(--gray-600);line-height:1.65}
+
+/* SPONTANEOUS / FORM */
+.spontaneous{background:linear-gradient(135deg,var(--sage-deeper) 0%,var(--sage-dark) 100%);position:relative;overflow:hidden}
+.spontaneous::before{content:'';position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,transparent,transparent 29px,rgba(255,255,255,.8) 29px,rgba(255,255,255,.8) 30px)}
+.spontaneous-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2}
+.spontaneous-text .section-label{color:rgba(255,255,255,.5)}
+.spontaneous-text .section-title{color:white}
+.spontaneous-text .section-sub{color:rgba(255,255,255,.65)}
+.benefit-list{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.benefit-list li{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:rgba(255,255,255,.75)}
+.benefit-check{width:20px;height:20px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65rem;color:rgba(255,255,255,.9)}
+
+.form-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:40px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.3px}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-sm);padding:12px 16px;font-family:var(--font-b);font-size:.9rem;color:white;transition:var(--tr);outline:none;width:100%}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.35)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.form-select{appearance:none;cursor:pointer}
+.form-select option{background:var(--sage-deeper);color:var(--gray-100)}
+.form-textarea{resize:vertical;min-height:100px}
+.file-upload{background:rgba(255,255,255,.06);border:1.5px dashed rgba(255,255,255,.2);border-radius:var(--radius-sm);padding:20px;text-align:center;cursor:pointer;transition:var(--tr)}
+.file-upload:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+.file-upload-icon{font-size:1.5rem;margin-bottom:6px}
+.file-upload p{font-size:.8rem;color:rgba(255,255,255,.5)}
+.file-upload strong{color:rgba(255,255,255,.8);font-weight:600}
+.form-submit{width:100%;background:white;color:var(--sage-deeper);border:none;padding:14px 32px;border-radius:50px;font-family:var(--font-h);font-size:.95rem;font-weight:700;cursor:pointer;transition:var(--tr);margin-top:8px}
+.form-submit:hover{background:var(--cream);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+
+/* FOOTER */
+.footer{background:var(--gray-900);padding:64px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand-text{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.75;margin-top:16px;max-width:260px}
+.footer-socials{display:flex;gap:12px;margin-top:20px}
+.footer-socials a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.footer-socials a:hover{background:var(--sage)}
+.footer-socials svg{width:16px;height:16px;fill:rgba(255,255,255,.5);transition:var(--tr)}
+.footer-socials a:hover svg{fill:white}
+.footer h4{font-family:var(--font-h);font-size:.8rem;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{text-decoration:none;font-size:.88rem;color:rgba(255,255,255,.5);transition:var(--tr)}
+.footer-links a:hover{color:white}
+.footer-links li{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.5}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:.82rem;color:rgba(255,255,255,.3)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{text-decoration:none;color:rgba(255,255,255,.3);transition:var(--tr)}
+.footer-legal a:hover{color:rgba(255,255,255,.7)}
+
+/* MODAL */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(17,20,16,.7);backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:24px}
+.modal-backdrop.active{display:flex}
+.modal{background:white;border-radius:16px;max-width:560px;width:100%;max-height:80vh;overflow-y:auto;padding:40px;position:relative;animation:slideUp .4s ease}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:var(--gray-50);border:none;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:var(--tr);color:var(--gray-600)}
+.modal-close:hover{background:var(--gray-100)}
+.modal-tag{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;background:var(--sage-subtle);color:var(--sage-dark);margin-bottom:12px}
+.modal h2{font-family:var(--font-h);font-size:1.5rem;font-weight:800;color:var(--gray-900);margin-bottom:6px}
+.modal-loc{font-size:.9rem;color:var(--gray-400);margin-bottom:24px;display:flex;align-items:center;gap:5px}
+.modal-section{margin-bottom:20px}
+.modal-section h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:var(--sage-dark);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.modal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.modal-list li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--gray-600)}
+.modal-list li::before{content:'→';color:var(--sage);flex-shrink:0;margin-top:1px}
+.modal-apply{display:block;width:100%;background:var(--sage);color:white;border:none;padding:14px;border-radius:50px;font-family:var(--font-h);font-weight:700;font-size:.95rem;cursor:pointer;transition:var(--tr);margin-top:24px;text-align:center}
+.modal-apply:hover{background:var(--sage-dark);transform:translateY(-2px);box-shadow:0 6px 20px var(--sage-glow)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:32px}.process-steps::before{display:none}
+  .spontaneous-inner{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:600px){
+  .why-grid{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .form-grid{grid-template-columns:1fr}
+  .job-card{grid-template-columns:1fr}
+  .job-arrow{display:none}
+  .positions-header{flex-direction:column;align-items:flex-start}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('hu')">HU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="Estur Épker Kft."></a>
+  <ul class="nav-links">
+    <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
+    <li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
+    <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
+    <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
+    <li><a href="karrier.html" class="active" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
+    <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Főoldal</a>
+  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
+  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
+  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
+  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
+  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="container hero-inner">
+    <div class="hero-label">
+      <span class="hero-dot"></span>
+      <span data-hu="Álláslehetőségek" data-en="Open Positions" data-de="Stellenangebote">Álláslehetőségek</span>
+    </div>
+    <h1 data-hu="Építsd velünk<br><em>a jövőt.</em>" data-en="Build the future<br><em>with us.</em>" data-de="Bau mit uns<br><em>die Zukunft.</em>">Építsd velünk<br><em>a jövőt.</em></h1>
+    <p class="hero-sub" data-hu="Az Estur Kft. dinamikusan növekvő építőipari csapat Baján és környékén. 2016 óta tartunk magas mércét — és ehhez hozzád is szükségünk van." data-en="Estur Kft. is a fast-growing construction team in Baja. Since 2016 we've held high standards — and we need you to keep them." data-de="Estur Kft. ist ein wachsendes Bauteam in Baja. Seit 2016 halten wir hohe Standards – und wir brauchen dich dafür.">Az Estur Kft. dinamikusan növekvő építőipari csapat Baján és környékén. 2016 óta tartunk magas mércét — és ehhez hozzád is szükségünk van.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">2016</div>
+        <div class="hero-stat-label" data-hu="alapítva" data-en="founded" data-de="gegründet">alapítva</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100+</div>
+        <div class="hero-stat-label" data-hu="elvégzett projekt" data-en="completed projects" data-de="abgeschl. Projekte">elvégzett projekt</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Baja</div>
+        <div class="hero-stat-label" data-hu="és Dél-Magyarország" data-en="& Southern Hungary" data-de="& Südungarn">és Dél-Magyarország</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,48 C360,80 1080,0 1440,48 L1440,72 L0,72 Z" fill="#ffffff"/></svg>
+  </div>
+</section>
+
+<!-- MIÉRT ESTUR -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label" data-hu="Miért mi?" data-en="Why us?" data-de="Warum wir?">Miért mi?</p>
+      <h2 class="section-title" data-hu="Ami megkülönböztet minket" data-en="What sets us apart" data-de="Was uns auszeichnet">Ami megkülönböztet minket</h2>
+      <p class="section-sub" data-hu="Nem csak munkahelyet kínálunk — csapatot, szakmai fejlődést és olyan projekteket, amelyekre büszke leszel." data-en="We offer more than a job — a team, professional growth, and projects you'll be proud of." data-de="Wir bieten mehr als einen Job — ein Team, Entwicklung und Projekte, auf die du stolz sein wirst.">Nem csak munkahelyet kínálunk — csapatot, szakmai fejlődést és olyan projekteket, amelyekre büszke leszel.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal" style="transition-delay:.05s">
+        <div class="why-icon">🏗️</div>
+        <h3 data-hu="Változatos projektek" data-en="Varied projects" data-de="Vielfältige Projekte">Változatos projektek</h3>
+        <p data-hu="Generálkivitelezéstől lakásfelújításig, az egyedi igényektől a nagyobb beruházásokig — sosem unod meg." data-en="From general contracting to home renovation, unique builds to major investments — never a dull moment." data-de="Von Generalunternehmen bis zur Renovierung — niemals langweilig.">Generálkivitelezéstől lakásfelújításig, az egyedi igényektől a nagyobb beruházásokig — sosem unod meg.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.1s">
+        <div class="why-icon">📈</div>
+        <h3 data-hu="Szakmai fejlődés" data-en="Professional growth" data-de="Berufliche Entwicklung">Szakmai fejlődés</h3>
+        <p data-hu="Képzési lehetőségek, mentoring és olyan környezet, ahol valóban lehet fejlődni — ez a mi befektetésünk beléd." data-en="Training, mentoring and an environment where growth is real — that's our investment in you." data-de="Schulungen, Mentoring und eine Umgebung, in der echtes Wachstum möglich ist.">Képzési lehetőségek, mentoring és olyan környezet, ahol valóban lehet fejlődni — ez a mi befektetésünk beléd.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.15s">
+        <div class="why-icon">🤝</div>
+        <h3 data-hu="Összetartó csapat" data-en="Close-knit team" data-de="Starkes Team">Összetartó csapat</h3>
+        <p data-hu="Kis, de ütőképes csapat — mindenki számít, és a munkád valódi hatással van az eredményre." data-en="Small but mighty team — everyone matters and your work truly affects the outcome." data-de="Kleines, schlagkräftiges Team — jeder zählt und deine Arbeit macht einen Unterschied.">Kis, de ütőképes csapat — mindenki számít, és a munkád valódi hatással van az eredményre.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.2s">
+        <div class="why-icon">💰</div>
+        <h3 data-hu="Versenyképes bérezés" data-en="Competitive pay" data-de="Wettbewerbsfähige Vergütung">Versenyképes bérezés</h3>
+        <p data-hu="Teljesítményhez igazított fizetés, rendszeres felülvizsgálattal és a jó munka megbecsülésével." data-en="Performance-aligned pay, regular reviews and recognition for quality work." data-de="Leistungsgerechte Vergütung, regelmäßige Überprüfungen und Anerkennung.">Teljesítményhez igazított fizetés, rendszeres felülvizsgálattal és a jó munka megbecsülésével.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.25s">
+        <div class="why-icon">📍</div>
+        <h3 data-hu="Baja és térsége" data-en="Baja & region" data-de="Baja & Umgebung">Baja és térsége</h3>
+        <p data-hu="Helyi gyökerekkel, de országos látókörrel. Ingázás nélkül, mégis nagyobb projektek." data-en="Local roots, national scope. No long commute, yet bigger projects." data-de="Lokale Wurzeln, nationaler Rahmen. Kein Pendeln, aber größere Projekte.">Helyi gyökerekkel, de országos látókörrel. Ingázás nélkül, mégis nagyobb projektek.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.3s">
+        <div class="why-icon">🛠️</div>
+        <h3 data-hu="Korszerű eszközök" data-en="Modern tools" data-de="Moderne Werkzeuge">Korszerű eszközök</h3>
+        <p data-hu="Minőségi gépek és eszközök — mert a jó munkához jó felszerelés kell." data-en="Quality machinery and tools — because good work needs good equipment." data-de="Qualitative Maschinen und Werkzeuge — gute Arbeit braucht gute Ausrüstung.">Minőségi gépek és eszközök — mert a jó munkához jó felszerelés kell.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POZÍCIÓK -->
+<section class="section positions-bg" id="poziciok">
+  <div class="container">
+    <div class="positions-header">
+      <div class="reveal">
+        <p class="section-label" data-hu="Nyitott pozíciók" data-en="Open positions" data-de="Offene Stellen">Nyitott pozíciók</p>
+        <h2 class="section-title" data-hu="Jelenleg várjuk<br>a jelentkezésedet" data-en="We're currently<br>hiring" data-de="Wir suchen<br>derzeit">Jelenleg várjuk<br>a jelentkezésedet</h2>
+      </div>
+    </div>
+
+    <div class="job-list">
+      <div class="job-card reveal" onclick="openModal('komuves')" style="transition-delay:.05s">
+        <div>
+          <div class="job-meta">
+            <span class="job-tag full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
+            <span class="job-tag" data-hu="Fizikai" data-en="Skilled trade" data-de="Handwerk">Fizikai</span>
+          </div>
+          <div class="job-title" data-hu="Kőműves / Falazó szakember" data-en="Bricklayer / Masonry Specialist" data-de="Maurer / Mauerwerksspezialist">Kőműves / Falazó szakember</div>
+          <div class="job-loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Baja és környéke
+          </div>
+        </div>
+        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card reveal" onclick="openModal('acs')" style="transition-delay:.1s">
+        <div>
+          <div class="job-meta">
+            <span class="job-tag full">Teljes munkaidő</span>
+            <span class="job-tag">Fizikai</span>
+          </div>
+          <div class="job-title" data-hu="Ács / Tetőfedő" data-en="Carpenter / Roofer" data-de="Zimmermann / Dachdecker">Ács / Tetőfedő</div>
+          <div class="job-loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Baja és környéke
+          </div>
+        </div>
+        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card reveal" onclick="openModal('epitesvezetö')" style="transition-delay:.15s">
+        <div>
+          <div class="job-meta">
+            <span class="job-tag full">Teljes munkaidő</span>
+            <span class="job-tag" style="background:#e3f2fd;color:#1565c0">Irodai / terep</span>
+          </div>
+          <div class="job-title" data-hu="Építésvezető / Műszaki koordinátor" data-en="Site Manager / Technical Coordinator" data-de="Bauleiter / Technischer Koordinator">Építésvezető / Műszaki koordinátor</div>
+          <div class="job-loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Baja
+          </div>
+        </div>
+        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card reveal" onclick="openModal('segedmunkas')" style="transition-delay:.2s">
+        <div>
+          <div class="job-meta">
+            <span class="job-tag full">Teljes munkaidő</span>
+            <span class="job-tag">Fizikai</span>
+            <span class="job-tag" style="background:#f3e5f5;color:#6a1b9a">Kezdőknek is</span>
+          </div>
+          <div class="job-title" data-hu="Építőipari segédmunkás" data-en="Construction Laborer" data-de="Bauhelfer">Építőipari segédmunkás</div>
+          <div class="job-loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Baja és környéke
+          </div>
+        </div>
+        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLYAMAT -->
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="section-label" data-hu="Hogyan zajlik?" data-en="How does it work?" data-de="Wie läuft es ab?">Hogyan zajlik?</p>
+      <h2 class="section-title" data-hu="A felvételi folyamat" data-en="The hiring process" data-de="Der Einstellungsprozess">A felvételi folyamat</h2>
+      <p class="section-sub" style="margin:0 auto" data-hu="Egyszerű, átlátható és gyors — becsüljük az idődet." data-en="Simple, transparent and fast — we respect your time." data-de="Einfach, transparent und schnell — wir respektieren deine Zeit.">Egyszerű, átlátható és gyors — becsüljük az idődet.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal" style="transition-delay:.05s">
+        <div class="step-num">01</div>
+        <h4 data-hu="Jelentkezés" data-en="Apply" data-de="Bewerbung">Jelentkezés</h4>
+        <p data-hu="Töltsd ki az űrlapot vagy küld el az önéletrajzodat. Pár perc az egész." data-en="Fill in the form or send your CV. Takes just a few minutes." data-de="Formular ausfüllen oder Lebenslauf schicken. Dauert nur wenige Minuten.">Töltsd ki az űrlapot vagy küld el az önéletrajzodat. Pár perc az egész.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.1s">
+        <div class="step-num">02</div>
+        <h4 data-hu="Visszajelzés" data-en="Response" data-de="Rückmeldung">Visszajelzés</h4>
+        <p data-hu="2 munkanapon belül felvesszük veled a kapcsolatot és egyeztetünk egy személyes találkozót." data-en="Within 2 business days we'll contact you and arrange an interview." data-de="Innerhalb von 2 Werktagen melden wir uns und vereinbaren ein Treffen.">2 munkanapon belül felvesszük veled a kapcsolatot és egyeztetünk egy személyes találkozót.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.15s">
+        <div class="step-num">03</div>
+        <h4 data-hu="Interjú" data-en="Interview" data-de="Vorstellungsgespräch">Interjú</h4>
+        <p data-hu="Személyes vagy videós találkozó — megismerjük egymást, bemutatjuk a csapatot és a projektjeinket." data-en="In-person or video meeting — we get to know each other, show you the team and projects." data-de="Persönlich oder per Video — gegenseitiges Kennenlernen, Team und Projekte.">Személyes vagy videós találkozó — megismerjük egymást, bemutatjuk a csapatot és a projektjeinket.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.2s">
+        <div class="step-num">04</div>
+        <h4 data-hu="Ajánlat" data-en="Offer" data-de="Angebot">Ajánlat</h4>
+        <p data-hu="Ha kölcsönösen tetszünk egymásnak, formális ajánlatot teszünk és megkezdjük az onboardingot." data-en="If there's mutual fit, we make a formal offer and kick off onboarding." data-de="Bei gegenseitigem Interesse folgt das formelle Angebot und das Onboarding.">Ha kölcsönösen tetszünk egymásnak, formális ajánlatot teszünk és megkezdjük az onboardingot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONTÁN JELENTKEZÉS + FORM -->
+<section class="section spontaneous" id="jelentkezes">
+  <div class="container">
+    <div class="spontaneous-inner">
+      <div class="spontaneous-text reveal">
+        <p class="section-label" data-hu="Spontán jelentkezés" data-en="Open application" data-de="Offene Bewerbung">Spontán jelentkezés</p>
+        <h2 class="section-title" data-hu="Nem találtad a<br>pozíciódat?" data-en="Didn't find<br>your role?" data-de="Keine passende<br>Stelle gefunden?">Nem találtad a<br>pozíciódat?</h2>
+        <p class="section-sub" data-hu="Küld el az önéletrajzodat és motivációs leveledet — ha megvan benned az, amit keresünk, biztosan megtaláljuk a helyed nálunk." data-en="Send your CV and motivation letter — if you have what we're looking for, we'll find a place for you." data-de="Schick Lebenslauf und Motivationsschreiben — wenn du das mitbringst, was wir suchen, finden wir einen Platz für dich.">Küld el az önéletrajzodat és motivációs leveledet — ha megvan benned az, amit keresünk, biztosan megtaláljuk a helyed nálunk.</p>
+        <ul class="benefit-list">
+          <li><span class="benefit-check">✓</span><span data-hu="Gyors visszajelzés 2 munkanapon belül" data-en="Quick response within 2 business days" data-de="Schnelle Antwort innerhalb von 2 Werktagen">Gyors visszajelzés 2 munkanapon belül</span></li>
+          <li><span class="benefit-check">✓</span><span data-hu="Személyes interjú — nem anonim folyamat" data-en="Personal interview — not an anonymous process" data-de="Persönliches Gespräch — kein anonymer Prozess">Személyes interjú — nem anonim folyamat</span></li>
+          <li><span class="benefit-check">✓</span><span data-hu="Az önéletrajzod 1 évig megőrizzük" data-en="Your CV is kept for 1 year" data-de="Dein Lebenslauf wird 1 Jahr aufbewahrt">Az önéletrajzod 1 évig megőrizzük</span></li>
+          <li><span class="benefit-check">✓</span><span data-hu="Megkérdezhetjük ha új pozíció nyílik" data-en="We may reach out when new roles open" data-de="Wir melden uns bei neuen Stellen">Megkérdezhetjük ha új pozíció nyílik</span></li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <div class="form-card">
+          <form id="applicationForm" onsubmit="handleSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" data-hu="Keresztnév *" data-en="First name *" data-de="Vorname *">Keresztnév *</label>
+                <input class="form-input" type="text" required placeholder="pl. Péter">
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-hu="Vezetéknév *" data-en="Last name *" data-de="Nachname *">Vezetéknév *</label>
+                <input class="form-input" type="text" required placeholder="pl. Nagy">
+              </div>
+              <div class="form-group full">
+                <label class="form-label" data-hu="E-mail *" data-en="Email *" data-de="E-Mail *">E-mail *</label>
+                <input class="form-input" type="email" required placeholder="nev@email.hu">
+              </div>
+              <div class="form-group full">
+                <label class="form-label" data-hu="Telefonszám" data-en="Phone" data-de="Telefon">Telefonszám</label>
+                <input class="form-input" type="tel" placeholder="+36 30 ...">
+              </div>
+              <div class="form-group full">
+                <label class="form-label" data-hu="Melyik pozícióra jelentkezel?" data-en="Which position?" data-de="Welche Stelle?">Melyik pozícióra jelentkezel?</label>
+                <select class="form-select form-input">
+                  <option value="">— Válassz —</option>
+                  <option value="komuves">Kőműves / Falazó</option>
+                  <option value="acs">Ács / Tetőfedő</option>
+                  <option value="epitesvezetö">Építésvezető</option>
+                  <option value="segedmunkas">Segédmunkás</option>
+                  <option value="spontan">Spontán jelentkezés</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" data-hu="Rövid bemutatkozás" data-en="Brief intro" data-de="Kurze Vorstellung">Rövid bemutatkozás</label>
+                <textarea class="form-textarea" placeholder="Tapasztalatod, mikor tudsz kezdeni, egyéb info..."></textarea>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" data-hu="Önéletrajz (PDF, max. 5 MB)" data-en="CV (PDF, max 5 MB)" data-de="Lebenslauf (PDF, max. 5 MB)">Önéletrajz (PDF, max. 5 MB)</label>
+                <div class="file-upload" onclick="document.getElementById('cvFile').click()">
+                  <input type="file" id="cvFile" accept=".pdf,.doc,.docx" style="display:none" onchange="updateFileName(this)">
+                  <div class="file-upload-icon">📎</div>
+                  <p><strong id="fileName">Fájl feltöltése</strong></p>
+                  <p style="font-size:.75rem;margin-top:4px">PDF, DOC, DOCX</p>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">Jelentkezés elküldése →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-text" data-hu="Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan." data-en="Estur Kft. has been providing high-quality general contracting, residential construction and renovation in Baja and nationwide since 2016." data-de="Die Estur Kft. bietet seit 2016 hochwertige Generalunternehmertätigkeit, Wohnungsbau und Renovierung in Baja und landesweit.">Az Estur Kft. 2016 óta végez magas színvonalú generálkivitelezést, lakásépítést és felújítást Baján és országosan.</p>
+      <div class="footer-socials">
+        <a href="#" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+    </div>
+    <div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
+    <div><h4 data-hu="Pozíciók" data-en="Services" data-de="Leistungen">Pozíciók</h4><ul class="footer-links"><li><a href="#" data-hu="Kőműves / Falazó" data-en="Bricklayer / Mason" data-de="Maurer / Mauerer">Kőműves / Falazó</a></li><li><a href="#" data-hu="Ács / Tetőfedő" data-en="Carpenter / Roofer" data-de="Zimmermann / Dachdecker">Ács / Tetőfedő</a></li><li><a href="#" data-hu="Építésvezető" data-en="Site Manager" data-de="Bauleiter">Építésvezető</a></li><li><a href="#" data-hu="Segédmunkás" data-en="General Labourer" data-de="Hilfsarbeiter">Segédmunkás</a></li></ul></div>
+    <div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html" data-hu="Adatkezelési tájékoztató" data-en="Privacy Policy" data-de="Datenschutz">Adatkezelési tájékoztató</a></div></div>
+</div></footer>
+
+<!-- JOB MODALS -->
+<div class="modal-backdrop" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// Navbar scroll
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',window.scrollY>20));
+
+// Mobile menu
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+hb.addEventListener('click',()=>{hb.classList.toggle('active');mm.classList.toggle('active');document.body.style.overflow=mm.classList.contains('active')?'hidden':''});
+function closeMobile(){hb.classList.remove('active');mm.classList.remove('active');document.body.style.overflow=''}
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((en,i)=>{
+    if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*80);obs.unobserve(en.target)}
+  })
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// File upload name
+function updateFileName(input){
+  document.getElementById('fileName').textContent=input.files[0]?input.files[0].name:'Fájl feltöltése';
+}
+
+// Form submit
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.textContent='Küldés...';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='✓ Sikeresen elküldve!';btn.style.background='#e8f5e9';btn.style.color='#2e7d32';},1200);
+}
+
+// Job modal data
+const jobs={
+  komuves:{
+    tag:'Teljes munkaidő · Fizikai',
+    title:'Kőműves / Falazó szakember',
+    loc:'Baja és környéke',
+    tasks:['Falazási, vakolási munkák elvégzése','Alapozás, betonozási feladatok','Csatlakozás a kivitelezési csapathoz','Munkavédelmi előírások betartása'],
+    reqs:['Kőműves vagy kapcsolódó szakképzettség','Min. 2 év tapasztalat','Fizikai teherbírás','Precizitás és megbízhatóság'],
+    offer:['Versenyképes fizetés','Állandó munkaviszony','Szakmai fejlődési lehetőség','Korszerű eszközök és munkaruha']
+  },
+  acs:{
+    tag:'Teljes munkaidő · Fizikai',
+    title:'Ács / Tetőfedő',
+    loc:'Baja és környéke',
+    tasks:['Tetőszerkezetek tervezése és megépítése','Ács- és asztalosmunkák','Zsaluzat készítése','Csapatmunkában való részvétel'],
+    reqs:['Ács szakképesítés','Tetőfedési tapasztalat előny','Magasban végzett munkák vállalása','Munkavédelmi ismeretek'],
+    offer:['Versenyképes fizetés','Rendszeres projektek','Fejlődési lehetőségek','Stabil munkaviszony']
+  },
+  'epitesvezetö':{
+    tag:'Teljes munkaidő · Irodai / terep',
+    title:'Építésvezető / Műszaki koordinátor',
+    loc:'Baja',
+    tasks:['Kivitelezési munkák koordinálása','Alvállalkozók irányítása','Műszaki dokumentáció kezelése','Megrendelőkkel való kapcsolattartás'],
+    reqs:['Építőmérnöki vagy műszaki végzettség','Min. 3 év terepen szerzett tapasztalat','Precizitás, jó kommunikáció','B jogosítvány'],
+    offer:['Kiemelkedő fizetés','Céges telefon','Szakmai autonómia','Karrierlehetőség']
+  },
+  segedmunkas:{
+    tag:'Teljes munkaidő · Fizikai · Kezdőknek is',
+    title:'Építőipari segédmunkás',
+    loc:'Baja és környéke',
+    tasks:['Anyagmozgatás és előkészítés','Szakmunkások segítése','Munkaterület rendjének fenntartása','Általános fizikai munkák'],
+    reqs:['Fizikai teherbírás','Szorgalom és megbízhatóság','Nem szükséges tapasztalat','Csapatjátékos hozzáállás'],
+    offer:['Azonnali kezdés lehetséges','Betanítást biztosítunk','Fejlődési lehetőség szakmunkás irányba','Stabil, hosszú távú munkaviszony']
+  }
+};
+
+function openModal(id){
+  const j=jobs[id];
+  if(!j)return;
+  document.getElementById('modalBody').innerHTML=`
+    <span class="modal-tag">${j.tag}</span>
+    <h2>${j.title}</h2>
+    <div class="modal-loc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${j.loc}</div>
+    <div class="modal-section"><h4>Feladatok</h4><ul class="modal-list">${j.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+    <div class="modal-section"><h4>Elvárások</h4><ul class="modal-list">${j.reqs.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+    <div class="modal-section"><h4>Amit kínálunk</h4><ul class="modal-list">${j.offer.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+    <button class="modal-apply" onclick="scrollToForm()">Jelentkezés erre a pozícióra →</button>
+  `;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){if(e.target===document.getElementById('modal'))closeModalDirect()}
+function closeModalDirect(){document.getElementById('modal').classList.remove('active');document.body.style.overflow=''}
+function scrollToForm(){closeModalDirect();document.getElementById('jelentkezes').scrollIntoView({behavior:'smooth',block:'start'})}
+
+// Lang switcher
+function setLang(lang){
+  localStorage.setItem('estur_lang',lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang));
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    const val=el.getAttribute('data-'+lang);
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=val;
+    else el.innerHTML=val;
+  });
+  document.documentElement.lang=lang==='hu'?'hu':lang==='en'?'en':'de';
+}
+(function(){const saved=localStorage.getItem('estur_lang');if(saved&&saved!=='hu')setLang(saved);})();
+</script>
+<script src="assets/js/estur.js"></script>
+</body>
+</html>
