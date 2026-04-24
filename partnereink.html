@@ -252,17 +252,55 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
     <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
     <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menü" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 </div></nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="closeMobile()">Főoldal</a>
-  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
-  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
-  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
-  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
-  <a href="blog.html" onclick="closeMobile()">Blog</a>
-  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
-  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-inner">
+    <button class="mobile-close" id="mobileClose" aria-label="Bezárás" onclick="closeMobile()">
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="mobile-nav-items">
+      <a class="mobile-nav-item" href="index.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">01</span>
+        <span class="mobile-nav-label" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</span>
+      </a>
+      <a class="mobile-nav-item" href="szolgaltatasok.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">02</span>
+        <span class="mobile-nav-label" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</span>
+      </a>
+      <a class="mobile-nav-item" href="rolunk.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">03</span>
+        <span class="mobile-nav-label" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</span>
+      </a>
+      <a class="mobile-nav-item" href="referenciak.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">04</span>
+        <span class="mobile-nav-label" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</span>
+      </a>
+      <a class="mobile-nav-item" href="partnereink.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">05</span>
+        <span class="mobile-nav-label" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</span>
+      </a>
+      <a class="mobile-nav-item" href="blog.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">06</span>
+        <span class="mobile-nav-label" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</span>
+      </a>
+      <a class="mobile-nav-item" href="karrier.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">07</span>
+        <span class="mobile-nav-label" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</span>
+      </a>
+    </nav>
+    <a href="ajanlatkeres.html" class="mobile-menu-cta" onclick="closeMobile()" data-hu="Ajánlatkérés →" data-en="Get a Quote →" data-de="Angebot →">Ajánlatkérés →</a>
+    <div class="mobile-menu-footer">
+      <span>Estur Épker Kft.</span>
+      <div class="mobile-menu-footer-dot"></div>
+      <span>Baja, 2016 óta</span>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->

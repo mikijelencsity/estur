@@ -11,18 +11,44 @@ if (navbar) {
 // ── Hamburger / mobil menü ──
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+
+function openMobile() {
+  if (!hamburger || !mobileMenu) return;
+  // Reset item states hogy az animáció újra lefusson
+  mobileMenu.querySelectorAll('.mobile-nav-item').forEach(el => {
+    el.style.transition = 'none';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-22px)';
+  });
+  mobileMenu.classList.add('active');
+  hamburger.classList.add('active');
+  mobileMenu.setAttribute('aria-hidden', 'false');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+  // Egy frame után engedjük az animációt
+  requestAnimationFrame(() => {
+    mobileMenu.querySelectorAll('.mobile-nav-item').forEach(el => {
+      el.style.transition = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+    });
   });
 }
+
 function closeMobile() {
   if (!hamburger || !mobileMenu) return;
   hamburger.classList.remove('active');
   mobileMenu.classList.remove('active');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  hamburger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
+}
+
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.contains('active') ? closeMobile() : openMobile();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobile(); });
 }
 
 // ── Reveal on scroll ──
