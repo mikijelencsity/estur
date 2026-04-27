@@ -8,33 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estur.css">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --sage:#727562;--sage-dark:#5a5d4e;--sage-deeper:#3e4134;--sage-light:#95987f;--sage-subtle:#e8eae0;--sage-glow:rgba(114,117,98,.18);
-  --cream:#f6f6f2;--white:#ffffff;--gray-50:#f0f1ec;--gray-100:#dfe1d9;--gray-200:#c0c4b8;--gray-400:#7d8274;--gray-600:#434840;--gray-800:#222620;--gray-900:#111410;
-  --font-h:'Sora',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;
-  --shadow-sm:0 1px 3px rgba(17,20,16,.08);--shadow-md:0 4px 20px rgba(17,20,16,.1);--shadow-lg:0 12px 40px rgba(17,20,16,.14);--shadow-xl:0 24px 64px rgba(17,20,16,.18);
-  --radius:12px;--radius-sm:8px;--tr:.3s cubic-bezier(.4,0,.2,1);
-}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-
 /* ══ ANIMATIONS ══ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes countUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-@keyframes rotateIn{from{opacity:0;transform:rotate(-5deg) scale(.9)}to{opacity:1;transform:rotate(0) scale(1)}}
 @keyframes slideFromLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideFromRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
 
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease}
 .reveal-left.visible{opacity:1;transform:translateX(0)}
 .reveal-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease}
@@ -42,39 +26,9 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .reveal-scale{opacity:0;transform:scale(.9);transition:opacity .8s ease,transform .8s ease}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
 
-/* ══ LANG BAR ══ */
-.lang-bar{position:fixed;top:0;left:0;right:0;z-index:1100;background:var(--gray-900);height:32px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;gap:12px}
-.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:.75rem;font-family:var(--font-b);font-weight:600;cursor:pointer;padding:2px 8px;border-radius:4px;transition:var(--tr);letter-spacing:.5px}
-.lang-btn.active{color:white;background:rgba(255,255,255,.12)}
-.lang-btn:hover{color:white}
-
-/* ══ NAVBAR ══ */
-.navbar{position:fixed;top:32px;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);transition:var(--tr)}
-.navbar.scrolled{box-shadow:var(--shadow-sm)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo img{height:40px;width:auto}
-.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--gray-600);font-size:.9rem;font-weight:500;transition:var(--tr);position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--sage);transition:var(--tr)}
-.nav-links a:hover{color:var(--sage)}.nav-links a:hover::after{width:100%}
-.nav-links a.active-page{color:var(--sage)}.nav-links a.active-page::after{width:100%}
-.nav-cta{background:var(--sage)!important;color:white!important;padding:10px 24px;border-radius:50px;font-weight:600!important;font-size:.85rem!important}
-.nav-cta::after{display:none!important}
-.nav-cta:hover{background:var(--sage-dark)!important;transform:translateY(-1px);box-shadow:0 4px 16px var(--sage-glow)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{width:24px;height:2px;background:var(--gray-800);transition:var(--tr);border-radius:2px}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hamburger.active span:nth-child(2){opacity:0}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{display:none;position:fixed;top:104px;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mobile-menu.active{display:flex}
-.mobile-menu a{text-decoration:none;font-family:var(--font-h);font-size:1.3rem;font-weight:600;color:var(--gray-800);transition:var(--tr)}
-.mobile-menu a:hover{color:var(--sage)}
-
 /* ══ PAGE HERO ══ */
 .page-hero{min-height:70vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:104px;background:var(--gray-900)}
-.page-hero-bg{position:absolute;inset:0;background:url('assets/images/hero.jpeg') center/cover no-repeat;opacity:.12}
+.page-hero-bg{position:absolute;inset:0;background:url('assets/images/hero.webp') center/cover no-repeat;opacity:.12}
 .page-hero-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(114,117,98,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(114,117,98,.06) 1px,transparent 1px);background-size:60px 60px;opacity:.6}
 .page-hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,transparent 30%,rgba(17,20,16,.8) 100%)}
 .page-hero-glow{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(114,117,98,.2) 0%,transparent 70%);animation:float 8s ease-in-out infinite}
@@ -140,7 +94,7 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 
 /* ══ VALUES / PILLARS ══ */
 .values-section{padding:120px 0;background:var(--gray-900);position:relative;overflow:hidden}
-.values-section::before{content:'';position:absolute;inset:0;background:url('assets/images/hero.jpeg') center/cover no-repeat;opacity:.04}
+.values-section::before{content:'';position:absolute;inset:0;background:url('assets/images/hero.webp') center/cover no-repeat;opacity:.04}
 .values-grid-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(114,117,98,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(114,117,98,.04) 1px,transparent 1px);background-size:80px 80px}
 .values-inner{position:relative;z-index:1}
 .values-header{text-align:center;margin-bottom:72px}
@@ -170,8 +124,6 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .team-card{background:var(--gray-50);border-radius:20px;overflow:hidden;transition:var(--tr);border:1px solid var(--gray-100)}
 .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--sage-light)}
 .team-card-img{aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--sage-subtle)}
-.team-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.team-card:hover .team-card-img img{transform:scale(1.05)}
 .team-card-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--sage-subtle),var(--gray-100))}
 .team-placeholder-icon{width:64px;height:64px;background:var(--sage-glow);border-radius:50%;display:flex;align-items:center;justify-content:center}
 .team-placeholder-icon svg{width:32px;height:32px;color:var(--sage)}
@@ -230,41 +182,8 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .cta-inner h2{font-family:var(--font-h);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:white;margin-bottom:16px}
 .cta-inner p{color:rgba(255,255,255,.8);font-size:1.05rem;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto}
 .cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.btn-white{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--sage-dark);padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.95rem;transition:var(--tr)}
-.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
 .btn-ghost-white{display:inline-flex;align-items:center;gap:8px;background:transparent;color:white;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:600;font-size:.95rem;border:1.5px solid rgba(255,255,255,.4);transition:var(--tr)}
 .btn-ghost-white:hover{background:rgba(255,255,255,.1);border-color:white}
-.arr{width:16px;height:16px;vertical-align:middle}
-
-/* ══ FOOTER ══ */
-.footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 0 30px}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand-text{font-size:.88rem;line-height:1.7;margin-top:16px;color:rgba(255,255,255,.5)}
-.footer h4{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:white;margin-bottom:16px;letter-spacing:.5px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-links li{font-size:.88rem;color:rgba(255,255,255,.5)}
-.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:var(--tr)}
-.footer-links a:hover{color:var(--sage-light)}
-.footer-socials{display:flex;gap:12px;margin-top:20px}
-.footer-socials a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:var(--tr)}
-.footer-socials a:hover{background:var(--sage);transform:translateY(-2px)}
-.footer-socials svg{width:18px;height:18px;fill:rgba(255,255,255,.6)}
-.footer-socials a:hover svg{fill:white}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.35)}
-.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}.footer-bottom a:hover{color:var(--sage-light)}
-.footer-legal{display:flex;gap:24px}
-
-/* ══ COOKIE ══ */
-.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:var(--gray-900);color:white;padding:20px 0;z-index:9999;transform:translateY(100%);transition:transform .4s ease;border-top:2px solid var(--sage)}
-.cookie-banner.show{transform:translateY(0)}
-.cookie-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.cookie-text{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.6}
-.cookie-text a{color:var(--sage-light);text-decoration:underline}
-.cookie-btns{display:flex;gap:12px;flex-shrink:0}
-.cookie-accept{background:var(--sage);color:white;padding:10px 24px;border-radius:50px;border:none;font-weight:600;font-size:.85rem;cursor:pointer;font-family:var(--font-b);transition:var(--tr)}
-.cookie-accept:hover{background:var(--sage-dark)}
-.cookie-decline{background:transparent;color:rgba(255,255,255,.6);padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);font-weight:500;font-size:.85rem;cursor:pointer;font-family:var(--font-b);transition:var(--tr)}
-.cookie-decline:hover{border-color:rgba(255,255,255,.4);color:white}
 
 /* ══ RESPONSIVE ══ */
 @media(max-width:968px){
@@ -278,7 +197,6 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   .stats-inner{grid-template-columns:1fr 1fr}
   .certs-inner{flex-direction:column;align-items:flex-start;gap:32px}
   .certs-divider{display:none}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .tl-item{grid-template-columns:1fr 40px 1fr}
   .tl-content{padding:24px 20px 40px}
 }
@@ -290,73 +208,89 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   .team-grid{grid-template-columns:1fr}
   .process-steps{grid-template-columns:1fr}
   .stats-inner{grid-template-columns:1fr 1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .nav-links{display:none}.hamburger{display:flex}
-  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
-  .cookie-inner{flex-direction:column;text-align:center}
+  .cta-btns{flex-direction:column}
   .tl-item{grid-template-columns:32px 1fr}
   .tl-item:nth-child(even) .tl-content{grid-column:2;text-align:left}
   .tl-item:nth-child(even) .tl-void{display:none}
   .tl-item:nth-child(odd) .tl-content{grid-column:2;text-align:left}
   .tl-dot{grid-column:1;padding-top:28px}
   .timeline::before{left:16px;transform:none}
-  .cta-btns{flex-direction:column}
 }
 </style>
 </head>
 <body>
 
-<!-- LANG BAR -->
 <div class="lang-bar">
   <button class="lang-btn active" onclick="setLang('hu')">HU</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
   <button class="lang-btn" onclick="setLang('de')">DE</button>
 </div>
 
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar"><div class="nav-inner">
   <a href="index.html" class="nav-logo"><img src="assets/images/logo.png" alt="Estur Épker Kft."></a>
   <ul class="nav-links">
     <li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li>
-    <li><a href="rolunk.html" class="active-page" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
+    <li><a href="rolunk.html" class="active" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li>
     <li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li>
     <li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li>
     <li><a href="blog.html" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</a></li>
     <li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li>
     <li><a href="ajanlatkeres.html" class="nav-cta" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menü" aria-expanded="false">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
 </div></nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="closeMobile()">Főoldal</a>
-  <a href="szolgaltatasok.html" onclick="closeMobile()">Szolgáltatások</a>
-  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
-  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
-  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
-  <a href="blog.html" onclick="closeMobile()">Blog</a>
-  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
-  <a href="ajanlatkeres.html" onclick="closeMobile()">Ajánlatkérés</a>
-</div>
-</nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="closeMobile()">Főoldal</a>
-  <a href="index.html#szolgaltatasok" onclick="closeMobile()">Szolgáltatások</a>
-  <a href="rolunk.html" onclick="closeMobile()">Rólunk</a>
-  <a href="referenciak.html" onclick="closeMobile()">Referenciák</a>
-  <a href="partnereink.html" onclick="closeMobile()">Partnereink</a>
-  <a href="karrier.html" onclick="closeMobile()">Karrier</a>
-  <a href="index.html#kapcsolat" onclick="closeMobile()">Kapcsolat</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-inner">
+    <button class="mobile-close" id="mobileClose" aria-label="Bezárás" onclick="closeMobile()">
+      <span></span><span></span>
+    </button>
+    <nav class="mobile-nav-items">
+      <a class="mobile-nav-item" href="index.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">01</span>
+        <span class="mobile-nav-label" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</span>
+      </a>
+      <a class="mobile-nav-item" href="szolgaltatasok.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">02</span>
+        <span class="mobile-nav-label" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</span>
+      </a>
+      <a class="mobile-nav-item" href="rolunk.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">03</span>
+        <span class="mobile-nav-label" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</span>
+      </a>
+      <a class="mobile-nav-item" href="referenciak.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">04</span>
+        <span class="mobile-nav-label" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</span>
+      </a>
+      <a class="mobile-nav-item" href="partnereink.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">05</span>
+        <span class="mobile-nav-label" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</span>
+      </a>
+      <a class="mobile-nav-item" href="blog.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">06</span>
+        <span class="mobile-nav-label" data-hu="Blog" data-en="Blog" data-de="Blog">Blog</span>
+      </a>
+      <a class="mobile-nav-item" href="karrier.html" onclick="closeMobile()">
+        <span class="mobile-nav-num">07</span>
+        <span class="mobile-nav-label" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</span>
+      </a>
+    </nav>
+    <a href="ajanlatkeres.html" class="mobile-menu-cta" onclick="closeMobile()" data-hu="Ajánlatkérés →" data-en="Get a Quote →" data-de="Angebot →">Ajánlatkérés →</a>
+    <div class="mobile-menu-footer">
+      <span>Estur Épker Kft.</span>
+      <div class="mobile-menu-footer-dot"></div>
+      <span>Baja, 2016 óta</span>
+    </div>
+  </div>
 </div>
 
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="page-hero-grid-overlay"></div>
   <div class="page-hero-vignette"></div>
   <div class="page-hero-glow"></div>
-
   <div class="container">
     <div class="page-hero-content" style="animation:fadeUp .9s ease forwards">
       <div class="breadcrumb">
@@ -379,7 +313,6 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
       </div>
     </div>
   </div>
-
   <div class="hero-side-stat" style="animation:fadeIn 1.2s ease .5s forwards;opacity:0">
     <div class="side-stat-item">
       <div class="side-stat-num">50+</div>
@@ -398,18 +331,13 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </section>
 
-<!-- STORY SECTION -->
 <section class="story-section">
   <div class="container">
     <div class="story-grid">
       <div class="story-left reveal-left">
         <div class="story-img-stack">
-          <div class="story-img-main">
-            <img src="assets/images/hero.jpeg" alt="Estur építkezés" loading="lazy">
-          </div>
-          <div class="story-img-secondary">
-            <img src="assets/images/Referenciak/Bonvital/imgi_5_8-1.png" alt="Estur referencia" loading="lazy">
-          </div>
+          <div class="story-img-main"><img src="assets/images/hero.webp" alt="Estur építkezés" loading="lazy"></div>
+          <div class="story-img-secondary"><img src="assets/images/Referenciak/Bonvital/imgi_5_8-1.webp" alt="Estur referencia" loading="lazy"></div>
           <div class="story-year-badge">
             <div class="story-year">2016</div>
             <div class="story-year-label" data-hu="Alapítás éve" data-en="Founded" data-de="Gegründet">Alapítás éve</div>
@@ -420,9 +348,9 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
         <div class="section-label" data-hu="Történetünk" data-en="Our Story" data-de="Unsere Geschichte">Történetünk</div>
         <h2 data-hu="Egy vízió, amely <span>kőbe van vésve.</span>" data-en="A vision <span>built in stone.</span>" data-de="Eine Vision, <span>in Stein gemeißelt.</span>">Egy vízió, amely <span>kőbe van vésve.</span></h2>
         <div class="story-body">
-          <p data-hu="Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri." data-en="<strong>Estur Épker Kft.</strong> was founded in 2016 with the goal of delivering high-quality general contracting projects in Baja and across Hungary. Its founder and managing director, <strong>Lengyel Olivér</strong>, knows every corner of the construction industry from the inside." data-de="Die <strong>Estur Épker Kft.</strong> wurde 2016 gegründet, um hochwertige Generalunternehmerprojekte in Baja und ganz Ungarn zu realisieren. Gründer und Geschäftsführer <strong>Lengyel Olivér</strong> kennt alle Bereiche der Baubranche von innen.">Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri.</p>
-          <p data-hu="Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modelülnk, és ez tesz bennünket egyedivé." data-en="Our experienced team handles every step from architectural planning to turnkey handover – from masonry to electricians and engineers. <strong>One point of contact, full responsibility</strong> – this is our model, and it's what makes us unique." data-de="Unser erfahrenes Team kümmert sich um jeden Schritt von der Planung bis zur schlüsselfertigen Übergabe. <strong>Ein Ansprechpartner, volle Verantwortung</strong> – das ist unser Modell und macht uns einzigartig.">Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modelülnk, és ez tesz bennünket egyedivé.</p>
-          <p data-hu="Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek – mert megbízhatóság, precizitás és minőség nélkül nem is hívnak vissza." data-en="Our main goal is maximum client satisfaction and building long-term partnerships. It's no coincidence that our clients return to us again and again – because without reliability, precision, and quality, they simply wouldn't call back." data-de="Unser Hauptziel ist maximale Kundenzufriedenheit und der Aufbau langfristiger Partnerschaften. Es ist kein Zufall, dass unsere Kunden immer wieder zu uns zurückkehren.">Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek – mert megbízhatóság, precizitás és minőség nélkül nem is hívnak vissza.</p>
+          <p data-hu="Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri." data-en="<strong>Estur Épker Kft.</strong> was founded in 2016 with the goal of delivering high-quality general contracting projects in Baja and across Hungary. Its founder and managing director, <strong>Lengyel Olivér</strong>, knows every corner of the construction industry from the inside." data-de="Die <strong>Estur Épker Kft.</strong> wurde 2016 gegründet.">Az <strong>Estur Épker Kft.</strong> 2016-ban alakult azzal a céllal, hogy magas színvonalú generálkivitelezési projekteket valósítson meg Baján és szerte az országban. Alapítója és ügyvezetője, <strong>Lengyel Olivér</strong>, az építőipar minden szegletét belülről ismeri.</p>
+          <p data-hu="Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modellünk, és ez tesz bennünket egyedivé." data-en="Our experienced team handles every step from architectural planning to turnkey handover. <strong>One point of contact, full responsibility</strong> – this is our model." data-de="Unser erfahrenes Team kümmert sich um jeden Schritt. <strong>Ein Ansprechpartner, volle Verantwortung</strong>.">Tapasztalt csapatunk gondoskodik az építészeti tervezéstől a kulcsrakész átadásig minden lépésről – kőművestől a villanyszerelőn át a gépészig. <strong>Egyetlen kapcsolattartó, teljes felelősség</strong> – ez a mi modellünk, és ez tesz bennünket egyedivé.</p>
+          <p data-hu="Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek." data-en="Our main goal is maximum client satisfaction and building long-term partnerships." data-de="Unser Hauptziel ist maximale Kundenzufriedenheit.">Fő célunk az ügyfeleink maximális elégedettsége és a hosszú távú együttműködések kialakítása. Nem véletlenül dolgoznak velünk újra és újra ugyanazok az ügyfelek.</p>
         </div>
         <div class="story-highlight">
           <p data-hu="Amit egyszer megígérünk, azt határidőre, minőségi anyagokkal, és mosolyogva adjuk át." data-en="What we promise, we deliver on time, with quality materials, and with a smile." data-de="Was wir versprechen, liefern wir pünktlich, mit Qualitätsmaterialien und mit einem Lächeln.">Amit egyszer megígérünk, azt határidőre, minőségi anyagokkal, és mosolyogva adjuk át.</p>
@@ -432,35 +360,17 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </section>
 
-<!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="container">
     <div class="stats-inner">
-      <div class="stat-item reveal">
-        <div class="stat-glow"></div>
-        <div class="stat-num" data-target="50">50+</div>
-        <div class="stat-label" data-hu="Elégedett ügyfél" data-en="Satisfied Clients" data-de="Zufriedene Kunden">Elégedett ügyfél</div>
-      </div>
-      <div class="stat-item reveal">
-        <div class="stat-glow"></div>
-        <div class="stat-num">9+</div>
-        <div class="stat-label" data-hu="Év tapasztalat" data-en="Years Experience" data-de="Jahre Erfahrung">Év tapasztalat</div>
-      </div>
-      <div class="stat-item reveal">
-        <div class="stat-glow"></div>
-        <div class="stat-num">100%</div>
-        <div class="stat-label" data-hu="Minősített anyag" data-en="Certified Materials" data-de="Zertifizierte Materialien">Minősített anyag</div>
-      </div>
-      <div class="stat-item reveal">
-        <div class="stat-glow"></div>
-        <div class="stat-num">30+</div>
-        <div class="stat-label" data-hu="Fős szakmai csapat" data-en="Team Members" data-de="Teammitglieder">Fős szakmai csapat</div>
-      </div>
+      <div class="stat-item reveal"><div class="stat-glow"></div><div class="stat-num">50+</div><div class="stat-label" data-hu="Elégedett ügyfél" data-en="Satisfied Clients" data-de="Zufriedene Kunden">Elégedett ügyfél</div></div>
+      <div class="stat-item reveal"><div class="stat-glow"></div><div class="stat-num">9+</div><div class="stat-label" data-hu="Év tapasztalat" data-en="Years Experience" data-de="Jahre Erfahrung">Év tapasztalat</div></div>
+      <div class="stat-item reveal"><div class="stat-glow"></div><div class="stat-num">100%</div><div class="stat-label" data-hu="Minősített anyag" data-en="Certified Materials" data-de="Zertifizierte Materialien">Minősített anyag</div></div>
+      <div class="stat-item reveal"><div class="stat-glow"></div><div class="stat-num">30+</div><div class="stat-label" data-hu="Fős szakmai csapat" data-en="Team Members" data-de="Teammitglieder">Fős szakmai csapat</div></div>
     </div>
   </div>
 </div>
 
-<!-- VALUES -->
 <section class="values-section">
   <div class="values-grid-pattern"></div>
   <div class="container values-inner">
@@ -471,45 +381,36 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
     <div class="values-cards reveal">
       <div class="value-card">
         <div class="value-card-num">01</div>
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3 data-hu="Precizitás" data-en="Precision" data-de="Präzision">Precizitás</h3>
-        <p data-hu="Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk. Ezért nincs visszamunka, ezért nincs meglepetés." data-en="We pay attention to every detail – from planning to the final touch. Millimeter-accurate work is not a goal but a baseline requirement for us. That's why there are no do-overs, no surprises." data-de="Wir achten auf jedes Detail – von der Planung bis zum letzten Schliff. Millimetergenaue Arbeit ist kein Ziel, sondern eine Grundvoraussetzung.">Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk. Ezért nincs visszamunka, ezért nincs meglepetés.</p>
+        <p data-hu="Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk." data-en="We pay attention to every detail – from planning to the final touch." data-de="Wir achten auf jedes Detail.">Minden részletre figyelünk – a tervezéstől az utolsó simításig. A milliméteres pontosság nem cél, hanem alapkövetelmény nálunk.</p>
         <div class="value-bottom-line"></div>
       </div>
       <div class="value-card">
         <div class="value-card-num">02</div>
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3 data-hu="Megbízhatóság" data-en="Reliability" data-de="Zuverlässigkeit">Megbízhatóság</h3>
-        <p data-hu="Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt. A megbízhatóság nem marketing szlogen nálunk, hanem az üzleti modellünk alapja." data-en="We deliver on time. What we commit to, we deliver – on paper and in reality alike. For us, reliability is not a marketing slogan but the foundation of our business model." data-de="Wir liefern pünktlich. Was wir versprechen, halten wir – auf dem Papier und in der Realität. Zuverlässigkeit ist bei uns kein Marketingslogan, sondern die Grundlage unseres Geschäftsmodells.">Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt. A megbízhatóság nem marketing szlogen nálunk, hanem az üzleti modellünk alapja.</p>
+        <p data-hu="Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt." data-en="We deliver on time. What we commit to, we deliver." data-de="Wir liefern pünktlich.">Határidőre teljesítünk. Amit vállalunk, azt meg is csináljuk – papíron és a valóságban egyaránt.</p>
         <div class="value-bottom-line"></div>
       </div>
       <div class="value-card">
         <div class="value-card-num">03</div>
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
         <h3 data-hu="Minőség" data-en="Quality" data-de="Qualität">Minőség</h3>
-        <p data-hu="Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya. A minőség nálunk nem emelt áron kapható extra, hanem az alapértelmezett megközelítés minden egyes projekten." data-en="We only work with certified materials – because durability is non-negotiable. Quality is not an expensive extra for us, but the default approach on every single project." data-de="Wir arbeiten nur mit zertifizierten Materialien – Haltbarkeit ist für uns nicht verhandelbar. Qualität ist bei uns kein teures Extra, sondern die Standardvorgehensweise.">Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya. A minőség nálunk nem emelt áron kapható extra, hanem az alapértelmezett megközelítés minden egyes projekten.</p>
+        <p data-hu="Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya." data-en="We only work with certified materials – because durability is non-negotiable." data-de="Wir arbeiten nur mit zertifizierten Materialien.">Csak minősített alapanyagokkal dolgozunk – mert a tartósság nem alku tárgya.</p>
         <div class="value-bottom-line"></div>
       </div>
       <div class="value-card">
         <div class="value-card-num">04</div>
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3 data-hu="Teljesség" data-en="Completeness" data-de="Vollständigkeit">Teljesség</h3>
-        <p data-hu="Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van. Kőmuves, villanyszerelő, gépész, burkoló, festő: mind egy kézből, egy ütemtervben, egy garanciával." data-en="As general contractors, we coordinate every trade – you have just one partner. Masonry, electrical, mechanical, tiling, painting: all from one hand, one schedule, one warranty." data-de="Als Generalunternehmer koordinieren wir alle Gewerke – Sie haben nur einen Partner. Maurer, Elektriker, Heizung, Fliesen, Maler: alles aus einer Hand, einem Zeitplan, einer Garantie.">Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van. Kőmuves, villanyszerelő, gépész, burkoló, festő: mind egy kézből, egy ütemtervben, egy garanciával.</p>
+        <p data-hu="Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van." data-en="As general contractors, we coordinate every trade – you have just one partner." data-de="Als Generalunternehmer koordinieren wir alle Gewerke.">Generálkivitelezőként minden szakmát mi koordinálunk – Önnek csak egy partnere van.</p>
         <div class="value-bottom-line"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TIMELINE -->
 <section class="timeline-section">
   <div class="container">
     <div class="timeline-header reveal">
@@ -518,47 +419,27 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
     </div>
     <div class="timeline">
       <div class="tl-item reveal">
-        <div class="tl-content">
-          <div class="tl-year">2016</div>
-          <div class="tl-title" data-hu="Megalapítás" data-en="Founded" data-de="Gründung">Megalapítás</div>
-          <p class="tl-text" data-hu="Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban." data-en="Lengyel Olivér founds Estur Épker Kft. in Baja with the goal of providing a one-stop solution in the construction industry." data-de="Lengyel Olivér gründet die Estur Épker Kft. in Baja mit dem Ziel, eine One-Stop-Lösung in der Baubranche anzubieten.">Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban.</p>
-        </div>
+        <div class="tl-content"><div class="tl-year">2016</div><div class="tl-title" data-hu="Megalapítás" data-en="Founded" data-de="Gründung">Megalapítás</div><p class="tl-text" data-hu="Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban." data-en="Lengyel Olivér founds Estur Épker Kft. in Baja." data-de="Gründung der Estur Épker Kft. in Baja.">Lengyel Olivér megalapítja az Estur Épker Kft.-t Baján, azzal a céllal, hogy egyablakos megoldást nyújtson az építőiparban.</p></div>
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
         <div class="tl-void"></div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-void"></div>
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content">
-          <div class="tl-year">2018</div>
-          <div class="tl-title" data-hu="Első nagy projektek" data-en="First major projects" data-de="Erste Großprojekte">Első nagy projektek</div>
-          <p class="tl-text" data-hu="Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik." data-en="Successful completion of first complex general contracting assignments – the team and reputation grow simultaneously." data-de="Erfolgreicher Abschluss erster komplexer Generalunternehmeraufträge – Team und Reputation wachsen gleichzeitig.">Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik.</p>
-        </div>
+        <div class="tl-content"><div class="tl-year">2018</div><div class="tl-title" data-hu="Első nagy projektek" data-en="First major projects" data-de="Erste Großprojekte">Első nagy projektek</div><p class="tl-text" data-hu="Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik." data-en="First complex general contracting assignments completed successfully." data-de="Erste Großaufträge erfolgreich abgeschlossen.">Az első komplex generálkivitelezési megbízások sikeres teljesítése – a csapat és a reputáció egyszerre növekszik.</p></div>
       </div>
       <div class="tl-item reveal">
-        <div class="tl-content">
-          <div class="tl-year">2020–2021</div>
-          <div class="tl-title" data-hu="Országos terjeszkedés" data-en="National expansion" data-de="Nationale Expansion">Országos terjeszkedés</div>
-          <p class="tl-text" data-hu="A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül." data-en="After successful Baja projects, Estur appears on the national market – from Budapest to Hévíz. The team grows to 30 members." data-de="Nach erfolgreichen Projekten in Baja tritt Estur auf dem nationalen Markt auf – von Budapest bis Hévíz. Das Team wächst auf 30 Mitglieder.">A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül.</p>
-        </div>
+        <div class="tl-content"><div class="tl-year">2020–2021</div><div class="tl-title" data-hu="Országos terjeszkedés" data-en="National expansion" data-de="Nationale Expansion">Országos terjeszkedés</div><p class="tl-text" data-hu="A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül." data-en="After Baja, Estur goes national – from Budapest to Hévíz. Team grows to 30." data-de="Nationale Expansion, Team wächst auf 30.">A sikeres bajai projektek után az Estur megjelenik az országos piacon – Budapesttől Hévízig. A csapat 30 főre bővül.</p></div>
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
         <div class="tl-void"></div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-void"></div>
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content">
-          <div class="tl-year">2022–2023</div>
-          <div class="tl-title" data-hu="Szálloda és prémium referenciák" data-en="Hotel & premium references" data-de="Hotel- & Premium-Referenzen">Szálloda és prémium referenciák</div>
-          <p class="tl-text" data-hu="A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe. Egyre több visszatérő ügyfél." data-en="Renovation of the Bonvital Hotel in Hévíz – Estur enters the premium hotel segment. An increasing number of repeat clients." data-de="Renovierung des Bonvital Hotels in Hévíz – Estur tritt in das Premium-Hotelsegment ein. Zunehmend wiederkehrende Kunden.">A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe. Egyre több visszatérő ügyfél.</p>
-        </div>
+        <div class="tl-content"><div class="tl-year">2022–2023</div><div class="tl-title" data-hu="Szálloda és prémium referenciák" data-en="Hotel & premium references" data-de="Hotel- & Premium-Referenzen">Szálloda és prémium referenciák</div><p class="tl-text" data-hu="A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe." data-en="Renovation of the Bonvital Hotel in Hévíz – Estur enters the premium segment." data-de="Renovierung des Bonvital Hotels in Hévíz.">A hévízi Bonvital Hotel felújítása – az Estur belép a szállodaipari prémium szegmensbe.</p></div>
       </div>
       <div class="tl-item reveal">
-        <div class="tl-content">
-          <div class="tl-year">2025–2026</div>
-          <div class="tl-title" data-hu="Ma" data-en="Today" data-de="Heute">Ma</div>
-          <p class="tl-text" data-hu="50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik – és a legjobbat nyújtja." data-en="50+ satisfied clients, 30+ team members, 9+ years of experience. Estur continues to grow – and continues to deliver its best." data-de="50+ zufriedene Kunden, 30+ Teammitglieder, 9+ Jahre Erfahrung. Estur wächst weiter – und liefert weiterhin sein Bestes.">50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik – és a legjobbat nyújtja.</p>
-        </div>
+        <div class="tl-content"><div class="tl-year">2025–2026</div><div class="tl-title" data-hu="Ma" data-en="Today" data-de="Heute">Ma</div><p class="tl-text" data-hu="50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik." data-en="50+ satisfied clients, 30+ team members, 9+ years of experience." data-de="50+ zufriedene Kunden, 30+ Teammitglieder, 9+ Jahre.">50+ elégedett ügyfél, 30+ fős csapat, több mint 9 év tapasztalat. Az Estur folyamatosan növekszik.</p></div>
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
         <div class="tl-void"></div>
       </div>
@@ -566,62 +447,30 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </section>
 
-<!-- TEAM -->
 <section class="team-section">
   <div class="container">
     <div class="team-header reveal">
       <div class="section-label" data-hu="Csapatunk" data-en="Our Team" data-de="Unser Team">Csapatunk</div>
       <h2 data-hu="Az emberek, akik mögöttünk állnak" data-en="The people behind the work" data-de="Die Menschen hinter der Arbeit">Az emberek, akik mögöttünk állnak</h2>
-      <p data-hu="30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig." data-en="Our team of 30+ specialists covers every area of construction – from planning to turnkey handover." data-de="Unser Team aus 30+ Spezialisten deckt jeden Bereich des Bauwesens ab – von der Planung bis zur schlüsselfertigen Übergabe.">30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig.</p>
+      <p data-hu="30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig." data-en="Our team of 30+ specialists covers every area of construction." data-de="Unser Team aus 30+ Spezialisten deckt jeden Bereich ab.">30+ szakemberből álló csapatunk az építőipar minden területét lefedi – tervezéstől a kulcsrakész átadásig.</p>
     </div>
     <div class="team-grid">
       <div class="team-card reveal">
-        <div class="team-card-img">
-          <div class="team-card-img-placeholder">
-            <div class="team-placeholder-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="team-card-body">
-          <div class="team-card-role" data-hu="Ügyvezető" data-en="CEO & Founder" data-de="Geschäftsführer">Ügyvezető</div>
-          <h3>Lengyel Olivér</h3>
-          <p data-hu="Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben, és személyesen felügyel minden nagyobb projektet." data-en="The founder and driving force behind Estur. With nearly ten years of general contracting experience, he personally oversees every major project." data-de="Gründer und treibende Kraft hinter Estur. Mit fast zehn Jahren Generalunternehmererfahrung überwacht er persönlich jedes größere Projekt.">Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben, és személyesen felügyel minden nagyobb projektet.</p>
-        </div>
+        <div class="team-card-img"><div class="team-card-img-placeholder"><div class="team-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div></div>
+        <div class="team-card-body"><div class="team-card-role" data-hu="Ügyvezető" data-en="CEO & Founder" data-de="Geschäftsführer">Ügyvezető</div><h3>Lengyel Olivér</h3><p data-hu="Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben." data-en="The founder and driving force behind Estur." data-de="Gründer und treibende Kraft hinter Estur.">Az Estur alapítója és motorja. Közel tíz éves tapasztalattal rendelkezik generálkivitelezésben.</p></div>
       </div>
       <div class="team-card reveal">
-        <div class="team-card-img">
-          <div class="team-card-img-placeholder">
-            <div class="team-placeholder-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="team-card-body">
-          <div class="team-card-role" data-hu="Projektmenedzsment" data-en="Project Management" data-de="Projektmanagement">Projektmenedzsment</div>
-          <h3 data-hu="Tervező &amp; Koordinátor csapat" data-en="Design &amp; Coordination team" data-de="Planungs- &amp; Koordinationsteam">Tervező &amp; Koordinátor csapat</h3>
-          <p data-hu="Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést, felügyelik a minőséget, és összehangolja a szakembereket." data-en="Our experienced project managers continuously monitor schedules, supervise quality, and coordinate all specialists." data-de="Unsere erfahrenen Projektmanager überwachen kontinuierlich Zeitpläne, Qualität und koordinieren alle Fachleute.">Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést, felügyelik a minőséget, és összehangolja a szakembereket.</p>
-        </div>
+        <div class="team-card-img"><div class="team-card-img-placeholder"><div class="team-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div></div></div>
+        <div class="team-card-body"><div class="team-card-role" data-hu="Projektmenedzsment" data-en="Project Management" data-de="Projektmanagement">Projektmenedzsment</div><h3 data-hu="Tervező &amp; Koordinátor csapat" data-en="Design &amp; Coordination team" data-de="Planungs- &amp; Koordinationsteam">Tervező &amp; Koordinátor csapat</h3><p data-hu="Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést és felügyelik a minőséget." data-en="Our experienced project managers continuously monitor schedules and supervise quality." data-de="Unsere Projektmanager überwachen Zeitpläne und Qualität.">Tapasztalt projektmenedzsereink folyamatosan nyomon követik az ütemezést és felügyelik a minőséget.</p></div>
       </div>
       <div class="team-card reveal">
-        <div class="team-card-img">
-          <div class="team-card-img-placeholder">
-            <div class="team-placeholder-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="team-card-body">
-          <div class="team-card-role" data-hu="Kivitelezői csapat" data-en="Construction team" data-de="Bauteam">Kivitelezői csapat</div>
-          <h3 data-hu="Szakipari mesterek" data-en="Trade specialists" data-de="Fachhandwerker">Szakipari mesterek</h3>
-          <p data-hu="Kőmivesektől villanyszerelőkön át gépészekig és burkolókig – 30+ szakember, akik nap mint nap az Estur minőségi standardjai szerint dolgoznak." data-en="From masons to electricians, engineers and tilers – 30+ specialists who work to Estur's quality standards day in, day out." data-de="Von Maurern über Elektriker, Mechaniker und Fliesenleger – 30+ Spezialisten, die täglich nach Esturs Qualitätsstandards arbeiten.">Kőmivesektől villanyszerelőkön át gépészekig és burkolókig – 30+ szakember, akik nap mint nap az Estur minőségi standardjai szerint dolgoznak.</p>
-        </div>
+        <div class="team-card-img"><div class="team-card-img-placeholder"><div class="team-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div></div></div>
+        <div class="team-card-body"><div class="team-card-role" data-hu="Kivitelezői csapat" data-en="Construction team" data-de="Bauteam">Kivitelezői csapat</div><h3 data-hu="Szakipari mesterek" data-en="Trade specialists" data-de="Fachhandwerker">Szakipari mesterek</h3><p data-hu="Kőmivesektől villanyszerelőkön át gépészekig – 30+ szakember az Estur minőségi standardjai szerint." data-en="From masons to electricians – 30+ specialists working to Estur's quality standards." data-de="30+ Spezialisten nach Esturs Qualitätsstandards.">Kőmivesektől villanyszerelőkön át gépészekig – 30+ szakember az Estur minőségi standardjai szerint.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section class="process-section">
   <div class="container">
     <div class="process-header reveal">
@@ -629,51 +478,15 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
       <h2 data-hu="A projekt útja – lépésről lépésre" data-en="The project journey – step by step" data-de="Der Projektweg – Schritt für Schritt">A projekt útja – lépésről lépésre</h2>
     </div>
     <div class="process-steps reveal">
-      <div class="process-step">
-        <div class="step-circle">
-          <span class="step-num">1</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="step-title" data-hu="Kapcsolatfelvétel" data-en="Initial Contact" data-de="Erstkontakt">Kapcsolatfelvétel</div>
-        <p class="step-text" data-hu="Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket." data-en="We get in touch and discuss your vision and requirements." data-de="Wir nehmen Kontakt auf und besprechen Ihre Vorstellungen.">Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-circle">
-          <span class="step-num">2</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        </div>
-        <div class="step-title" data-hu="Tervezés" data-en="Planning" data-de="Planung">Tervezés</div>
-        <p class="step-text" data-hu="Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve." data-en="Detailed plans, permits, quote – everything documented on paper." data-de="Detailpläne, Genehmigungen, Angebot – alles schriftlich festgehalten.">Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-circle">
-          <span class="step-num">3</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        </div>
-        <div class="step-title" data-hu="Kivitelezés" data-en="Construction" data-de="Ausführung">Kivitelezés</div>
-        <p class="step-text" data-hu="A munkálatok megkezdése – koordináltan, ütemtervhez igazodva." data-en="Work begins – coordinated and on schedule." data-de="Die Arbeiten beginnen – koordiniert und nach Zeitplan.">A munkálatok megkezdése – koordináltan, ütemtervhez igazodva.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-circle">
-          <span class="step-num">4</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="step-title" data-hu="Minőségellenőrzés" data-en="Quality Check" data-de="Qualitätskontrolle">Minőségellenőrzés</div>
-        <p class="step-text" data-hu="Folyamatos belső ellenőrzés minden fázisban – nincs meglepetés az átadáskor." data-en="Continuous internal checks at every phase – no surprises at handover." data-de="Kontinuierliche interne Kontrollen in jeder Phase – keine Überraschungen bei der Übergabe.">Folyamatos belső ellenőrzés minden fázisban – nincs meglepetés az átadáskor.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-circle">
-          <span class="step-num">5</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div class="step-title" data-hu="Kulcsrakész átadás" data-en="Turnkey Handover" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</div>
-        <p class="step-text" data-hu="Határidőre, garanciával – az utolsó simítástól az első kulcsig." data-en="On time, with warranty – from the final touch to the first key." data-de="Pünktlich, mit Garantie – vom letzten Schliff bis zum ersten Schlüssel.">Határidőre, garanciával – az utolsó simítástól az első kulcsig.</p>
-      </div>
+      <div class="process-step"><div class="step-circle"><span class="step-num">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="step-title" data-hu="Kapcsolatfelvétel" data-en="Initial Contact" data-de="Erstkontakt">Kapcsolatfelvétel</div><p class="step-text" data-hu="Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket." data-en="We get in touch and discuss your vision." data-de="Wir nehmen Kontakt auf.">Felvesszük Önnel a kapcsolatot és megbeszéljük az elképzeléseket.</p></div>
+      <div class="process-step"><div class="step-circle"><span class="step-num">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="step-title" data-hu="Tervezés" data-en="Planning" data-de="Planung">Tervezés</div><p class="step-text" data-hu="Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve." data-en="Detailed plans, permits, quote – documented." data-de="Pläne, Genehmigungen, Angebot.">Részletes tervek, engedélyek, árajánlat – minden papíron rögzítve.</p></div>
+      <div class="process-step"><div class="step-circle"><span class="step-num">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="step-title" data-hu="Kivitelezés" data-en="Construction" data-de="Ausführung">Kivitelezés</div><p class="step-text" data-hu="A munkálatok megkezdése – koordináltan, ütemtervhez igazodva." data-en="Work begins – coordinated and on schedule." data-de="Ausführung nach Zeitplan.">A munkálatok megkezdése – koordináltan, ütemtervhez igazodva.</p></div>
+      <div class="process-step"><div class="step-circle"><span class="step-num">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="step-title" data-hu="Minőségellenőrzés" data-en="Quality Check" data-de="Qualitätskontrolle">Minőségellenőrzés</div><p class="step-text" data-hu="Folyamatos belső ellenőrzés minden fázisban." data-en="Continuous internal checks at every phase." data-de="Kontinuierliche Qualitätskontrolle.">Folyamatos belső ellenőrzés minden fázisban.</p></div>
+      <div class="process-step"><div class="step-circle"><span class="step-num">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="step-title" data-hu="Kulcsrakész átadás" data-en="Turnkey Handover" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</div><p class="step-text" data-hu="Határidőre, garanciával – az utolsó simítástól az első kulcsig." data-en="On time, with warranty." data-de="Pünktlich, mit Garantie.">Határidőre, garanciával – az utolsó simítástól az első kulcsig.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
 <div class="certs-section">
   <div class="container">
     <div class="certs-inner reveal">
@@ -683,36 +496,17 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
       </div>
       <div class="certs-divider"></div>
       <div class="certs-items">
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="Minősített alapanyagok" data-en="Certified materials" data-de="Zertifizierte Materialien">Minősített alapanyagok</span>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="Határidő-garancia" data-en="On-time guarantee" data-de="Termingarantie">Határidő-garancia</span>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="Egyetlen kapcsolattartó" data-en="Single point of contact" data-de="Zentraler Ansprechpartner">Egyetlen kapcsolattartó</span>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="Teljes körű kivitelezés" data-en="Full scope execution" data-de="Vollständige Ausführung">Teljes körű kivitelezés</span>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="Kulcsrakész átadás" data-en="Turnkey delivery" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</span>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span class="cert-text" data-hu="9+ év tapasztalat" data-en="9+ years experience" data-de="9+ Jahre Erfahrung">9+ év tapasztalat</span>
-        </div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="Minősített alapanyagok" data-en="Certified materials" data-de="Zertifizierte Materialien">Minősített alapanyagok</span></div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="Határidő-garancia" data-en="On-time guarantee" data-de="Termingarantie">Határidő-garancia</span></div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="Egyetlen kapcsolattartó" data-en="Single point of contact" data-de="Zentraler Ansprechpartner">Egyetlen kapcsolattartó</span></div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="Teljes körű kivitelezés" data-en="Full scope execution" data-de="Vollständige Ausführung">Teljes körű kivitelezés</span></div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="Kulcsrakész átadás" data-en="Turnkey delivery" data-de="Schlüsselfertige Übergabe">Kulcsrakész átadás</span></div>
+        <div class="cert-item"><div class="cert-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="cert-text" data-hu="9+ év tapasztalat" data-en="9+ years experience" data-de="9+ Jahre Erfahrung">9+ év tapasztalat</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="container">
     <div class="cta-inner reveal">
@@ -726,7 +520,6 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer"><div class="container">
   <div class="footer-grid">
     <div>
@@ -744,59 +537,24 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html">Adatkezelési tájékoztató</a></div></div>
 </div></footer>
 
-<!-- COOKIE -->
 <div class="cookie-banner" id="cookieBanner"><div class="cookie-inner">
   <p class="cookie-text">Weboldalunk a felhasználói élmény javítása érdekében sütiket használ. <a href="adatkezeles.html">Adatkezelési tájékoztató</a></p>
   <div class="cookie-btns"><button class="cookie-accept" id="cookieAccept">Elfogadom</button><button class="cookie-decline" id="cookieDecline">Elutasítom</button></div>
 </div></div>
 
+<script src="assets/js/estur.js"></script>
 <script>
-// Navbar
-const nb=document.getElementById('navbar');
-window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',window.scrollY>20));
-
-// Mobile menu
-const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
-hb.addEventListener('click',()=>{hb.classList.toggle('active');mm.classList.toggle('active');document.body.style.overflow=mm.classList.contains('active')?'hidden':''});
-function closeMobile(){hb.classList.remove('active');mm.classList.remove('active');document.body.style.overflow=''}
-
-// Reveal on scroll
-const obs=new IntersectionObserver(e=>{
-  e.forEach((en,i)=>{
-    if(en.isIntersecting){
-      setTimeout(()=>en.target.classList.add('visible'),i*100);
-      obs.unobserve(en.target);
-    }
-  });
-},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
-
-// Cookie
-const cb=document.getElementById('cookieBanner');
-if(!localStorage.getItem('estur_cookies'))setTimeout(()=>cb.classList.add('show'),1500);
-document.getElementById('cookieAccept').addEventListener('click',()=>{localStorage.setItem('estur_cookies','accepted');cb.classList.remove('show')});
-document.getElementById('cookieDecline').addEventListener('click',()=>{localStorage.setItem('estur_cookies','declined');cb.classList.remove('show')});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',function(e){
-    const t=document.querySelector(this.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(en => { if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);} });
+  }, {threshold:.1, rootMargin:'0px 0px -40px 0px'}).observe(el);
+});
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const t = document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
-
-// Language switcher
-function setLang(lang){
-  localStorage.setItem('estur_lang',lang);
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang));
-  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-    const val=el.getAttribute('data-'+lang);
-    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=val;
-    else el.innerHTML=val;
-  });
-  document.documentElement.lang=lang==='hu'?'hu':lang==='en'?'en':'de';
-}
-(function(){const saved=localStorage.getItem('estur_lang')||'hu';setLang(saved);})();
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/estur.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -61,10 +62,6 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.active span:nth-child(2){opacity:0}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{display:none;position:fixed;top:104px;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mobile-menu.active{display:flex}
-.mobile-menu a{text-decoration:none;font-family:var(--font-h);font-size:1.3rem;font-weight:600;color:var(--gray-800);transition:var(--tr)}
-.mobile-menu a:hover{color:var(--sage)}
 
 .page-hero{padding:148px 0 100px;background:var(--gray-900);position:relative;overflow:hidden;}
 .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%, rgba(114,117,98,.18) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%, rgba(114,117,98,.1) 0%, transparent 70%);}
@@ -879,13 +876,10 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </div></div>
 
+<script src="/assets/js/estur.js"></script>
 <script>
 const nb = document.getElementById('navbar');
 window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 20));
-
-const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
-hb.addEventListener('click', () => { hb.classList.toggle('active'); mm.classList.toggle('active'); });
-function closeMobile() { hb.classList.remove('active'); mm.classList.remove('active'); }
 
 const obs = new IntersectionObserver(entries => {
   entries.forEach((en, i) => {
