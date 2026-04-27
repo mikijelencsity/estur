@@ -877,7 +877,7 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   </div>
 </div></div>
 
-<script src="/assets/js/estur.js"></script>
+<script src="/assets/js/estur.js" defer></script>
 <script>
 const nb = document.getElementById('navbar');
 window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 20));
@@ -935,6 +935,9 @@ function setLang(lang) {
   document.documentElement.lang = lang === 'hu' ? 'hu' : lang === 'en' ? 'en' : 'de';
 }
 (function () { const saved = localStorage.getItem('estur_lang') || 'hu'; setLang(saved); })();
+
+
+
 </script>
 </body>
 </html>
