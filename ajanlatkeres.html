@@ -179,6 +179,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);background
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -524,7 +525,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);background
           <p class="success-text" data-hu="Sikeresen megkaptuk az ajánlatkérést. Munkatársaink hamarosan felveszik Önnel a kapcsolatot — általában 48 órán belül visszahívunk." data-en="We have received your quote request. Our team will contact you shortly — typically we call back within 48 hours." data-de="Wir haben Ihre Anfrage erhalten. Unser Team meldet sich in Kürze — in der Regel innerhalb von 48 Stunden.">Sikeresen megkaptuk az ajánlatkérést. Munkatársaink hamarosan felveszik Önnel a kapcsolatot — általában 48 órán belül visszahívunk.</p>
           <div class="success-note">
             <span>📞</span>
-            <span data-hu="Sürgős esetben hívjon minket: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>" data-en="For urgent matters call: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>" data-de="Bei Dringlichkeit rufen Sie uns an: <strong><a href='tel:+36301234567' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>">Sürgős esetben hívjon minket: <strong><a href="tel:+36301234567" style="color:var(--sage-dark)">+36 30 123 4567</a></strong></span>
+            <span data-hu="Sürgős esetben hívjon minket: <strong><a href='tel:+36304120833' style='color:var(--sage-dark)'>+36304120833</a></strong>" data-en="For urgent matters call: <strong><a href='tel:+36304120833' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>" data-de="Bei Dringlichkeit rufen Sie uns an: <strong><a href='tel:+36304120833' style='color:var(--sage-dark)'>+36 30 123 4567</a></strong>">Sürgős esetben hívjon minket: <strong><a href="tel:+36304120833" style="color:var(--sage-dark)">+36 30 123 4567</a></strong></span>
           </div>
           <div style="margin-top:40px">
             <a href="index.html" class="btn btn-secondary" style="display:inline-flex">
@@ -585,8 +586,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);background
         <div class="sidebar-card">
           <h3 data-hu="Közvetlen elérhetőség" data-en="Direct contact" data-de="Direktkontakt">Közvetlen elérhetőség</h3>
           <div class="contact-mini">
-            <div>📞 <a href="tel:+36301234567">+36 30 123 4567</a></div>
-            <div>✉️ <a href="mailto:info@estur.hu">info@estur.hu</a></div>
+            <div>📞 <a href="tel:+36304120833">+36 30 123 4567</a></div>
+            <div>✉️ <a href="mailto:info@estur.hu">estur.kft@gmail.com</a></div>
             <div>📍 6500 Baja, Hungary</div>
           </div>
         </div>
@@ -729,12 +730,58 @@ function buildSummary() {
 }
 
 // ══ SUBMIT ══
+// ══ EMAILJS CONFIG ══
+const EMAILJS_SERVICE_ID  = 'service_obg3e7t';
+const EMAILJS_TEMPLATE_ID = 'template_w8iu8ow';
+const EMAILJS_PUBLIC_KEY  = '_ZAJCvuP6L1YLNdMV';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ══ SUBMIT ══
 function submitForm() {
-  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('stepper').style.display = 'none';
-  document.querySelector('.sidebar').style.display = 'none';
-  document.getElementById('successPanel').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const rooms = [...document.querySelectorAll('.check-grid input:checked')]
+    .map(i => i.value).join(', ') || '—';
+
+  const templateParams = {
+    munka_tipusa : typeLabels[state.type] || '—',
+    helyszin     : document.getElementById('helyszin').value || '—',
+    alapterulet  : document.getElementById('alapterulet').value
+                     ? document.getElementById('alapterulet').value + ' m²' : '—',
+    területek    : rooms,
+    kezdes       : tlLabels[state.timeline] || '—',
+    budzse       : document.getElementById('budgetDisplay').textContent.trim(),
+    leiras       : document.getElementById('leiras').value || '—',
+    nev          : document.getElementById('nev').value,
+    telefon      : document.getElementById('tel').value,
+    email_cim    : document.getElementById('email').value,
+    kontakt_mod  : document.getElementById('kontakt-mod').value,
+    megjegyzes   : document.getElementById('megjegyzes').value || '—',
+  };
+
+  // Küldés gomb letiltása
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span>Küldés...</span>';
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      // Siker → success panel megjelenítése
+      document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('stepper').style.display = 'none';
+      document.querySelector('.sidebar').style.display = 'none';
+      document.getElementById('successPanel').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch((error) => {
+      console.error('EmailJS hiba:', error);
+      btn.disabled = false;
+      btn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/>
+        </svg>
+        <span>Ajánlatkérés küldése</span>`;
+      alert('Hiba történt a küldés során. Kérjük, próbálja újra, vagy hívjon minket közvetlenül!');
+    });
 }
 
 

@@ -94,9 +94,10 @@
 
 /* ── Contact ── */
 .contact{background:var(--cream)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-.contact-info-cards{display:flex;flex-direction:column;gap:16px;margin-top:28px}
-.contact-card{display:flex;align-items:center;gap:16px;background:var(--white);padding:20px 24px;border-radius:var(--radius-sm);border:1px solid var(--gray-100);transition:var(--tr)}
+.contact-center{max-width:700px;margin:0 auto;text-align:center}
+.contact-center .section-sub{margin:0 auto 40px}
+.contact-info-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0}
+.contact-card{display:flex;align-items:center;gap:16px;background:var(--white);padding:20px 24px;border-radius:var(--radius-sm);border:1px solid var(--gray-100);transition:var(--tr);text-align:left}
 .contact-card:hover{border-color:var(--sage-subtle);box-shadow:var(--shadow-sm)}
 .cc-icon{width:44px;height:44px;min-width:44px;background:var(--sage-subtle);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .cc-icon svg{width:20px;height:20px;color:var(--sage)}
@@ -104,15 +105,10 @@
 .cc-value{font-weight:600;color:var(--gray-900);font-size:.95rem;margin-top:2px}
 .cc-value a{color:var(--gray-900);text-decoration:none}
 .cc-value a:hover{color:var(--sage)}
-.contact-form-wrapper{background:var(--white);padding:40px;border-radius:var(--radius);border:1px solid var(--gray-100);box-shadow:var(--shadow-sm)}
-.contact-form-wrapper h3{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:var(--gray-900);margin-bottom:24px}
-.form-group{margin-bottom:18px}
-.form-group label{display:block;font-size:.85rem;font-weight:600;color:var(--gray-800);margin-bottom:6px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-family:var(--font-b);font-size:.92rem;color:var(--gray-800);background:var(--gray-50);transition:var(--tr);outline:none}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-glow);background:var(--white)}
-.form-group textarea{resize:vertical;min-height:120px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-submit{width:100%;margin-top:8px}
+
+@media(max-width:640px){
+  .contact-info-cards{grid-template-columns:1fr}
+}
 
 /* ── Responsive (page-specific overrides) ── */
 @media(max-width:968px){
@@ -337,28 +333,31 @@
 </div></div></section>
 
 <!-- CONTACT -->
-<section class="contact section" id="kapcsolat"><div class="container"><div class="contact-grid">
-  <div class="reveal">
+<section class="contact section" id="kapcsolat"><div class="container">
+  <div class="contact-center reveal">
     <div class="section-label" data-hu="Kapcsolat" data-en="Contact" data-de="Kontakt">Kapcsolat</div>
     <h2 class="section-title" data-hu="Lépj velünk kapcsolatba!" data-en="Get in Touch!" data-de="Kontaktieren Sie uns!">Lépj velünk kapcsolatba!</h2>
     <p class="section-sub" data-hu="Kérdése van, vagy ajánlatot kérne? Írjon nekünk, és hamarosan válaszolunk." data-en="Have a question or want a quote? Write to us and we'll respond shortly." data-de="Haben Sie eine Frage oder möchten Sie ein Angebot? Schreiben Sie uns.">Kérdése van, vagy ajánlatot kérne? Írjon nekünk, és hamarosan válaszolunk.</p>
     <div class="contact-info-cards">
-      <div class="contact-card"><div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="cc-label" data-hu="Telefonszám" data-en="Phone" data-de="Telefon">Telefonszám</div><div class="cc-value"><a href="tel:+36304120833">+36 30 412 0833</a></div></div></div>
-      <div class="contact-card"><div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="cc-label">Email</div><div class="cc-value"><a href="mailto:estur.kft@gmail.com">estur.kft@gmail.com</a></div></div></div>
-      <div class="contact-card"><div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="cc-label" data-hu="Cím" data-en="Address" data-de="Adresse">Cím</div><div class="cc-value">6503 Baja, Magyar utca 10.</div></div></div>
-      <div class="contact-card"><div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><div class="cc-label">LinkedIn</div><div class="cc-value"><a href="https://hu.linkedin.com/company/estur-kft" target="_blank">LinkedIn</a></div></div></div>
+      <div class="contact-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="cc-label" data-hu="Telefonszám" data-en="Phone" data-de="Telefon">Telefonszám</div><div class="cc-value"><a href="tel:+36304120833">+36 30 412 0833</a></div></div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="cc-label">Email</div><div class="cc-value"><a href="mailto:estur.kft@gmail.com">estur.kft@gmail.com</a></div></div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="cc-label" data-hu="Cím" data-en="Address" data-de="Adresse">Cím</div><div class="cc-value">6503 Baja, Magyar utca 10.</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><div class="cc-label">LinkedIn</div><div class="cc-value"><a href="https://hu.linkedin.com/company/estur-kft" target="_blank">LinkedIn profil</a></div></div>
+      </div>
     </div>
   </div>
-  <div class="contact-form-wrapper reveal">
-    <h3 data-hu="Ajánlatkérés" data-en="Request a Quote" data-de="Angebot anfordern">Ajánlatkérés</h3>
-    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" id="contactForm">
-      <div class="form-row"><div class="form-group"><label for="name" data-hu="Név *" data-en="Name *" data-de="Name *">Név *</label><input type="text" id="name" name="name" required></div><div class="form-group"><label for="phone" data-hu="Telefon" data-en="Phone" data-de="Telefon">Telefon</label><input type="tel" id="phone" name="phone" placeholder="+36 ..."></div></div>
-      <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
-      <div class="form-group"><label for="message" data-hu="Üzenet *" data-en="Message *" data-de="Nachricht *">Üzenet *</label><textarea id="message" name="message" required></textarea></div>
-      <button type="submit" class="btn-primary form-submit" data-hu="Üzenet küldése" data-en="Send Message" data-de="Nachricht senden">Üzenet küldése <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    </form>
-  </div>
-</div></div></section>
+</div></section>
 
 <!-- MAP -->
 <div class="map-section">
