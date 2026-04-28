@@ -130,7 +130,7 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .mobile-close {
   position: absolute;
   top: 45px;
-  right: 25px;
+  right: 45px;
   width: 44px;
   height: 44px;
   background: rgba(255,255,255,.07);
