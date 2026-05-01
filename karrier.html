@@ -83,21 +83,36 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 .why-card p{font-size:.9rem;color:var(--gray-600);line-height:1.7}
 
 /* POSITIONS */
-.positions-bg{background:var(--gray-50)}
-.positions-header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px;flex-wrap:wrap}
-.job-list{display:flex;flex-direction:column;gap:16px}
-.job-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:28px 32px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;transition:var(--tr);cursor:pointer;text-decoration:none;color:inherit}
-.job-card:hover{box-shadow:var(--shadow-md);border-color:var(--sage-light);transform:translateX(4px)}
-.job-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.job-tag{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;background:var(--sage-subtle);color:var(--sage-dark);letter-spacing:.3px}
-.job-tag.full{background:#e8f5e9;color:#2e7d32}
-.job-tag.part{background:#fff3e0;color:#e65100}
-.job-title{font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:4px}
-.job-loc{font-size:.88rem;color:var(--gray-400);display:flex;align-items:center;gap:5px}
-.job-arrow{width:42px;height:42px;background:var(--sage-subtle);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--tr);flex-shrink:0}
-.job-card:hover .job-arrow{background:var(--sage);color:white}
-.job-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--sage-dark);transition:var(--tr)}
-.job-card:hover .job-arrow svg{color:white}
+.positions-bg{background:var(--gray-900);padding:64px 0}
+.positions-bg .container{max-width:none;padding:0}
+.positions-header{margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding:0 32px}
+.positions-header .section-label{color:rgba(255,255,255,.4)}
+.positions-header .section-title{color:white;margin-bottom:0}
+.positions-count{font-family:var(--font-h);font-size:5rem;font-weight:800;color:rgba(255,255,255,.05);line-height:1;letter-spacing:-4px;flex-shrink:0}
+.job-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.job-card{position:relative;clip-path:inset(0 round 0px);cursor:pointer;aspect-ratio:1/1;display:block;text-decoration:none;color:inherit;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s ease,clip-path .35s ease;will-change:transform}
+.job-card:first-child{clip-path:inset(0 round 12px 0 0 12px)}
+.job-card:last-child{clip-path:inset(0 round 0 12px 12px 0)}
+.job-card:hover{transform:translate3d(0,-6px,0);box-shadow:0 24px 48px rgba(0,0,0,.5)}
+.job-card-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
+.job-card:hover .job-card-bg{transform:scale(1.1)}
+.job-card-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.job-card-placeholder-icon{font-size:4.5rem;line-height:1;filter:drop-shadow(0 4px 20px rgba(0,0,0,.5));transition:transform .5s ease}
+.job-card:hover .job-card-placeholder-icon{transform:scale(1.15) translateY(-6px)}
+.job-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,7,.97) 0%,rgba(8,10,7,.5) 45%,rgba(8,10,7,.05) 100%);transition:var(--tr)}
+.job-card:hover .job-card-overlay{background:linear-gradient(to top,rgba(8,10,7,1) 0%,rgba(8,10,7,.6) 50%,rgba(8,10,7,.1) 100%)}
+.job-card-num{position:absolute;top:14px;left:14px;font-family:var(--font-h);font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);background:rgba(0,0,0,.3);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);padding:4px 9px;border-radius:50px}
+.job-card-content{position:absolute;bottom:0;left:0;right:0;padding:18px 20px}
+.job-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.job-card-tag{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:50px;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);letter-spacing:.8px;text-transform:uppercase}
+.job-card-tag.is-full{background:rgba(46,125,50,.4);border-color:rgba(100,200,100,.3);color:#b9f0bb}
+.job-card-title{font-family:var(--font-h);font-size:clamp(.95rem,1.2vw,1.15rem);font-weight:800;color:white;line-height:1.2;margin-bottom:10px}
+.job-card-footer{display:flex;justify-content:space-between;align-items:center}
+.job-card-loc{font-size:.75rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px}
+.job-card-arrow{width:36px;height:36px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--tr)}
+.job-card:hover .job-card-arrow{background:var(--sage)}
+.job-card-arrow svg{width:15px;height:15px;stroke:var(--sage-deeper);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:var(--tr)}
+.job-card:hover .job-card-arrow svg{stroke:white}
 
 /* PROCESS */
 .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
@@ -181,15 +196,21 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
   .process-steps{grid-template-columns:1fr 1fr;gap:32px}.process-steps::before{display:none}
   .spontaneous-inner{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .job-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .job-card:first-child{clip-path:inset(0 round 12px 0 0 12px)}
+  .job-card:last-child{clip-path:inset(0 round 0 12px 12px 0)}
+  .job-card:nth-child(2){clip-path:inset(0 round 0 12px 0 0)}
+  .job-card:nth-child(3){clip-path:inset(0 round 0 0 0 12px)}
+  .positions-header{padding:0 20px}
+  .positions-count{display:none}
 }
 @media(max-width:600px){
   .why-grid{grid-template-columns:1fr}
   .hero-stats{gap:24px}
   .form-grid{grid-template-columns:1fr}
-  .job-card{grid-template-columns:1fr}
-  .job-arrow{display:none}
-  .positions-header{flex-direction:column;align-items:flex-start}
   .footer-grid{grid-template-columns:1fr}
+  .job-grid{grid-template-columns:1fr;gap:10px;padding:0 16px}
+  .job-card,.job-card:first-child,.job-card:last-child,.job-card:nth-child(2),.job-card:nth-child(3){clip-path:inset(0 round 14px)}
 }
 </style>
 </head>
@@ -337,74 +358,89 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
 <!-- POZÍCIÓK -->
 <section class="section positions-bg" id="poziciok">
   <div class="container">
-    <div class="positions-header">
-      <div class="reveal">
+    <div class="positions-header reveal">
+      <div>
         <p class="section-label" data-hu="Nyitott pozíciók" data-en="Open positions" data-de="Offene Stellen">Nyitott pozíciók</p>
         <h2 class="section-title" data-hu="Jelenleg várjuk<br>a jelentkezésedet" data-en="We're currently<br>hiring" data-de="Wir suchen<br>derzeit">Jelenleg várjuk<br>a jelentkezésedet</h2>
       </div>
+      <div class="positions-count">04</div>
     </div>
 
-    <div class="job-list">
+    <div class="job-grid">
+
+      <!-- KŐMŰVES -->
       <div class="job-card reveal" onclick="openModal('komuves')" style="transition-delay:.05s">
-        <div>
-          <div class="job-meta">
-            <span class="job-tag full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
-            <span class="job-tag" data-hu="Fizikai" data-en="Skilled trade" data-de="Handwerk">Fizikai</span>
+        <img class="job-card-bg" src="/assets/images/karrier/komuves.png" alt="Kőműves munka">
+        <div class="job-card-overlay"></div>
+        <div class="job-card-num">01 — Kőműves mester</div>
+        <div class="job-card-content">
+          <div class="job-card-tags">
+            <span class="job-card-tag is-full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
+            <span class="job-card-tag" data-hu="Fizikai" data-en="Skilled trade" data-de="Handwerk">Fizikai</span>
           </div>
-          <div class="job-title" data-hu="Kőműves / Falazó szakember" data-en="Bricklayer / Masonry Specialist" data-de="Maurer / Mauerwerksspezialist">Kőműves / Falazó szakember</div>
-          <div class="job-loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Baja és környéke
+          <div class="job-card-footer">
+                      <div class="job-card-title" data-hu="Kőműves mester" data-en="Bricklayer / Masonry Specialist" data-de="Maurer / Mauerwerksspezialist">Kőműves mester</div>
+
+            <div class="job-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
           </div>
         </div>
-        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
-      <div class="job-card reveal" onclick="openModal('acs')" style="transition-delay:.1s">
-        <div>
-          <div class="job-meta">
-            <span class="job-tag full">Teljes munkaidő</span>
-            <span class="job-tag">Fizikai</span>
+      <!-- ÁCS -->
+      <div class="job-card reveal" onclick="openModal('burkolo')" style="transition-delay:.1s">
+          <img class="job-card-bg" src="/assets/images/karrier/burkolo.png" alt="Burkoló munka">
+        <div class="job-card-overlay"></div>
+        <div class="job-card-num">02 — Burkoló</div>
+        <div class="job-card-content">
+          <div class="job-card-tags">
+            <span class="job-card-tag is-full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
+            <span class="job-card-tag" data-hu="Fizikai" data-en="Skilled trade" data-de="Handwerk">Fizikai</span>
           </div>
-          <div class="job-title" data-hu="Ács / Tetőfedő" data-en="Carpenter / Roofer" data-de="Zimmermann / Dachdecker">Ács / Tetőfedő</div>
-          <div class="job-loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Baja és környéke
+          <div class="job-card-footer">
+                      <div class="job-card-title" data-hu="Hideg-melegburkoló" data-en="Tiling / Flooring Specialist" data-de="Fliesen- / Bodenbelagsleger">Hideg-melegburkoló</div>
+
+            <div class="job-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
           </div>
         </div>
-        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
+      <!-- ÉPÍTÉSVEZETŐ -->
       <div class="job-card reveal" onclick="openModal('epitesvezetö')" style="transition-delay:.15s">
-        <div>
-          <div class="job-meta">
-            <span class="job-tag full">Teljes munkaidő</span>
-            <span class="job-tag" style="background:#e3f2fd;color:#1565c0">Irodai / terep</span>
+        <img class="job-card-bg" src="/assets/images/karrier/kordintor.png" alt="Építésvezető">
+        <div class="job-card-overlay"></div>
+        <div class="job-card-num">03 — Koordinátor</div>
+        <div class="job-card-content">
+          <div class="job-card-tags">
+            <span class="job-card-tag is-full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
+            <span class="job-card-tag" data-hu="Irodai / terep" data-en="Office / field" data-de="Büro / Feld">Irodai / terep</span>
           </div>
-          <div class="job-title" data-hu="Építésvezető / Műszaki koordinátor" data-en="Site Manager / Technical Coordinator" data-de="Bauleiter / Technischer Koordinator">Építésvezető / Műszaki koordinátor</div>
-          <div class="job-loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Baja
+          <div class="job-card-footer">
+                      <div class="job-card-title" data-hu="Építésvezető / Műszaki koordinátor" data-en="Site Manager / Technical Coordinator" data-de="Bauleiter / Technischer Koordinator">Építésvezető / Műszaki koordinátor</div>
+
+            <div class="job-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
           </div>
         </div>
-        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
+      <!-- SEGÉDMUNKÁS -->
       <div class="job-card reveal" onclick="openModal('segedmunkas')" style="transition-delay:.2s">
-        <div>
-          <div class="job-meta">
-            <span class="job-tag full">Teljes munkaidő</span>
-            <span class="job-tag">Fizikai</span>
-            <span class="job-tag" style="background:#f3e5f5;color:#6a1b9a">Kezdőknek is</span>
+        Replace with: <img class="job-card-bg" src="assets/images/karrier/segedmunkas.png" alt="Segédmunkás">
+        <div class="job-card-overlay"></div>
+        <div class="job-card-num">04 — Segédmunkás</div>
+        <div class="job-card-content">
+          <div class="job-card-tags">
+            <span class="job-card-tag is-full" data-hu="Teljes munkaidő" data-en="Full-time" data-de="Vollzeit">Teljes munkaidő</span>
+            <span class="job-card-tag" data-hu="Fizikai" data-en="Skilled trade" data-de="Handwerk">Fizikai</span>
+            <span class="job-card-tag" data-hu="Kezdőknek is" data-en="Entry level" data-de="Auch für Einsteiger">Kezdőknek is</span>
           </div>
-          <div class="job-title" data-hu="Építőipari segédmunkás" data-en="Construction Laborer" data-de="Bauhelfer">Építőipari segédmunkás</div>
-          <div class="job-loc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Baja és környéke
+          <div class="job-card-footer">
+                      <div class="job-card-title" data-hu="Építőipari segédmunkás" data-en="Construction Laborer" data-de="Bauhelfer">Építőipari segédmunkás</div>
+
+            <div class="job-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
           </div>
         </div>
-        <div class="job-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
+
     </div>
   </div>
 </section>
@@ -481,8 +517,8 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
                 <label class="form-label" data-hu="Melyik pozícióra jelentkezel?" data-en="Which position?" data-de="Welche Stelle?">Melyik pozícióra jelentkezel?</label>
                 <select class="form-select form-input">
                   <option value="">— Válassz —</option>
-                  <option value="komuves">Kőműves / Falazó</option>
-                  <option value="acs">Ács / Tetőfedő</option>
+                  <option value="komuves">Kőműves mester</option>
+                  <option value="burkolo">Hideg-melegburkoló</option>
                   <option value="epitesvezetö">Építésvezető</option>
                   <option value="segedmunkas">Segédmunkás</option>
                   <option value="spontan">Spontán jelentkezés</option>
@@ -522,7 +558,7 @@ body{font-family:var(--font-b);color:var(--gray-800);background:var(--white);lin
       </div>
     </div>
     <div><h4 data-hu="Navigáció" data-en="Navigation" data-de="Navigation">Navigáció</h4><ul class="footer-links"><li><a href="index.html" data-hu="Főoldal" data-en="Home" data-de="Startseite">Főoldal</a></li><li><a href="szolgaltatasok.html" data-hu="Szolgáltatások" data-en="Services" data-de="Leistungen">Szolgáltatások</a></li><li><a href="rolunk.html" data-hu="Rólunk" data-en="About Us" data-de="Über uns">Rólunk</a></li><li><a href="referenciak.html" data-hu="Referenciák" data-en="References" data-de="Referenzen">Referenciák</a></li><li><a href="partnereink.html" data-hu="Partnereink" data-en="Partners" data-de="Partner">Partnereink</a></li><li><a href="karrier.html" data-hu="Karrier" data-en="Careers" data-de="Karriere">Karrier</a></li><li><a href="ajanlatkeres.html" data-hu="Ajánlatkérés" data-en="Get a Quote" data-de="Angebot">Ajánlatkérés</a></li></ul></div>
-    <div><h4 data-hu="Pozíciók" data-en="Services" data-de="Leistungen">Pozíciók</h4><ul class="footer-links"><li><a href="#" data-hu="Kőműves / Falazó" data-en="Bricklayer / Mason" data-de="Maurer / Mauerer">Kőműves / Falazó</a></li><li><a href="#" data-hu="Ács / Tetőfedő" data-en="Carpenter / Roofer" data-de="Zimmermann / Dachdecker">Ács / Tetőfedő</a></li><li><a href="#" data-hu="Építésvezető" data-en="Site Manager" data-de="Bauleiter">Építésvezető</a></li><li><a href="#" data-hu="Segédmunkás" data-en="General Labourer" data-de="Hilfsarbeiter">Segédmunkás</a></li></ul></div>
+    <div><h4 data-hu="Pozíciók" data-en="Services" data-de="Leistungen">Pozíciók</h4><ul class="footer-links"><li><a href="#" data-hu="Kőműves mester" data-en="Bricklayer / Mason" data-de="Maurer / Mauerer">Kőműves mester</a></li><li><a href="#" data-hu="Hideg-melegburkoló" data-en="Tiling / Flooring Specialist" data-de="Fliesen- / Bodenbelagsleger">Hideg-melegburkoló</a></li><li><a href="#" data-hu="Építésvezető" data-en="Site Manager" data-de="Bauleiter">Építésvezető</a></li><li><a href="#" data-hu="Segédmunkás" data-en="General Labourer" data-de="Hilfsarbeiter">Segédmunkás</a></li></ul></div>
     <div><h4 data-hu="Cégadatok" data-en="Company Info" data-de="Firmendaten">Cégadatok</h4><ul class="footer-links"><li data-hu="Ügyvezető: Lengyel Olivér" data-en="CEO: Lengyel Olivér" data-de="Geschäftsführer: Lengyel Olivér">Ügyvezető: Lengyel Olivér</li><li>Cégjegyzékszám: 03-09-129683</li><li>Erste Bank:<br>11600006-00000000-94622137</li></ul></div>
   </div>
   <div class="footer-bottom"><span>&copy; 2026 Estur Épker Kft.</span><div class="footer-legal"><a href="aszf.html">ÁSZF</a><a href="adatkezeles.html" data-hu="Adatkezelési tájékoztató" data-en="Privacy Policy" data-de="Datenschutz">Adatkezelési tájékoztató</a></div></div>
@@ -555,19 +591,19 @@ function handleSubmit(e){
 const jobs={
   komuves:{
     tag:'Teljes munkaidő · Fizikai',
-    title:'Kőműves / Falazó szakember',
+    title:'Kőműves mester',
     loc:'Baja és környéke',
     tasks:['Falazási, vakolási munkák elvégzése','Alapozás, betonozási feladatok','Csatlakozás a kivitelezési csapathoz','Munkavédelmi előírások betartása'],
     reqs:['Kőműves vagy kapcsolódó szakképzettség','Min. 2 év tapasztalat','Fizikai teherbírás','Precizitás és megbízhatóság'],
     offer:['Versenyképes fizetés','Állandó munkaviszony','Szakmai fejlődési lehetőség','Korszerű eszközök és munkaruha']
   },
-  acs:{
+  burkolo:{
     tag:'Teljes munkaidő · Fizikai',
-    title:'Ács / Tetőfedő',
+    title:'Hideg-melegburkoló',
     loc:'Baja és környéke',
-    tasks:['Tetőszerkezetek tervezése és megépítése','Ács- és asztalosmunkák','Zsaluzat készítése','Csapatmunkában való részvétel'],
-    reqs:['Ács szakképesítés','Tetőfedési tapasztalat előny','Magasban végzett munkák vállalása','Munkavédelmi ismeretek'],
-    offer:['Versenyképes fizetés','Rendszeres projektek','Fejlődési lehetőségek','Stabil munkaviszony']
+    tasks:['Padló- és falburkolás (kerámia, gres, természetes kő)','Fugázás, szilikon- és tömítési munkák','Aljzatkészítés, kiegyenlítés','Fürdőszoba és konyhai burkolatszerelés'],
+    reqs:['Burkoló szakképesítés vagy min. 2 év tapasztalat','Precizitás és esztétikai érzék','Különféle burkolóanyagok ismerete','Fizikai teherbírás, megbízhatóság'],
+    offer:['Versenyképes fizetés','Rendszeres, változatos projektek','Fejlődési lehetőségek','Stabil, hosszú távú munkaviszony']
   },
   'epitesvezetö':{
     tag:'Teljes munkaidő · Irodai / terep',
