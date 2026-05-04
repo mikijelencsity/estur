@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>404 - Az oldal nem található | Estur Épker Kft.</title>
+  <meta name="description" content="A keresett oldal nem található. Az Estur Épker Kft. főoldalán vagy szolgáltatásaink között folytathatod a böngészést." />
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="stylesheet" href="/assets/css/estur.css" />
+
+  <style>
+    .error-404 {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .error-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, var(--sage-glow), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(114,117,98,.10), transparent 45%);
+      pointer-events: none;
+    }
+
+    .error-code {
+      font-family: var(--font-h);
+      font-size: clamp(6rem, 12vw, 12rem);
+      font-weight: 900;
+      color: var(--sage);
+      line-height: 1;
+      letter-spacing: -4px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .error-box {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      max-width: 520px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .quick-links {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .quick-card {
+      background: var(--cream);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-decoration: none;
+      transition: var(--tr);
+    }
+
+    .quick-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--sage);
+    }
+
+    .quick-card h3 {
+      font-family: var(--font-h);
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--gray-900);
+    }
+
+    .quick-card p {
+      font-size: .85rem;
+      color: var(--gray-600);
+    }
+
+    @media(max-width: 768px){
+      .quick-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="error-404">
+
+  <div class="error-bg"></div>
+
+  <div class="container error-box">
+
+    <div class="section-label">HIBA 404</div>
+
+    <div class="error-code">404</div>
+
+    <h1 class="section-title">
+      Az oldal nem található
+    </h1>
+
+    <p class="error-subtitle">
+      Amit keresel valószínűleg elköltözött, átnevezték, vagy sosem létezett ezen az útvonalon.
+      De semmi gond — segítünk visszatalálni.
+    </p>
+
+    <div class="error-actions">
+      <a href="/" class="btn-primary">Vissza a főoldalra</a>
+      <a href="/szolgaltatasok" class="btn-secondary">Szolgáltatások</a>
+      <a href="/kapcsolat" class="btn-secondary">Kapcsolat</a>
+    </div>
+
+    <div class="quick-links">
+
+      <a href="/referenciak" class="quick-card">
+        <h3>Referenciák</h3>
+        <p>Megnézheted a korábbi munkáinkat</p>
+      </a>
+
+      <a href="/szolgaltatasok" class="quick-card">
+        <h3>Szolgáltatások</h3>
+        <p>Építőipari megoldásaink</p>
+      </a>
+
+      <a href="/rolunk" class="quick-card">
+        <h3>Rólunk</h3>
+        <p>Ismerd meg a céget</p>
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
