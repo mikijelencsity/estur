@@ -14,7 +14,11 @@
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* ══ PAGE HERO ══ */
-.page-hero{padding:180px 0 80px;background:linear-gradient(165deg,var(--white) 0%,var(--sage-subtle) 50%,var(--cream) 100%);position:relative;overflow:hidden}
+
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:96px;max-width:1200px;margin:0 auto;padding:0 24px}
+
+
+.page-hero{padding:204px 0 80px;background:linear-gradient(165deg,var(--white) 0%,var(--sage-subtle) 50%,var(--cream) 100%);position:relative;overflow:hidden}
 .page-hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,var(--sage-glow) 0%,transparent 70%);animation:float 6s ease-in-out infinite}
 .page-hero-inner{position:relative;z-index:1}
 .page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--gray-100);padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--sage-dark);margin-bottom:28px;box-shadow:var(--shadow-sm)}
